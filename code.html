@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Streetwear Co. - Modern Ecommerce Redesign</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#111111", // Deep Black for Primary actions
+            "background-light": "#ffffff",
+            "background-dark": "#121212",
+            "card-light": "#f8f8f8",
+            "card-dark": "#1e1e1e",
+            "accent": "#ef4444" // Red for discount/tags
+          },
+          fontFamily: {
+            display: ["Oswald", "sans-serif"],
+            sans: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200">
+  <header
+    class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 relative">
+        <!-- Mobile Menu Button -->
+        <div class="flex items-center md:hidden">
+          <button class="text-gray-900 dark:text-gray-100 hover:text-black dark:hover:text-white p-2 -ml-2">
+            <span class="material-icons text-2xl">menu</span>
+          </button>
+        </div>
+
+        <!-- Logo -->
+        <div
+          class="flex-shrink-0 flex items-center absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:translate-x-0">
+          <a class="block" href="#">
+            <img alt="Clothyfly" class="h-8 md:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
+              src="file:///Users/rohitkardani/.gemini/antigravity/brain/1c8108d9-eb8c-4a95-8852-c2127cf219eb/uploaded_image_1769417957430.png" />
+          </a>
+        </div>
+
+        <nav class="hidden md:flex space-x-8 self-stretch">
+          <a id="nav-home"
+            class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 uppercase tracking-wide transition-colors flex items-center h-full"
+            href="#">Home</a>
+          <div class="group static flex items-center h-full">
+            <a id="nav-men"
+              class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 group-hover:text-red-500 group-hover:border-b-2 group-hover:border-red-500 uppercase tracking-wide transition-colors relative z-10 h-full flex items-center border-transparent border-b-2"
+              href="#">Men</a>
+            <div
+              class="absolute left-0 w-full bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 shadow-xl hidden group-hover:block transition-all duration-200 z-0 top-16">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-5 gap-8">
+                  <!-- Column 1 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Topwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">T-Shirts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual Shirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Formal Shirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sweatshirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sweaters</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Blazers & Coats</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Suits</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Rain Jackets</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Indian & Festive Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Kurtas & Kurta
+                          Sets</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sherwanis</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Nehru Jackets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dhotis</a></li>
+                    </ul>
+                  </div>
+                  <!-- Column 2 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Bottomwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jeans</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual Trousers</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Formal Trousers</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shorts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Track Pants &
+                          Joggers</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Innerwear & Sleepwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Briefs & Trunks</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Boxers</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Vests</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sleepwear &
+                          Loungewear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Thermals</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Plus Size</a></h4>
+                  </div>
+                  <!-- Column 3 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Footwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Formal Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sneakers</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sandals &
+                          Floaters</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Flip Flops</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Socks</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Personal Care & Grooming</a>
+                    </h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Sunglasses & Frames</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Watches</a></h4>
+                  </div>
+                  <!-- Column 4 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Sports & Active Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports Sandals</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Active T-Shirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Track Pants &
+                          Shorts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Tracksuits</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets &
+                          Sweatshirts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Accessories</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Swimwear</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Gadgets</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Smart Wearables</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fitness Gadgets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Headphones</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Speakers</a></li>
+                    </ul>
+                  </div>
+                  <!-- Column 5 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Fashion Accessories</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Wallets</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Belts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Perfumes & Body
+                          Mists</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Trimmers</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Deodorants</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Ties, Cufflinks &
+                          Pocket Squares</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Accessory Gift
+                          Sets</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Caps & Hats</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Mufflers, Scarves &
+                          Gloves</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Phone Cases</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Rings &
+                          Wristwear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Helmets</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Bags & Backpacks</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Luggages & Trolleys</a></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="group static flex items-center h-full">
+            <a id="nav-women"
+              class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 group-hover:text-red-500 group-hover:border-b-2 group-hover:border-red-500 uppercase tracking-wide transition-colors relative z-10 h-full flex items-center border-transparent border-b-2"
+              href="#">Women</a>
+            <div
+              class="absolute left-0 w-full bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 shadow-xl hidden group-hover:block transition-all duration-200 z-0 top-16">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-5 gap-8">
+                  <!-- Column 1 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Indian & Fusion Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Kurtas & Suits</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Kurtis, Tunics &
+                          Tops</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sarees</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Ethnic Wear</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Leggings, Salwars &
+                          Churidars</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Skirts &
+                          Palazzos</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dress Materials</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Lehenga Cholis</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dupattas &
+                          Shawls</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Belts, Scarves & More</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Watches & Wearables</a></h4>
+                  </div>
+                  <!-- Column 2 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Western Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dresses</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Tops</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Tshirts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jeans</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Trousers &
+                          Capris</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shorts & Skirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Co-ords</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Playsuits</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jumpsuits</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shrugs</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sweaters &
+                          Sweatshirts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets & Coats</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Blazers &
+                          Waistcoats</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Plus Size</a></h4>
+                  </div>
+                  <!-- Column 3 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Maternity</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Sunglasses & Frames</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Footwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Flats</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Heels</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Boots</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports Shoes &
+                          Floaters</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4">Sports & Active Wear</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Clothing</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Footwear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Accessories</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Equipment</a></li>
+                    </ul>
+                  </div>
+                  <!-- Column 4 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Lingerie & Sleepwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Bra</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Briefs</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shapewear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sleepwear &
+                          Loungewear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Swimwear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Camisoles &
+                          Thermals</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Beauty & Personal Care</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Makeup</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Skincare</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Premium Beauty</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Lipsticks</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fragrances</a></li>
+                    </ul>
+                  </div>
+                  <!-- Column 5 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Gadgets</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Smart Wearables</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fitness Gadgets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Headphones</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Speakers</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Jewellery</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fashion
+                          Jewellery</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fine Jewellery</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Earrings</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Backpacks</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Handbags, Bags & Wallets</a>
+                    </h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Luggages & Trolleys</a></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a id="nav-about"
+            class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 uppercase tracking-wide transition-colors flex items-center h-full"
+            href="#">About</a>
+          <a id="nav-contact"
+            class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 uppercase tracking-wide transition-colors flex items-center h-full"
+            href="#">Contact</a>
+        </nav>
+
+        <div class="flex items-center space-x-2 md:space-x-4">
+          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:hidden">
+            <span class="material-icons text-xl">search</span>
+          </button>
+
+          <div class="relative hidden sm:block">
+            <div class="flex items-center w-96 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+              <button id="search-btn-icon"
+                class="p-1.5 pl-3 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors">
+                <span class="material-icons text-xl pl-1">search</span>
+              </button>
+              <input id="search-input-field"
+                class="w-full bg-transparent border-none px-2 py-1.5 text-sm focus:ring-0 text-gray-900 dark:text-white placeholder-gray-500"
+                placeholder="Search for products, brands and more" type="text" />
+            </div>
+          </div>
+          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white">
+            <span class="material-icons text-xl">person_outline</span>
+          </button>
+          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
+            <span class="material-icons text-xl">favorite_border</span>
+            <span
+              class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">0</span>
+          </button>
+          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
+            <span class="material-icons text-xl">shopping_bag</span>
+            <span
+              class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">2</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="relative w-full h-[600px] overflow-hidden">
+    <img alt="Man in streetwear hoodie" class="w-full h-full object-cover"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeND-E0aVAj9y1mloQI1qR_uSWsnuZw-tXMkIunM2MHnz2kSW1Ql7sAlc6wstHOB5_P8y4HhTxjtx9-pi0jVtX3yYutIE-q9mdHzp08wyT0tmZ4jBSGCJcayx4lt_--FNFDTPNOO1eClln7L0wmqBJjFTwFpdTnUFvPqlpUsH1TSIw_tcGUNF1P1u7TSlLpNCVd4wcynyL54XIJDdMo1kJgu6qX-TKzCfn4Iw2151H194RLoHA6lB3sAsc3mi8y16_K_5B0G2gEm84" />
+    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+      <div class="text-center px-4">
+        <h1 class="font-display text-5xl md:text-8xl font-bold text-white uppercase tracking-tight mb-6">Wear Your Vibe
+        </h1>
+        <p class="text-gray-200 text-lg mb-8 max-w-xl mx-auto">Explore the latest drops from the underground. Premium
+          quality, unmatched style.</p>
+        <a class="inline-block bg-white text-black font-display font-bold uppercase text-lg px-8 py-3 rounded-none hover:bg-gray-100 transition-colors"
+          href="#">
+          Shop Now
+        </a>
+      </div>
+    </div>
+  </div>
+  <section class="w-full px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-12">
+      <h2 class="font-display text-4xl font-bold text-gray-900 dark:text-white uppercase mb-2">New Arrivals</h2>
+      <div class="w-16 h-1 bg-black dark:bg-white mx-auto"></div>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Top
+            Seller</span>
+          <img alt="Black Hoodie"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxiRnmxxTQZJXirfuzhIvv2SIZVdLKumVvDJj9Xxq2wHUGvyfo3AlEGv5SzQym3CY8vivdsI5KF0kep9GZAdS-Q2JXHB0W12gvxXJFInG0TwLZm-Jqujn_qCoP3KoS9N3B5AhQT5MkA9S1uBzcC93DZEbe64Me-ko13GB7HWdXNN1qBUcSMm1Xh8tnzos5pdJ_8ReegiYJ1vKyst4xiYYTCDETJS15IUd8okq7exN0WEobWJI-QXkqM7YuGkTXRn3bP4qRIFnDiZSS" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Defender Generation Gap - HV007</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999</span>
+          <span class="text-gray-400 line-through text-xs">Rs. 4,999</span>
+          <span class="text-green-600 text-xs font-bold">40% OFF</span>
+        </div>
+      </div>
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">New</span>
+          <img alt="Beige Oversized T-shirt"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuASt0aF5WxFLdU2RuJNkTIA3--nuXmw5wL9nxUeSIdUxKt9Vnw5DjgDOXkof_JwtWb_CIs3UwyyZb89PL1UJvwtaxNbFazbqDDe5R8auGzn-WALoNCDZbawYz3pHgF5EOlSviLuFzrkXE_UfVg4-l66i5GOdH_4vV1OaIL_QOrKu4iKVOO9aUJLkKb9VDDt0yPNN6BE5nkPK0plC0ngzQrK6p9ErmZ1mXnCqS1l4qxcNjzGKuM2bBRKmuCoiUvayZEPnyr6EzbgnCub" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Ginger Root Brown Mood Tee</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 369</span>
+          <span class="text-gray-400 line-through text-xs">Rs. 1,399</span>
+          <span class="text-green-600 text-xs font-bold">73% OFF</span>
+        </div>
+      </div>
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+          <img alt="Maroon Graphic Tee"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGWrAuc-vNuO2OTjCBsh5z_yK-OTcsU2i0Xlob7roXg8FIKrELP8Sz87W2DhzOSqXfeh9XKD0UURO2JkMJe5XEUXiu2z0BeJXpDuoqfh_HRKlhMyPiSZJ59B3p2cWww6WI52t0XVC5SIhn2c_ID_IHBqWG9ffOzDIyH9yJvVtfFIc4CikCl_W4q42XtCsoCDnfi9hDVHqsaSi3oSLphWTrpUTRtpGQC8GVcEDvpo9ERRCeFTWuGaf3iL9HyKQzrkghdCrFdRdoESVq" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">11:11 Mask Design - HOODVIBE</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
+        </div>
+      </div>
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Limited</span>
+          <img alt="Brown Hoodie Back"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjXolRishS-369zSIZtLx2e3rI8PoZ1na1MW4oh3HbItsZh362_--P70BDE5aVKzS19pfew86zekrf9_-A9a8m1ZpUGoGsXXBimxZb435jRnc1XzPKPxVye6AXzpY64kTuevkzKTkhc4vbkw5EodpBAx62iTQVa86M-ae_wBRM0ncSj3QUjp5Sx1nAiDpCVZNFW_gT9uLUeuD2hHxw_L0YbJBcAx2S0LaI2ZhnZdqSCO4lNYBV91HOT59ZPA2fMP_LuygKefJnzC-M" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">THE ARMED MAFIA HOODIE</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 2,499</span>
+          <span class="text-gray-400 line-through text-xs">Rs. 3,499</span>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <button
+        class="inline-flex items-center bg-black dark:bg-white text-white dark:text-black font-display font-bold uppercase px-8 py-3 rounded-full hover:opacity-90 transition-opacity">
+        Show More <span class="material-icons ml-2 text-sm">arrow_forward</span>
+      </button>
+    </div>
+  </section>
+  <section
+    class="py-20 bg-background-light dark:bg-background-dark overflow-hidden border-t border-b border-gray-100 dark:border-gray-800">
+    <div class="w-full px-4 sm:px-6 lg:px-8 mb-10 flex items-end justify-between">
+      <div>
+        <h2 class="font-display text-5xl font-bold text-gray-900 dark:text-white uppercase mb-4 tracking-tight">Shop By
+          Category</h2>
+        <div class="flex space-x-6">
+          <button id="tab-men"
+            class="text-sm font-bold uppercase tracking-widest border-b-2 border-black dark:border-white pb-1 transition-colors">Men</button>
+          <button id="tab-women"
+            class="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900 dark:hover:text-white pb-1 transition-colors">Women</button>
+        </div>
+      </div>
+      <div class="hidden md:flex space-x-4">
+        <button id="category-prev"
+          class="p-3 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+          <span class="material-icons text-xl block">arrow_back</span>
+        </button>
+        <button id="category-next"
+          class="p-3 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+          <span class="material-icons text-xl block">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+    <div id="category-container"
+      class="relative w-full px-4 sm:px-6 lg:px-8 overflow-x-auto hide-scrollbar pb-8 scroll-smooth">
+      <div class="flex space-x-6 w-max pr-8">
+        <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
+          href="#">
+          <img alt="Model wearing hoodie"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3T8dbiiHCxS0NOST3Da6YZqbbJhbOUaep8Y82T3zDuazCyQks79nuF9HdUvqpiu-iE_srzkAESvUB1AnfoxWMZnSgk2brP6EaOt6SnaBUBvLUsqx6NKB1TgqTVbhWUGov4GEuhNtJ0pUQUprzqPGI2DZzdQrcJ-AxJE0tZNXMcXVZH_BFocQx0mImSGXRNs9l7HTkOSBtlkPxtNH-lMuSWHKjQRyP0ZXzaFxZ34SLvQH3sspEo01yLMO7m15smL_tyR8YMQqPSTOw" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity">
+          </div>
+          <div
+            class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+            <h3 class="font-display text-4xl font-bold text-white uppercase tracking-tighter mb-2 drop-shadow-lg">
+              Hoodies</h3>
+            <div class="w-0 group-hover:w-16 h-1 bg-white transition-all duration-300"></div>
+          </div>
+        </a>
+        <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
+          href="#">
+          <img alt="Model in t-shirt"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj2q4NbxAjFOr63vuTCRmNPSRPwt2mDxysi6lzSTEH6lzNDUVmdihyc7mireFDUXel9eIcRxzCOb8SQDi8m4UEVqnhGAl8HNPmPVt2ZPZBB-JIuaBSmKjZyXsyFXe0Zi2KqDGADSMlZWn7_szBYnBsxqWBcZLf6xxTrxjQfLWuoM9XaSm6AEEfOAnOyxB1IvpFAIG-41N9sGjJIbH8H1ejnK_1Vvlg3YAtCVE5GXFrz-wwVwYG5QPOOjZbJHxKaA6UMg2HOXeAxRPm" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity">
+          </div>
+          <div
+            class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+            <h3 class="font-display text-4xl font-bold text-white uppercase tracking-tighter mb-2 drop-shadow-lg">
+              T-Shirts</h3>
+            <div class="w-0 group-hover:w-16 h-1 bg-white transition-all duration-300"></div>
+          </div>
+        </a>
+        <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
+          href="#">
+          <img alt="Model in Polo"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoexObi4HKwGG2L0BfqWYQ899sbEIVndCWOAGvPbm0ffrU_T0eoMA140Vlr4vxzRQadq5-d9x-DPN_saDWEiVgwEev4b406DrapFui7vsrJuEA0Px7lZGueq9dhpwtyRTwOQFDAISo8NJWMhRmP2uRr4pnKyV-bvLhYaxr63S1u_fgRyiaMnu_0-Z5WGeGb08RAd6Qh0FLiGU2fj39Louii7NW1I6DeWjxVITjJYHqr1bFk_pDU_S4_EZrDoh5fnxetAUeki1XhPTJ" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity">
+          </div>
+          <div
+            class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+            <h3 class="font-display text-4xl font-bold text-white uppercase tracking-tighter mb-2 drop-shadow-lg">Polos
+            </h3>
+            <div class="w-0 group-hover:w-16 h-1 bg-white transition-all duration-300"></div>
+          </div>
+        </a>
+        <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
+          href="#">
+          <img alt="Model in jacket"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYzXtaJ47qHiTR_GxCOExdWNrQcq0PV26HSh7YI2hRM1px-UaYJKz4eNYSxDYXaJ-xsSn95mE4Vr9jbAve6PK3F-LQkw-qmH7q41Ye7TW1aTM5TWS6rW2jPYtyA8V-OiDWQ2YNYePnoT-6_B5w6LKysMg-25mpXNCb0L8Gq-Bc3Sv07MnbVIcHYMILfyUUWxz7rtzEDxrNaIGmKTKRAEnEkCjRYJzjX3jV15WvDH5k3mzgC7dIkjLL6my5W_We5JoIUu6tH0u1wMv5" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity">
+          </div>
+          <div
+            class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+            <h3 class="font-display text-4xl font-bold text-white uppercase tracking-tighter mb-2 drop-shadow-lg">
+              Jackets</h3>
+            <div class="w-0 group-hover:w-16 h-1 bg-white transition-all duration-300"></div>
+          </div>
+        </a>
+        <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
+          href="#">
+          <img alt="Streetwear accessories"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh_gsV1-dNBvJqpu1K1WYOtnjAMUzZO4gYF3zNlpVCgnB9xoRheiHiaWj6oMY6VI7obsFmUZViltD6PL8TzU2ECB-POcoVQke4k9cbGASmglZB-IDJevrUbXNc-psucommHbhYMlFGSR1WBNeoe-wktEYZaIz572N8F8knNf2Lqo7Dc-2y6EFgNjQiUQkfjsgZSRuqZLti0yUWis7ESuD9T31NEs8b54LqznsQ1WxWiTkavePAA7AgFb_ke4HLCqv80zyVl1UJ6A3a" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity">
+          </div>
+          <div
+            class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+            <h3 class="font-display text-4xl font-bold text-white uppercase tracking-tighter mb-2 drop-shadow-lg">
+              Accessories</h3>
+            <div class="w-0 group-hover:w-16 h-1 bg-white transition-all duration-300"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="w-full px-4 sm:px-6 lg:px-8 mt-4">
+      <div class="w-full bg-gray-200 dark:bg-gray-800 h-1 rounded-full overflow-hidden">
+        <div id="category-progress-bar"
+          class="bg-black dark:bg-white h-full rounded-full transition-all duration-75 ease-out" style="width: 0%">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="w-full px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-10">
+      <h2 class="font-display text-4xl font-bold text-gray-900 dark:text-white uppercase mb-4">Featured Products</h2>
+      <div class="flex justify-center space-x-8 border-b border-gray-200 dark:border-gray-800 pb-2 mb-8 w-fit mx-auto">
+        <button id="filter-all"
+          class="text-sm font-bold uppercase border-b-2 border-black dark:border-white pb-2 -mb-2.5 transition-colors">All</button>
+        <button id="filter-men"
+          class="text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white font-medium uppercase pb-2 transition-colors">Men's
+          Fashion</button>
+        <button id="filter-women"
+          class="text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white font-medium uppercase pb-2 transition-colors">Women's
+          Fashion</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Hot</span>
+          <img alt="Navy Blue T-shirt"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5QHG0v8WTfRi_KbvaTQDYubV9uCIeFm6uSa-M2QiHE7KXkqQbeJGyjtM6zqklNGG0Umc73ovzgNWGWZwbx2gvg4dYrlWWKjW2S16BWyDYZWhBzTUR6-z8hL_8J96aPiBj-mjRkKRPfTwa98IN6p4-mClVL7gf5HFLL2z-GMRbyJ4_wmVJ0FSJhWXoZ-v4xGeANONWvripOOIOChWMI_UlNKCO4MEjQUfV7-02KEwGRUNjG5mkq83Qz6JYf262a0tZegX0Q3MpQHGu" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Navy Blue Hang Loose Relax Tee</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
+          <span class="text-gray-400 line-through text-xs">Rs. 1,099</span>
+          <span class="text-green-600 text-xs font-bold">55% OFF</span>
+        </div>
+      </div>
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">New</span>
+          <img alt="Cargo Pants"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs8cyzmXiRzVDzNoopaBPe7ObQne7hASsyybN7N6WgItXBepLrPBDE-DsfLLnaurFuK94B-wOfGZC3Afa7MFWVjhZN_JAEGRcmIm8nu0fxdLwfFJv4oYxMZL_k6soWSG1P1rFoO2aJCvpEvt-FC1R5kPZajRT4TqylO_NCKjXf0JNlfk0SdccXdbfSEnD9mxO9aUW97916mTCVShgbavqvp-4z2BdxgA9P8FwQqiAJM7O8vsMGZ9Q1oGtBh8o-tHG4eUa9xZReoGtd" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Women Black Cargo Carpenter Pants</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
+          <span class="text-gray-400 line-through text-xs">Rs. 4,399</span>
+          <span class="text-green-600 text-xs font-bold">65% OFF</span>
+        </div>
+      </div>
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Best
+            Seller</span>
+          <img alt="Orange T-shirt"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs20icwyfpo6BWaKsVyVcZ6omM5y1i6YuBbBrcoVH7iJg5Bm4wz2AYbyLdf1fMsjIZSiVq-koBK3jm1usb2srIB5TxJrtnQOiPoSHRdnPUY4FaeAyRx2nbIs9it1u3MBIR0EcVmrebOcPMIJBigP0an7br6l0x9gUKg5qV-Z1n2CJf1yC5b_hTbuBvTPgMKgwctBELs3U-cFV5OmV2fsv-AzQq8qZBaK_pdtIpTAK8M5cYVMaAWLCVEvpCyIED0_KDDoxuuDU0qV2d" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Women's Orange Boyfriend T-shirt</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
+          <span class="text-gray-400 line-through text-xs">Rs. 699</span>
+          <span class="text-green-600 text-xs font-bold">42% OFF</span>
+        </div>
+      </div>
+      <div class="group">
+        <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+          <span
+            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+          <img alt="Lilac Oversize T-shirt"
+            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDExQyQZGr2L7QiMkAZBblquXlMe_vS69FnhjkIY8jvLrLquE8TOVOeC27mBGSwgF2g6UJ5GgfFQUJKTcRDMOJy99qIxWmhl0_lMBZes9pSRmmRKFhhy_65LdiDdPNCtBUW3CFspdrPFbjp5j0ZImelz9my_r97l1pYor4sEreRmgksabuCtI8UezihJD0UBGd_y0Zj_yvLt-GYzHb9KllwXF4mBdo3sZ33pDdLc9rW9NrOpKFatXnQ2679J0Q55Dl7pr2yQa9uz7f7" />
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="bg-black text-white text-xs uppercase font-bold px-4 py-2 rounded-full shadow-lg hover:bg-gray-800">Quick
+              Add</button>
+          </div>
+        </div>
+        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Lilac Bloom Grooving Typography Tee</h3>
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="font-bold text-gray-900 dark:text-white">Rs. 599</span>
+          <span class="text-gray-400 line-through text-xs">Rs. 1,599</span>
+          <span class="text-green-600 text-xs font-bold">62% OFF</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="bg-black text-white border-t border-gray-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
+        <div class="col-span-1 md:col-span-1">
+          <a class="block mb-6 inline-block md:block" href="#">
+            <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0"
+              src="file:///Users/rohitkardani/.gemini/antigravity/brain/1c8108d9-eb8c-4a95-8852-c2127cf219eb/uploaded_image_1769418322931.png" />
+          </a>
+          <p class="text-gray-400 text-sm italic">Dress Better. Feel Better.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase mb-4 tracking-wider">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a class="hover:text-white" href="#">Home</a></li>
+            <li><a class="hover:text-white" href="#">Products</a></li>
+            <li><a class="hover:text-white" href="#">About</a></li>
+            <li><a class="hover:text-white" href="#">Contact</a></li>
+            <li><a class="hover:text-white" href="#">Wishlist</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase mb-4 tracking-wider">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a class="hover:text-white" href="#">Order Processing</a></li>
+            <li><a class="hover:text-white" href="#">Privacy Policy</a></li>
+            <li><a class="hover:text-white" href="#">Refund &amp; Exchange Policy</a></li>
+            <li><a class="hover:text-white" href="#">Terms and Conditions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase mb-4 tracking-wider">Our Store</h4>
+          <div class="flex space-x-4">
+            <a class="text-gray-400 hover:text-white transition-colors" href="#">
+              <span class="material-icons text-xl">camera_alt</span>
+            </a>
+            <a class="text-gray-400 hover:text-white transition-colors" href="#">
+              <span class="material-icons text-xl">facebook</span>
+            </a>
+            <a class="text-gray-400 hover:text-white transition-colors" href="#">
+              <span class="material-icons text-xl">location_on</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <p>&copy; <span id="copyright-year">2025</span> Clothyfly. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <button id="scroll-to-top"
+    class="fixed bottom-6 right-6 bg-white text-black p-3 rounded-full shadow-xl hover:bg-gray-100 transition-all duration-300 z-50 opacity-0 invisible translate-y-4">
+    <span class="material-icons text-xl">arrow_upward</span>
+  </button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('category-container');
+      const prevBtn = document.getElementById('category-prev');
+      const nextBtn = document.getElementById('category-next');
+      const progressBar = document.getElementById('category-progress-bar');
+
+      const updateProgress = () => {
+        if (!container || !progressBar) return;
+
+        // Calculate the ratio of visible width to total scrollable width
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+
+        // If content fits, bar is 100%. Otherwise calculated ratio.
+        const widthPercentage = (clientWidth / scrollWidth) * 100;
+        progressBar.style.width = `${widthPercentage}%`;
+
+        // Calculate scroll progress (0 to 1)
+        const maxScrollLeft = scrollWidth - clientWidth;
+        const scrollLeft = container.scrollLeft;
+
+        if (maxScrollLeft > 0) {
+          const scrollProgress = scrollLeft / maxScrollLeft;
+          // The available space for the bar to move is (100% - widthPercentage)
+          const availableSpace = 100 - widthPercentage;
+          const marginLeft = scrollProgress * availableSpace;
+          progressBar.style.marginLeft = `${marginLeft}%`;
+        } else {
+          progressBar.style.marginLeft = '0%';
+        }
+      };
+
+      if (container && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          container.scrollBy({ left: -340, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+          container.scrollBy({ left: 340, behavior: 'smooth' });
+        });
+
+        container.addEventListener('scroll', updateProgress);
+        window.addEventListener('resize', updateProgress);
+
+        // Initial calculation
+        // Timeout to ensure layout is settled (images etc might affect it, though usually not horizontal width of flex items with fixed width)
+        setTimeout(updateProgress, 100);
+      }
+
+      // Tab selection logic
+      const tabMen = document.getElementById('tab-men');
+      const tabWomen = document.getElementById('tab-women');
+
+      if (tabMen && tabWomen) {
+        const toggleTabs = (selected, unselected) => {
+          // Active state classes
+          selected.classList.add('border-b-2', 'border-black', 'dark:border-white');
+          selected.classList.remove('text-gray-400', 'hover:text-gray-900', 'dark:hover:text-white');
+
+          // Inactive state classes
+          unselected.classList.remove('border-b-2', 'border-black', 'dark:border-white');
+          unselected.classList.add('text-gray-400', 'hover:text-gray-900', 'dark:hover:text-white');
+        };
+
+        tabMen.addEventListener('click', () => toggleTabs(tabMen, tabWomen));
+        tabWomen.addEventListener('click', () => toggleTabs(tabWomen, tabMen));
+      }
+
+      // Featured Products Filter logic
+      const filterAll = document.getElementById('filter-all');
+      const filterMen = document.getElementById('filter-men');
+      const filterWomen = document.getElementById('filter-women');
+
+      if (filterAll && filterMen && filterWomen) {
+        const filters = [filterAll, filterMen, filterWomen];
+
+        const setActiveFilter = (selected) => {
+          filters.forEach(filter => {
+            if (filter === selected) {
+              // Active state
+              filter.classList.add('font-bold', 'border-b-2', 'border-black', 'dark:border-white', '-mb-2.5', 'text-black', 'dark:text-white');
+              filter.classList.remove('text-gray-500', 'dark:text-gray-400', 'font-medium');
+            } else {
+              // Inactive state
+              filter.classList.remove('font-bold', 'border-b-2', 'border-black', 'dark:border-white', '-mb-2.5', 'text-black', 'dark:text-white');
+              filter.classList.add('text-gray-500', 'dark:text-gray-400', 'font-medium');
+            }
+          });
+        };
+
+        filterAll.addEventListener('click', () => setActiveFilter(filterAll));
+        filterMen.addEventListener('click', () => setActiveFilter(filterMen));
+        filterWomen.addEventListener('click', () => setActiveFilter(filterWomen));
+      }
+
+
+
+      // Search Bar Highlight Logic
+      const searchInput = document.getElementById('search-input-field');
+      const searchBtn = document.getElementById('search-btn-icon');
+
+      if (searchInput && searchBtn) {
+        searchInput.addEventListener('input', () => {
+          if (searchInput.value.trim() !== '') {
+            // Highlight icon
+            searchBtn.classList.remove('text-gray-500', 'dark:text-gray-400');
+            searchBtn.classList.add('text-black', 'dark:text-white');
+          } else {
+            // Revert to default
+            searchBtn.classList.add('text-gray-500', 'dark:text-gray-400');
+            searchBtn.classList.remove('text-black', 'dark:text-white');
+          }
+        });
+      }
+
+      // Dynamic Copyright Year
+      const yearSpan = document.getElementById('copyright-year');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // Scroll to Top Logic
+      const scrollToTopBtn = document.getElementById('scroll-to-top');
+      if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 300) {
+            scrollToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+            scrollToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+          } else {
+            scrollToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+            scrollToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+          }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
