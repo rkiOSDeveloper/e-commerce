@@ -719,7 +719,7 @@
                 <h1 class="font-bold text-2xl lg:text-3xl uppercase leading-tight mb-4">
                     I Like Cars More Than People - Black
                 </h1>
-                <div class="flex items-end gap-3 mb-6">
+                <div class="flex flex-col items-start gap-1 lg:flex-row lg:items-end lg:gap-3 mb-6">
                     <span class="text-2xl font-bold font-heading">Rs. 1,499.00</span>
                     <span class="text-sm text-gray-500 line-through mb-1">Rs. 2,499.00</span>
                     <span class="text-xs font-bold text-accent mb-1 border border-accent px-1.5 py-0.5 rounded">SAVE
@@ -807,9 +807,11 @@
                     <div class="flex gap-4">
                         <div
                             class="w-32 flex items-center justify-between border border-gray-300 dark:border-gray-600 rounded px-3 h-12">
-                            <button class="text-gray-500 hover:text-black dark:hover:text-white text-xl">-</button>
-                            <span class="font-medium">1</span>
-                            <button class="text-gray-500 hover:text-black dark:hover:text-white text-xl">+</button>
+                            <button id="quantity-btn-minus"
+                                class="text-gray-500 hover:text-black dark:hover:text-white text-xl">-</button>
+                            <span id="quantity-value" class="font-medium">1</span>
+                            <button id="quantity-btn-plus"
+                                class="text-gray-500 hover:text-black dark:hover:text-white text-xl">+</button>
                         </div>
                         <button
                             class="flex-1 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white h-12 rounded font-bold uppercase tracking-wide hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
@@ -889,7 +891,8 @@
                     <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
                         <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Navy Blue Hang Loose Relax Tee
                         </h3>
-                        <div class="flex items-center space-x-2 text-sm">
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
                             <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
                             <span class="text-gray-400 line-through text-xs">Rs. 1,099</span>
                             <span class="text-green-600 text-xs font-bold">55% OFF</span>
@@ -913,7 +916,8 @@
                     <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
                         <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Women Black Cargo Carpenter
                             Pants</h3>
-                        <div class="flex items-center space-x-2 text-sm">
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
                             <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
                             <span class="text-gray-400 line-through text-xs">Rs. 4,399</span>
                             <span class="text-green-600 text-xs font-bold">65% OFF</span>
@@ -938,7 +942,8 @@
                     <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
                         <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Women's Orange Boyfriend
                             T-shirt</h3>
-                        <div class="flex items-center space-x-2 text-sm">
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
                             <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
                             <span class="text-gray-400 line-through text-xs">Rs. 699</span>
                             <span class="text-green-600 text-xs font-bold">42% OFF</span>
@@ -962,7 +967,8 @@
                     <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
                         <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Lilac Bloom Grooving Typography
                             Tee</h3>
-                        <div class="flex items-center space-x-2 text-sm">
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
                             <span class="font-bold text-gray-900 dark:text-white">Rs. 599</span>
                             <span class="text-gray-400 line-through text-xs">Rs. 1,599</span>
                             <span class="text-green-600 text-xs font-bold">62% OFF</span>
@@ -1305,6 +1311,25 @@
                             favoriteBtn.classList.remove('text-red-500');
                         }
                     }
+                });
+            }
+
+            // Quantity Logic
+            const quantityMinusBtn = document.getElementById('quantity-btn-minus');
+            const quantityPlusBtn = document.getElementById('quantity-btn-plus');
+            const quantityValue = document.getElementById('quantity-value');
+
+            if (quantityMinusBtn && quantityPlusBtn && quantityValue) {
+                quantityMinusBtn.addEventListener('click', () => {
+                    let val = parseInt(quantityValue.textContent);
+                    if (val > 1) {
+                        quantityValue.textContent = val - 1;
+                    }
+                });
+
+                quantityPlusBtn.addEventListener('click', () => {
+                    let val = parseInt(quantityValue.textContent);
+                    quantityValue.textContent = val + 1;
                 });
             }
         });
