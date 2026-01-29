@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Streetwear Co. - Modern Ecommerce Redesign</title>
+  <title>Clothyfly</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
@@ -52,23 +52,25 @@
     class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16 relative">
-        <!-- Mobile Menu Button -->
-        <div class="flex items-center md:hidden">
-          <button class="text-gray-900 dark:text-gray-100 hover:text-black dark:hover:text-white p-2 -ml-2">
-            <span class="material-icons text-2xl">menu</span>
-          </button>
+        <div class="flex items-center">
+          <!-- Mobile Menu Button -->
+          <div class="flex items-center xl:hidden">
+            <button class="text-gray-900 dark:text-gray-100 hover:text-black dark:hover:text-white p-2 -ml-2">
+              <span class="material-icons text-2xl">menu</span>
+            </button>
+          </div>
+
+          <!-- Logo -->
+          <div
+            class="flex-shrink-0 flex items-center absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:translate-x-0 md:ml-4 xl:ml-0">
+            <a class="block" href="#">
+              <img alt="Clothyfly" class="h-8 lg:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
+                src="https://raw.githack.com/rkiOSDeveloper/e-commerce/refs/heads/main/Clothyfly-dark.svg" />
+            </a>
+          </div>
         </div>
 
-        <!-- Logo -->
-        <div
-          class="flex-shrink-0 flex items-center absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:translate-x-0">
-          <a class="block" href="#">
-            <img alt="Clothyfly" class="h-8 md:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
-              src="https://raw.githack.com/rkiOSDeveloper/e-commerce/refs/heads/main/Clothyfly-dark.svg" />
-          </a>
-        </div>
-
-        <nav class="hidden md:flex space-x-8 self-stretch">
+        <nav class="hidden xl:flex space-x-8 self-stretch">
           <a id="nav-home"
             class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 uppercase tracking-wide transition-colors flex items-center h-full"
             href="#">Home</a>
@@ -386,7 +388,7 @@
             href="#">Contact</a>
         </nav>
 
-        <div class="flex items-center space-x-2 md:space-x-4">
+        <div class="flex items-center space-x-2 xl:space-x-4">
           <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:hidden">
             <span class="material-icons text-xl">search</span>
           </button>
@@ -419,20 +421,29 @@
       </div>
     </div>
   </header>
-  <div class="relative w-full h-[600px] overflow-hidden">
-    <img alt="Man in streetwear hoodie" class="w-full h-full object-cover"
-      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeND-E0aVAj9y1mloQI1qR_uSWsnuZw-tXMkIunM2MHnz2kSW1Ql7sAlc6wstHOB5_P8y4HhTxjtx9-pi0jVtX3yYutIE-q9mdHzp08wyT0tmZ4jBSGCJcayx4lt_--FNFDTPNOO1eClln7L0wmqBJjFTwFpdTnUFvPqlpUsH1TSIw_tcGUNF1P1u7TSlLpNCVd4wcynyL54XIJDdMo1kJgu6qX-TKzCfn4Iw2151H194RLoHA6lB3sAsc3mi8y16_K_5B0G2gEm84" />
-    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <div class="text-center px-4">
-        <h1 class="font-display text-5xl md:text-8xl font-bold text-white uppercase tracking-tight mb-6">Wear Your Vibe
-        </h1>
-        <p class="text-gray-200 text-lg mb-8 max-w-xl mx-auto">Explore the latest drops from the underground. Premium
-          quality, unmatched style.</p>
-        <a class="inline-block bg-white text-black font-display font-bold uppercase text-lg px-8 py-3 rounded-none hover:bg-gray-100 transition-colors"
-          href="#">
-          Shop Now
-        </a>
-      </div>
+  <div id="hero-slider" class="relative w-full h-[600px] overflow-hidden group">
+    <!-- Slide 1 (Men) -->
+    <a href="#" class="slide absolute inset-0 transition-opacity duration-1000 opacity-100 z-10 block">
+      <picture>
+        <source media="(max-width: 1024px)" srcset="./men-mobile.webp">
+        <img src="./men.webp" class="w-full h-full object-cover" alt="Men's Fashion">
+      </picture>
+    </a>
+    <!-- Slide 2 (Women) -->
+    <a href="#" class="slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0 block">
+      <picture>
+        <source media="(max-width: 1024px)" srcset="./women-mobile.webp">
+        <img src="./women.webp" class="w-full h-full object-cover" alt="Women's Fashion">
+      </picture>
+    </a>
+
+    <!-- Navigation Dots -->
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+      <button
+        class="slider-dot w-3 h-3 rounded-full bg-white opacity-100 transition-all duration-300 transform scale-125"
+        data-slide="0" aria-label="Go to slide 1"></button>
+      <button class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300"
+        data-slide="1" aria-label="Go to slide 2"></button>
     </div>
   </div>
   <section class="w-full px-4 sm:px-6 lg:px-8 py-16">
@@ -446,17 +457,17 @@
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Top
             Seller</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Black Hoodie"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxiRnmxxTQZJXirfuzhIvv2SIZVdLKumVvDJj9Xxq2wHUGvyfo3AlEGv5SzQym3CY8vivdsI5KF0kep9GZAdS-Q2JXHB0W12gvxXJFInG0TwLZm-Jqujn_qCoP3KoS9N3B5AhQT5MkA9S1uBzcC93DZEbe64Me-ko13GB7HWdXNN1qBUcSMm1Xh8tnzos5pdJ_8ReegiYJ1vKyst4xiYYTCDETJS15IUd8okq7exN0WEobWJI-QXkqM7YuGkTXRn3bP4qRIFnDiZSS" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Defender Generation Gap - HV007</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999</span>
@@ -469,17 +480,17 @@
         <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">New</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Beige Oversized T-shirt"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuASt0aF5WxFLdU2RuJNkTIA3--nuXmw5wL9nxUeSIdUxKt9Vnw5DjgDOXkof_JwtWb_CIs3UwyyZb89PL1UJvwtaxNbFazbqDDe5R8auGzn-WALoNCDZbawYz3pHgF5EOlSviLuFzrkXE_UfVg4-l66i5GOdH_4vV1OaIL_QOrKu4iKVOO9aUJLkKb9VDDt0yPNN6BE5nkPK0plC0ngzQrK6p9ErmZ1mXnCqS1l4qxcNjzGKuM2bBRKmuCoiUvayZEPnyr6EzbgnCub" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Ginger Root Brown Mood Tee</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 369</span>
@@ -492,17 +503,17 @@
         <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Maroon Graphic Tee"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGWrAuc-vNuO2OTjCBsh5z_yK-OTcsU2i0Xlob7roXg8FIKrELP8Sz87W2DhzOSqXfeh9XKD0UURO2JkMJe5XEUXiu2z0BeJXpDuoqfh_HRKlhMyPiSZJ59B3p2cWww6WI52t0XVC5SIhn2c_ID_IHBqWG9ffOzDIyH9yJvVtfFIc4CikCl_W4q42XtCsoCDnfi9hDVHqsaSi3oSLphWTrpUTRtpGQC8GVcEDvpo9ERRCeFTWuGaf3iL9HyKQzrkghdCrFdRdoESVq" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">11:11 Mask Design - HOODVIBE</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
@@ -513,17 +524,17 @@
         <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Limited</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Brown Hoodie Back"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjXolRishS-369zSIZtLx2e3rI8PoZ1na1MW4oh3HbItsZh362_--P70BDE5aVKzS19pfew86zekrf9_-A9a8m1ZpUGoGsXXBimxZb435jRnc1XzPKPxVye6AXzpY64kTuevkzKTkhc4vbkw5EodpBAx62iTQVa86M-ae_wBRM0ncSj3QUjp5Sx1nAiDpCVZNFW_gT9uLUeuD2hHxw_L0YbJBcAx2S0LaI2ZhnZdqSCO4lNYBV91HOT59ZPA2fMP_LuygKefJnzC-M" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">THE ARMED MAFIA HOODIE</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 2,499</span>
@@ -670,17 +681,17 @@
         <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Hot</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Navy Blue T-shirt"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5QHG0v8WTfRi_KbvaTQDYubV9uCIeFm6uSa-M2QiHE7KXkqQbeJGyjtM6zqklNGG0Umc73ovzgNWGWZwbx2gvg4dYrlWWKjW2S16BWyDYZWhBzTUR6-z8hL_8J96aPiBj-mjRkKRPfTwa98IN6p4-mClVL7gf5HFLL2z-GMRbyJ4_wmVJ0FSJhWXoZ-v4xGeANONWvripOOIOChWMI_UlNKCO4MEjQUfV7-02KEwGRUNjG5mkq83Qz6JYf262a0tZegX0Q3MpQHGu" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Navy Blue Hang Loose Relax Tee</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
@@ -693,17 +704,17 @@
         <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">New</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Cargo Pants"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs8cyzmXiRzVDzNoopaBPe7ObQne7hASsyybN7N6WgItXBepLrPBDE-DsfLLnaurFuK94B-wOfGZC3Afa7MFWVjhZN_JAEGRcmIm8nu0fxdLwfFJv4oYxMZL_k6soWSG1P1rFoO2aJCvpEvt-FC1R5kPZajRT4TqylO_NCKjXf0JNlfk0SdccXdbfSEnD9mxO9aUW97916mTCVShgbavqvp-4z2BdxgA9P8FwQqiAJM7O8vsMGZ9Q1oGtBh8o-tHG4eUa9xZReoGtd" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Women Black Cargo Carpenter Pants</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
@@ -717,17 +728,17 @@
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Best
             Seller</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Orange T-shirt"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs20icwyfpo6BWaKsVyVcZ6omM5y1i6YuBbBrcoVH7iJg5Bm4wz2AYbyLdf1fMsjIZSiVq-koBK3jm1usb2srIB5TxJrtnQOiPoSHRdnPUY4FaeAyRx2nbIs9it1u3MBIR0EcVmrebOcPMIJBigP0an7br6l0x9gUKg5qV-Z1n2CJf1yC5b_hTbuBvTPgMKgwctBELs3U-cFV5OmV2fsv-AzQq8qZBaK_pdtIpTAK8M5cYVMaAWLCVEvpCyIED0_KDDoxuuDU0qV2d" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Women's Orange Boyfriend T-shirt</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
@@ -740,17 +751,17 @@
         <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
           <span
             class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
-          <a href="#" class="block">
+          <a href="product_detail.html" class="block">
             <img alt="Lilac Oversize T-shirt"
               class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDExQyQZGr2L7QiMkAZBblquXlMe_vS69FnhjkIY8jvLrLquE8TOVOeC27mBGSwgF2g6UJ5GgfFQUJKTcRDMOJy99qIxWmhl0_lMBZes9pSRmmRKFhhy_65LdiDdPNCtBUW3CFspdrPFbjp5j0ZImelz9my_r97l1pYor4sEreRmgksabuCtI8UezihJD0UBGd_y0Zj_yvLt-GYzHb9KllwXF4mBdo3sZ33pDdLc9rW9NrOpKFatXnQ2679J0Q55Dl7pr2yQa9uz7f7" />
           </a>
           <button
-            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
             <span class="material-icons text-lg">favorite_border</span>
           </button>
         </div>
-        <a href="#" class="block group-hover:opacity-80 transition-opacity">
+        <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
           <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">Lilac Bloom Grooving Typography Tee</h3>
           <div class="flex items-center space-x-2 text-sm">
             <span class="font-bold text-gray-900 dark:text-white">Rs. 599</span>
@@ -763,8 +774,8 @@
   </section>
   <footer class="bg-black text-white border-t border-gray-800 mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
-        <div class="col-span-1 md:col-span-1">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
+        <div class="col-span-2 md:col-span-1">
           <a class="block mb-6 inline-block md:block" href="#">
             <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0"
               src="https://raw.githack.com/rkiOSDeveloper/e-commerce/refs/heads/main/Clothyfly-light.svg" />
@@ -790,9 +801,9 @@
             <li><a class="hover:text-white" href="#">Terms and Conditions</a></li>
           </ul>
         </div>
-        <div>
+        <div class="col-span-2 md:col-span-1">
           <h4 class="font-bold text-sm uppercase mb-4 tracking-wider">Our Store</h4>
-          <div class="flex space-x-4">
+          <div class="flex space-x-4 justify-center md:justify-start">
             <a class="text-gray-400 hover:text-white transition-colors" href="#">
               <span class="material-icons text-xl">camera_alt</span>
             </a>
@@ -975,6 +986,64 @@
         });
       }
     });
+
+    // Hero Slider Logic
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    let currentSlide = 0;
+    let slideInterval;
+
+    const showSlide = (index) => {
+      // Hide all slides
+      slides.forEach(slide => {
+        slide.classList.remove('opacity-100', 'z-10');
+        slide.classList.add('opacity-0', 'z-0');
+      });
+
+      // Reset all dots
+      dots.forEach(dot => {
+        dot.classList.remove('opacity-100', 'scale-125');
+        dot.classList.add('bg-white/50');
+        dot.classList.remove('bg-white');
+      });
+
+      // Show target slide
+      slides[index].classList.remove('opacity-0', 'z-0');
+      slides[index].classList.add('opacity-100', 'z-10');
+
+      // Activate target dot
+      dots[index].classList.remove('bg-white/50');
+      dots[index].classList.add('bg-white', 'opacity-100', 'scale-125');
+
+      currentSlide = index;
+    };
+
+    const nextSlide = () => {
+      showSlide((currentSlide + 1) % slides.length);
+    };
+
+    const startSlider = () => {
+      slideInterval = setInterval(nextSlide, 5000);
+    };
+
+    const stopSlider = () => {
+      clearInterval(slideInterval);
+    };
+
+    // Event Listeners for Dots
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        stopSlider();
+        const slideIndex = parseInt(dot.getAttribute('data-slide'));
+        showSlide(slideIndex);
+        startSlider(); // Restart timer
+      });
+    });
+
+    // Start initial timer
+    if (slides.length > 0) {
+      startSlider();
+    }
   </script>
 </body>
 
