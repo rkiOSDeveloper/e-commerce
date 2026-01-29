@@ -702,10 +702,16 @@
                     <img id="main-product-image" alt="Black T-shirt with white graphic car print"
                         class="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOcAEFlsvqmHB70CqXMohFCMIgXpdsxjPDAIeZ3kxauvQoolZX3AWtYFrUHqIFjX8t8BsEuugi-QFI46hZQnGm_e87fJMCxNSdc-v0-ev9kAp8C6J1cGPQv7U6i59gIFVgAqR8wtvGX047Xt-7sjGSN3uhR2eN63qt9SSGu4RXiGPii6tMNUNiyVs2yk-OccEZ7Ma36ZRrZvDQ0VcGhuq0QOwx03fxaeddqhDWqNxCrDHVafZ717HB8m6Xtw58vYcjRubevlmMXO2" />
-                    <button
-                        class="absolute top-4 right-4 p-2 rounded-full bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black transition-colors">
-                        <span class="material-icons-outlined text-xl">favorite_border</span>
-                    </button>
+                    <div class="absolute top-4 right-4 flex gap-2">
+                        <button id="share-btn"
+                            class="p-2 rounded-full bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black transition-colors">
+                            <span class="material-icons-outlined text-xl">share</span>
+                        </button>
+                        <button id="favorite-btn"
+                            class="p-2 rounded-full bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black transition-colors">
+                            <span class="material-icons-outlined text-xl">favorite_border</span>
+                        </button>
+                    </div>
 
                 </div>
             </div>
@@ -1260,6 +1266,45 @@
 
                 scrollToTopBtn.addEventListener('click', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Share Button Logic
+            const shareBtn = document.getElementById('share-btn');
+            if (shareBtn) {
+                shareBtn.addEventListener('click', async () => {
+                    if (navigator.share) {
+                        try {
+                            await navigator.share({
+                                title: 'Check out this product!',
+                                text: 'I found this amazing product on Clothyfly.',
+                                url: window.location.href,
+                            });
+                        } catch (err) {
+                            console.error('Error sharing:', err);
+                        }
+                    } else {
+                        // Fallback for browsers that don't support Web Share API
+                        alert('Sharing is not supported on this browser. Copying URL to clipboard is a good fallback.');
+                        // Optional: Implement clipboard copy here
+                    }
+                });
+            }
+
+            // Favorite Button Logic
+            const favoriteBtn = document.getElementById('favorite-btn');
+            if (favoriteBtn) {
+                favoriteBtn.addEventListener('click', () => {
+                    const icon = favoriteBtn.querySelector('.material-icons-outlined');
+                    if (icon) {
+                        if (icon.textContent === 'favorite_border') {
+                            icon.textContent = 'favorite';
+                            favoriteBtn.classList.add('text-red-500');
+                        } else {
+                            icon.textContent = 'favorite_border';
+                            favoriteBtn.classList.remove('text-red-500');
+                        }
+                    }
                 });
             }
         });
