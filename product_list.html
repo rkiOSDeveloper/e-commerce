@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Hoodvibe Collection</title>
+  <link rel="manifest" href="manifest.json">
+  <title>Clothyfly</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Oswald:wght@400;500;700&amp;display=swap"
@@ -1608,6 +1609,18 @@
     if (desktopSearchBtn) {
       desktopSearchBtn.addEventListener('click', function () {
         window.location.href = 'product_list.html?search=' + encodeURIComponent(desktopSearchInput.value);
+      });
+    }
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
       });
     }
   </script>
