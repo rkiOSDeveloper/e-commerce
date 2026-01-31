@@ -8,20 +8,20 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "Clothyfly-dark.svg",
+      "src": "clothyfly_favicon.jpg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/jpeg"
     },
     {
-      "src": "Clothyfly-dark.svg",
+      "src": "clothyfly_favicon.jpg",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "Clothyfly-dark.svg",
+      "src": "clothyfly_favicon.jpg",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     }
   ]

@@ -4,7 +4,7 @@ const ASSETS_TO_CACHE = [
     './index.html',
     './product_list.html',
     './product_detail.html',
-    './Clothyfly-dark.svg',
+    './clothyfly_favicon.jpg',
     './Clothyfly-light.svg',
     './manifest.json'
 ];
