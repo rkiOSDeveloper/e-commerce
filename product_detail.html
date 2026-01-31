@@ -66,9 +66,9 @@
                 <div class="flex items-center">
                     <!-- Mobile Menu Button -->
                     <div class="flex items-center xl:hidden">
-                        <button
-                            class="text-gray-900 dark:text-gray-100 hover:text-black dark:hover:text-white p-2 -ml-2">
-                            <span class="material-icons text-2xl">menu</span>
+                        <button id="mobile-menu-btn" onclick="toggleMobileMenu()"
+                            class="text-gray-900 dark:text-gray-100 p-2 -ml-2 relative z-50 focus:outline-none transition-transform duration-300">
+                            <span id="mobile-menu-icon" class="material-icons text-2xl">menu</span>
                         </button>
                     </div>
 
@@ -78,7 +78,7 @@
                         <a class="block" href="index.html">
                             <img alt="Clothyfly"
                                 class="h-8 lg:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
-                                src="https://raw.githack.com/rkiOSDeveloper/e-commerce/refs/heads/main/Clothyfly-dark.svg" />
+                                src="Clothyfly-dark.svg" />
                         </a>
                     </div>
                 </div>
@@ -635,7 +635,8 @@
                 </nav>
 
                 <div class="flex items-center space-x-2 xl:space-x-4">
-                    <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:hidden">
+                    <button id="mobile-search-btn" onclick="toggleSearchModal()"
+                        class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:hidden focus:outline-none">
                         <span class="material-icons text-xl">search</span>
                     </button>
 
@@ -776,7 +777,7 @@
                     </div>
                     <div class="grid grid-cols-6 gap-2 sm:gap-3">
                         <button
-                            class="size-btn py-3 border border-gray-200 dark:border-gray-700 rounded text-gray-300 dark:text-gray-600 cursor-not-allowed text-sm font-medium relative overflow-hidden"
+                            class="size-btn py-3 border border-gray-200 dark:border-gray-700 rounded text-gray-300 dark:text-gray-600 cursor-not-allowed text-sm font-medium relative"
                             disabled="">
                             S
                             <div class="absolute inset-0 flex items-center justify-center">
@@ -984,7 +985,7 @@
                 <div class="col-span-2 md:col-span-1">
                     <a class="block mb-6 inline-block md:block" href="#">
                         <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0"
-                            src="https://raw.githack.com/rkiOSDeveloper/e-commerce/refs/heads/main/Clothyfly-light.svg" />
+                            src="Clothyfly-light.svg" />
                     </a>
                     <p class="text-gray-400 text-sm italic">Dress Better. Feel Better.</p>
                 </div>
@@ -1028,7 +1029,7 @@
             </div>
         </div>
     </footer>
-    <div
+    <div id="sticky-cart-bar"
         class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 p-4 z-[60] flex gap-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
         <div class="flex-1">
             <p class="text-xs text-gray-500 dark:text-gray-400 mb-0.5">I LIKE CARS...</p>
@@ -1037,7 +1038,7 @@
         <button class="bg-primary text-white px-8 py-2 rounded font-bold uppercase text-sm">Add to Cart</button>
     </div>
     <button id="scroll-to-top"
-        class="fixed bottom-6 right-6 bg-white text-black p-3 rounded-full shadow-xl hover:bg-gray-100 transition-all duration-300 z-50 opacity-0 invisible translate-y-4">
+        class="fixed bottom-20 lg:bottom-6 right-6 bg-white text-black p-3 rounded-full shadow-xl hover:bg-gray-100 transition-all duration-300 z-50 opacity-0 invisible translate-y-4">
         <span class="material-icons text-xl">arrow_upward</span>
     </button>
 
@@ -1257,6 +1258,12 @@
                 });
             }
 
+            // Dynamic Copyright Year
+            const yearSpan = document.getElementById('copyright-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
             // Scroll to Top Logic
             const scrollToTopBtn = document.getElementById('scroll-to-top');
             if (scrollToTopBtn) {
@@ -1332,7 +1339,146 @@
                     quantityValue.textContent = val + 1;
                 });
             }
+
         });
+
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu-drawer');
+            const btn = document.getElementById('mobile-menu-btn');
+            const icon = document.getElementById('mobile-menu-icon');
+            const stickyCartBar = document.getElementById('sticky-cart-bar');
+
+            const isOpen = !menu.classList.contains('-translate-x-full');
+
+            if (isOpen) {
+                // Close Menu
+                menu.classList.add('-translate-x-full');
+                document.body.classList.remove('overflow-hidden');
+
+                // Show Sticky Cart
+                if (stickyCartBar) stickyCartBar.classList.remove('hidden');
+
+                // Animate Icon to Menu
+                btn.classList.remove('rotate-90');
+                icon.textContent = 'menu';
+            } else {
+                // Open Menu
+                menu.classList.remove('-translate-x-full');
+                document.body.classList.add('overflow-hidden');
+
+                // Hide Sticky Cart
+                if (stickyCartBar) stickyCartBar.classList.add('hidden');
+
+                // Animate Icon to Close
+                btn.classList.add('rotate-90');
+                icon.textContent = 'close';
+            }
+        }
+    </script>
+    <!-- Mobile Menu Drawer (White Background) -->
+    <div id="mobile-menu-drawer"
+        class="fixed inset-0 z-40 bg-white transform -translate-x-full transition-transform duration-300 xl:hidden overflow-y-auto">
+        <div class="pt-24 px-6 pb-12 flex flex-col h-full">
+            <!-- Nav Links -->
+            <nav class="space-y-6 flex-1">
+                <a href="index.html" class="block text-lg font-medium text-black">Home</a>
+                <div class="flex items-center justify-between group cursor-pointer">
+                    <a href="#" class="block text-lg font-medium text-black">Products</a>
+                    <span class="material-icons text-black">chevron_right</span>
+                </div>
+                <a href="#" class="block text-lg font-medium text-black">About Us</a>
+                <a href="#" class="block text-lg font-medium text-black">Contact</a>
+                <a href="#" class="block text-lg font-medium text-black">Wishlist</a>
+            </nav>
+
+            <!-- My Account Section -->
+            <div class="mt-auto pt-10">
+                <h3 class="text-lg font-bold text-black mb-6">My Account</h3>
+                <div class="space-y-4">
+                    <a href="#"
+                        class="block w-full text-center py-3 border border-black text-black font-medium hover:bg-black hover:text-white transition-colors">
+                        Log in
+                    </a>
+                    <a href="#"
+                        class="block w-full text-center py-3 bg-black text-white font-medium hover:bg-gray-800 transition-colors">
+                        Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Modal -->
+    <div id="search-modal"
+        class="fixed inset-0 z-[60] bg-white dark:bg-background-dark transform translate-y-full transition-transform duration-300 flex flex-col">
+        <div class="p-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+            <h2 class="text-lg font-medium text-gray-900 dark:text-white">Search our store</h2>
+            <button onclick="toggleSearchModal()"
+                class="text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white focus:outline-none">
+                <span class="material-icons text-2xl">close</span>
+            </button>
+        </div>
+        <div class="p-4">
+            <div class="relative mb-6">
+                <input id="mobile-search-input" type="text" placeholder="Search products"
+                    class="w-full border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 pl-4 pr-10 text-gray-900 dark:text-white bg-transparent focus:ring-1 focus:ring-black dark:focus:ring-white focus:border-transparent outline-none">
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <span class="material-icons text-xl">search</span>
+                </button>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Popular Searches:</p>
+                <div class="flex flex-wrap gap-2">
+                    <a href="product_list.html?search=T-Shirt"
+                        class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">T-Shirt</a>
+                    <a href="product_list.html?search=Blue"
+                        class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">Blue</a>
+                    <a href="product_list.html?search=Jacket"
+                        class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">Jacket</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSearchModal() {
+            const modal = document.getElementById('search-modal');
+            const input = document.getElementById('mobile-search-input');
+            const isOpen = !modal.classList.contains('translate-y-full');
+
+            if (isOpen) {
+                modal.classList.add('translate-y-full');
+                document.body.classList.remove('overflow-hidden');
+            } else {
+                modal.classList.remove('translate-y-full');
+                document.body.classList.add('overflow-hidden');
+                setTimeout(() => input.focus(), 300);
+            }
+        }
+
+        document.getElementById('mobile-search-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
+            }
+        });
+
+        // Desktop Search Logic
+        const desktopSearchInput = document.getElementById('search-input-field');
+        const desktopSearchBtn = document.getElementById('search-btn-icon');
+
+        if (desktopSearchInput) {
+            desktopSearchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
+                }
+            });
+        }
+
+        if (desktopSearchBtn) {
+            desktopSearchBtn.addEventListener('click', function () {
+                window.location.href = 'product_list.html?search=' + encodeURIComponent(desktopSearchInput.value);
+            });
+        }
     </script>
 </body>
 

@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Hoodvibe Collection</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Oswald:wght@400;500;700&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#000000",
+            "background-light": "#FFFFFF",
+            "background-dark": "#0a0a0a",
+            "surface-light": "#F3F4F6", // Gray-100
+            "surface-dark": "#171717", // Neutral-900
+            "card-light": "#f8f8f8",
+            "card-dark": "#1e1e1e",
+            "accent": "#ef4444" // Red for discount/tags
+          },
+          fontFamily: {
+            display: ["Oswald", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0px", // Streetwear often prefers sharp edges for a brutalist feel
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
+
+    .dark ::-webkit-scrollbar-thumb {
+      background: #4b5563;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark text-black dark:text-white font-body transition-colors duration-300 antialiased pb-20 lg:pb-0">
+  <header
+    class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 relative">
+        <div class="flex items-center">
+          <!-- Mobile Menu Button -->
+          <div class="flex items-center xl:hidden">
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()"
+              class="text-gray-900 dark:text-gray-100 p-2 -ml-2 relative z-50 focus:outline-none transition-transform duration-300">
+              <span id="mobile-menu-icon" class="material-icons text-2xl">menu</span>
+            </button>
+          </div>
+
+          <!-- Logo -->
+          <div
+            class="flex-shrink-0 flex items-center absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:translate-x-0 md:ml-4 xl:ml-0">
+            <a class="block" href="index.html">
+              <img alt="Clothyfly" class="h-8 lg:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
+                src="Clothyfly-dark.svg" />
+            </a>
+          </div>
+        </div>
+
+        <nav class="hidden xl:flex space-x-8 self-stretch">
+          <a id="nav-home"
+            class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 uppercase tracking-wide transition-colors flex items-center h-full"
+            href="index.html">Home</a>
+          <div class="group static flex items-center h-full">
+            <a id="nav-men"
+              class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 group-hover:text-red-500 group-hover:border-b-2 group-hover:border-red-500 uppercase tracking-wide transition-colors relative z-10 h-full flex items-center border-transparent border-b-2"
+              href="#">Men</a>
+            <div
+              class="absolute left-0 w-full bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 shadow-xl hidden group-hover:block transition-all duration-200 z-0 top-16">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-5 gap-8">
+                  <!-- Column 1 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Topwear</a>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">T-Shirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual
+                          Shirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Formal
+                          Shirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sweatshirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sweaters</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Blazers
+                          & Coats</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Suits</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Rain
+                          Jackets</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Indian
+                        & Festive Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Kurtas
+                          & Kurta
+                          Sets</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sherwanis</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Nehru
+                          Jackets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dhotis</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Column 2 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Bottomwear</a>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jeans</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual
+                          Trousers</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Formal
+                          Trousers</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shorts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Track
+                          Pants &
+                          Joggers</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Innerwear
+                        & Sleepwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Briefs
+                          & Trunks</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Boxers</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Vests</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sleepwear
+                          &
+                          Loungewear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Thermals</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Plus
+                        Size</a></h4>
+                  </div>
+                  <!-- Column 3 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Footwear</a>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual
+                          Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Formal
+                          Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sneakers</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sandals
+                          &
+                          Floaters</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Flip
+                          Flops</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Socks</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Personal
+                        Care & Grooming</a>
+                    </h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Sunglasses
+                        & Frames</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Watches</a>
+                    </h4>
+                  </div>
+                  <!-- Column 4 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Sports
+                        & Active Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Sandals</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Active
+                          T-Shirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Track
+                          Pants &
+                          Shorts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Tracksuits</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets
+                          &
+                          Sweatshirts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Accessories</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Swimwear</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Gadgets</a>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Smart
+                          Wearables</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fitness
+                          Gadgets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Headphones</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Speakers</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Column 5 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Fashion
+                        Accessories</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Wallets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Belts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Perfumes
+                          & Body
+                          Mists</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Trimmers</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Deodorants</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Ties,
+                          Cufflinks &
+                          Pocket Squares</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Accessory
+                          Gift
+                          Sets</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Caps
+                          & Hats</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Mufflers,
+                          Scarves &
+                          Gloves</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Phone
+                          Cases</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Rings
+                          &
+                          Wristwear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Helmets</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Bags &
+                        Backpacks</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Luggages
+                        & Trolleys</a></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="group static flex items-center h-full">
+            <a id="nav-women"
+              class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 group-hover:text-red-500 group-hover:border-b-2 group-hover:border-red-500 uppercase tracking-wide transition-colors relative z-10 h-full flex items-center border-transparent border-b-2"
+              href="#">Women</a>
+            <div
+              class="absolute left-0 w-full bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 shadow-xl hidden group-hover:block transition-all duration-200 z-0 top-16">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-5 gap-8">
+                  <!-- Column 1 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Indian
+                        & Fusion Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Kurtas
+                          & Suits</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Kurtis,
+                          Tunics &
+                          Tops</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sarees</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Ethnic
+                          Wear</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Leggings,
+                          Salwars &
+                          Churidars</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Skirts
+                          &
+                          Palazzos</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dress
+                          Materials</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Lehenga
+                          Cholis</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dupattas
+                          &
+                          Shawls</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Belts,
+                        Scarves & More</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Watches
+                        & Wearables</a></h4>
+                  </div>
+                  <!-- Column 2 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Western
+                        Wear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Dresses</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Tops</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Tshirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jeans</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Trousers
+                          &
+                          Capris</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shorts
+                          & Skirts</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Co-ords</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Playsuits</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jumpsuits</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shrugs</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sweaters
+                          &
+                          Sweatshirts</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Jackets
+                          & Coats</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Blazers
+                          &
+                          Waistcoats</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Plus
+                        Size</a></h4>
+                  </div>
+                  <!-- Column 3 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Maternity</a>
+                    </h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Sunglasses
+                        & Frames</a></h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Footwear</a>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Flats</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Casual
+                          Shoes</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Heels</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Boots</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Shoes &
+                          Floaters</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4">Sports & Active
+                      Wear</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Clothing</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Footwear</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Accessories</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sports
+                          Equipment</a></li>
+                    </ul>
+                  </div>
+                  <!-- Column 4 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Lingerie
+                        & Sleepwear</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Bra</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Briefs</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Shapewear</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Sleepwear
+                          &
+                          Loungewear</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Swimwear</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Camisoles
+                          &
+                          Thermals</a></li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Beauty
+                        & Personal Care</a></h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Makeup</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Skincare</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Premium
+                          Beauty</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Lipsticks</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fragrances</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Column 5 -->
+                  <div>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Gadgets</a>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Smart
+                          Wearables</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fitness
+                          Gadgets</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Headphones</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Speakers</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Jewellery</a>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fashion
+                          Jewellery</a></li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Fine
+                          Jewellery</a>
+                      </li>
+                      <li><a href="#" class="hover:text-black dark:hover:text-white hover:font-bold">Earrings</a>
+                      </li>
+                    </ul>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mt-6 mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Backpacks</a>
+                    </h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Handbags,
+                        Bags & Wallets</a>
+                    </h4>
+                    <h4 class="font-bold text-red-500 uppercase text-xs mb-4"><a href="#"
+                        class="hover:text-black dark:hover:text-white transition-colors">Luggages
+                        & Trolleys</a></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a id="nav-about"
+            class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 uppercase tracking-wide transition-colors flex items-center h-full"
+            href="#">About</a>
+          <a id="nav-contact"
+            class="nav-link text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 uppercase tracking-wide transition-colors flex items-center h-full"
+            href="#">Contact</a>
+        </nav>
+
+        <div class="flex items-center space-x-2 xl:space-x-4">
+          <button id="mobile-search-btn" onclick="toggleSearchModal()"
+            class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:hidden focus:outline-none">
+            <span class="material-icons text-xl">search</span>
+          </button>
+
+          <div class="relative hidden sm:block">
+            <div class="flex items-center w-96 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+              <button id="search-btn-icon"
+                class="p-1.5 pl-3 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors">
+                <span class="material-icons text-xl pl-1">search</span>
+              </button>
+              <input id="search-input-field"
+                class="w-full bg-transparent border-none px-2 py-1.5 text-sm focus:ring-0 text-gray-900 dark:text-white placeholder-gray-500"
+                placeholder="Search for products, brands and more" type="text" />
+            </div>
+          </div>
+          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white">
+            <span class="material-icons text-xl">person_outline</span>
+          </button>
+          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
+            <span class="material-icons text-xl">favorite_border</span>
+            <span
+              class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">0</span>
+          </button>
+          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
+            <span class="material-icons text-xl">shopping_bag</span>
+            <span
+              class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">2</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container mx-auto px-4 pt-16 pb-6 text-center">
+    <h1 id="page-title" class="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-4">All Product
+    </h1>
+    <nav id="breadcrumb-nav" class="text-xs text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-widest">
+      <a class="hover:text-black dark:hover:text-white transition-colors" href="#">Home</a>
+      <span class="mx-2">/</span>
+      <span class="text-black dark:text-white font-medium">Men's Fashion</span>
+    </nav>
+    <!-- <p class="text-gray-500 dark:text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
+      result for "T-Shirts"
+    </p> -->
+  </div>
+  <main class="container mx-auto px-4 pt-2 pb-12 flex flex-col lg:flex-row gap-12">
+    <aside class="w-full lg:w-1/4 hidden lg:block">
+      <div class="flex items-center justify-between h-16 mb-8 border-b border-gray-100 dark:border-gray-800">
+        <h2 class="font-display text-2xl font-bold uppercase tracking-wide">Filters</h2>
+        <button class="lg:hidden text-sm underline">Close</button>
+      </div>
+      <div class="space-y-10">
+        <div>
+          <h3 id="filter-header-category" onclick="toggleFilter('category')"
+            class="font-display text-lg font-medium mb-4 flex items-center justify-between cursor-pointer select-none">
+            CATEGORIES
+            <span id="filter-icon-category" class="material-icons-outlined text-sm">expand_less</span>
+          </h3>
+          <div id="filter-content-category" class="space-y-3 transition-all duration-300">
+            <div class="flex items-center justify-between group cursor-pointer">
+              <span
+                class="text-sm text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">Men's
+                Fashion</span>
+              <span class="text-sm text-gray-500 dark:text-gray-500 font-mono">3</span>
+            </div>
+            <div class="flex items-center justify-between group cursor-pointer">
+              <span
+                class="text-sm text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">Women's
+                Fashion</span>
+              <span class="text-sm text-gray-500 dark:text-gray-500 font-mono">3</span>
+            </div>
+            <div class="flex items-center justify-between group cursor-pointer">
+              <span
+                class="text-sm text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">KIDS</span>
+              <span class="text-sm text-gray-500 dark:text-gray-500 font-mono">1</span>
+            </div>
+            <div class="flex items-center justify-between group cursor-pointer">
+              <span
+                class="text-sm text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">Men</span>
+              <span class="text-sm text-gray-500 dark:text-gray-500 font-mono">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-800 pt-6">
+          <h3 id="filter-header-price" onclick="toggleFilter('price')"
+            class="font-display text-lg font-medium mb-4 flex items-center justify-between cursor-pointer select-none">
+            PRICE
+            <span id="filter-icon-price" class="material-icons-outlined text-sm">expand_less</span>
+          </h3>
+          <div id="filter-content-price" class="transition-all duration-300">
+            <div class="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full mb-6 mt-2">
+              <div class="absolute left-0 right-0 h-1 bg-black dark:bg-white rounded-full"></div>
+              <div
+                class="absolute left-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-black dark:bg-white rounded-full cursor-pointer hover:scale-110 transition-transform">
+              </div>
+              <div
+                class="absolute right-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-black dark:bg-white rounded-full cursor-pointer hover:scale-110 transition-transform">
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="flex-1">
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">₹</span>
+                  <input
+                    class="w-full pl-7 pr-3 py-2 text-sm bg-transparent border border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white focus:ring-0 transition-colors font-mono"
+                    type="number" value="0" />
+                </div>
+              </div>
+              <span class="text-sm text-gray-400">to</span>
+              <div class="flex-1">
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">₹</span>
+                  <input
+                    class="w-full pl-7 pr-3 py-2 text-sm bg-transparent border border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white focus:ring-0 transition-colors font-mono"
+                    type="number" value="2999" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-800 pt-6">
+          <h3 id="filter-header-availability" onclick="toggleFilter('availability')"
+            class="font-display text-lg font-medium mb-4 flex items-center justify-between cursor-pointer select-none">
+            AVAILABILITY
+            <span id="filter-icon-availability" class="material-icons-outlined text-sm">expand_less</span>
+          </h3>
+          <div id="filter-content-availability" class="space-y-3 transition-all duration-300">
+            <label class="flex items-center group cursor-pointer">
+              <input
+                class="form-checkbox h-4 w-4 text-black border-gray-300 focus:ring-black dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-white dark:checked:text-black dark:focus:ring-offset-gray-900 rounded-sm"
+                type="checkbox" />
+              <span
+                class="ml-3 text-sm text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">In
+                stock (6)</span>
+            </label>
+            <label class="flex items-center group cursor-pointer">
+              <input
+                class="form-checkbox h-4 w-4 text-black border-gray-300 focus:ring-black dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-white dark:checked:text-black dark:focus:ring-offset-gray-900 rounded-sm"
+                type="checkbox" />
+              <span
+                class="ml-3 text-sm text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors">Out
+                of stock (1)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="flex-1">
+      <div
+        class="flex items-center justify-between mb-8 bg-background-light dark:bg-background-dark h-16 border-b border-gray-100 dark:border-gray-800">
+        <div id="product-count" class="hidden lg:block text-sm text-gray-500 dark:text-gray-400 font-mono">
+          Showing 8 products
+        </div>
+        <div class="flex items-center w-full lg:w-auto justify-between lg:justify-end">
+          <div class="flex items-center space-x-4">
+            <button onclick="toggleMobileFilter()"
+              class="lg:hidden flex items-center space-x-2 text-sm font-medium uppercase tracking-wider">
+              <span>Filter</span>
+              <span class="material-icons-outlined text-base">expand_more</span>
+            </button>
+            <div class="relative">
+              <button id="sort-button" onclick="toggleSortDropdown(event)"
+                class="flex items-center space-x-2 text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 uppercase tracking-wider focus:outline-none">
+                <span id="sort-text">Best selling</span>
+                <span id="sort-icon"
+                  class="material-icons-outlined text-base transition-transform duration-200">expand_more</span>
+              </button>
+              <div id="sort-dropdown"
+                class="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-card-dark rounded-lg shadow-xl py-2 z-50 transform origin-top-right transition-all duration-200 scale-95 opacity-0 invisible ring-1 ring-black ring-opacity-5">
+                <a href="#" onclick="selectSortOption('Featured', event)"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Featured</a>
+                <a href="#" onclick="selectSortOption('Best selling', event)"
+                  class="block px-4 py-2 text-sm font-bold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800">Best
+                  selling</a>
+                <a href="#" onclick="selectSortOption('Alphabetically, A-Z', event)"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Alphabetically,
+                  A-Z</a>
+                <a href="#" onclick="selectSortOption('Alphabetically, Z-A', event)"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Alphabetically,
+                  Z-A</a>
+                <a href="#" onclick="selectSortOption('Price, low to high', event)"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Price,
+                  low to high</a>
+                <a href="#" onclick="selectSortOption('Price, high to low', event)"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Price,
+                  high to low</a>
+                <a href="#" onclick="selectSortOption('Date, old to new', event)"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Date,
+                  old to new</a>
+                <a href="#" onclick="selectSortOption('Date, new to old', event)"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Date,
+                  new to old</a>
+              </div>
+            </div>
+          </div>
+          <!-- Desktop View Options (lg+) -->
+          <div
+            class="hidden lg:flex items-center space-x-2 border-l border-gray-200 dark:border-gray-700 pl-10 lg:ml-6">
+            <button onclick="updateGridColumn('desktop', 3)" id="btn-desktop-3"
+              class="p-2 rounded transition-colors text-gray-400 hover:text-black dark:hover:text-white">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                <rect x="0" width="2" height="14" rx="1" />
+                <rect x="6" width="2" height="14" rx="1" />
+                <rect x="12" width="2" height="14" rx="1" />
+              </svg>
+            </button>
+            <button onclick="updateGridColumn('desktop', 4)" id="btn-desktop-4"
+              class="p-2 rounded transition-colors bg-black text-white dark:bg-white dark:text-black">
+              <svg width="19" height="14" viewBox="0 0 19 14" fill="currentColor">
+                <rect x="0" width="2" height="14" rx="1" />
+                <rect x="5.66" width="2" height="14" rx="1" />
+                <rect x="11.33" width="2" height="14" rx="1" />
+                <rect x="17" width="2" height="14" rx="1" />
+              </svg>
+            </button>
+            <button onclick="updateGridColumn('desktop', 5)" id="btn-desktop-5"
+              class="p-2 rounded transition-colors text-gray-400 hover:text-black dark:hover:text-white">
+              <svg width="24" height="14" viewBox="0 0 24 14" fill="currentColor">
+                <rect x="0" width="2" height="14" rx="1" />
+                <rect x="5.5" width="2" height="14" rx="1" />
+                <rect x="11" width="2" height="14" rx="1" />
+                <rect x="16.5" width="2" height="14" rx="1" />
+                <rect x="22" width="2" height="14" rx="1" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Tablet View Options (sm-lg) -->
+          <div
+            class="hidden sm:flex lg:hidden items-center space-x-2 border-l border-gray-200 dark:border-gray-700 pl-6">
+            <button onclick="updateGridColumn('tablet', 2)" id="btn-tablet-2"
+              class="p-2 rounded transition-colors text-gray-400 hover:text-black dark:hover:text-white">
+              <svg width="9" height="14" viewBox="0 0 9 14" fill="currentColor">
+                <rect x="0" width="2" height="14" rx="1" />
+                <rect x="7" width="2" height="14" rx="1" />
+              </svg>
+            </button>
+            <button onclick="updateGridColumn('tablet', 3)" id="btn-tablet-3"
+              class="p-2 rounded transition-colors bg-black text-white dark:bg-white dark:text-black">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                <rect x="0" width="2" height="14" rx="1" />
+                <rect x="6" width="2" height="14" rx="1" />
+                <rect x="12" width="2" height="14" rx="1" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Mobile View Options (<sm) -->
+          <div class="flex sm:hidden items-center space-x-2 border-l border-gray-200 dark:border-gray-700 pl-4 ml-4">
+            <button onclick="updateGridColumn('mobile', 1)" id="btn-mobile-1"
+              class="p-2 rounded transition-colors text-gray-400 hover:text-black dark:hover:text-white">
+              <svg width="4" height="14" viewBox="0 0 4 14" fill="currentColor">
+                <rect x="1" width="2" height="14" rx="1" />
+              </svg>
+            </button>
+            <button onclick="updateGridColumn('mobile', 2)" id="btn-mobile-2"
+              class="p-2 rounded transition-colors bg-black text-white dark:bg-white dark:text-black">
+              <svg width="9" height="14" viewBox="0 0 9 14" fill="currentColor">
+                <rect x="0" width="2" height="14" rx="1" />
+                <rect x="7" width="2" height="14" rx="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16">
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Black graphic hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxmTnUKbWgghAdRg-J4ZbH64q33DU-PWdIHCpc0brPP2pzb1muszUobPyfeSVRKFa6JsRXrusj8BaIFodiQRdaqEjOzc-R1XcKBzcTiAfTEmsuP2eCyZGp-fZdyaiJ9X1mlKr35QJBLn0sg_-7Bxb_6oe5ka3TVOb1Yq8M6Xt2eNDUeu0qe8txz1-4VPZlmIT5PjyQckCvuv_hBXIqCRLWsS-lgG6eUwe5kpshgTsMyABXdcJAxutCqkkw0K2uyqZs93-SKgS1Ge1a" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">DEFENDER GAP</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 4,399</span>
+              <span class="text-green-600 text-xs font-bold">65% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <a href="product_detail.html" class="block">
+              <img alt="Back print graphic hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLGazvs_rfyV7gSTN74B2QjZYOKQMCh-rxLzwtr5kOFKItsv1HmM3EAVR9IVlEWuTyhUQfShUrZZayYBsMFhWoaEJtFEMXXldH1dE0o9yId5vHpLfYm04VYHy4ey81p9WibZaXYF_fYD5UbeU_ifgC9FumKqd-qgNIUZE9jCws0_g-vuAXor0tc3D7VLioXJVAU_CwETh51mTcH4weIiUp26e89RgosY-2C_z0yqFutCM4dd4hR7JlEe6d78DMd4qv0u_eSAissJf" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">BULLET & DOLLAR</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Brown hoodie graphic"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXcyYSY0z7m1lJX8R7O7n_R4nH3nFCilbB-_fN9R33P9Bse5Ot6eUKSEm8LsRsdVMo3nu0GMJ7QYWN_FR0SnY6eqV9jSuxa6Si_ojv8W2XGgTW5e_9b9H3QIal8ccW3HA6-8COc1q4nhBtHBA2ZtKjgDXKo3BO9CIXH65Wxv_hpCntbkNUoppWCfRykfYDkCT3mUXd4WojKpNUqNlgIKIPbz0WKbtrGRCay5Ed97iBsAwmKkiJGUciDLVdbESgPvXuK8hXbyoP9Rj6" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">ARMED MAFIA</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 2,999</span>
+              <span class="text-green-600 text-xs font-bold">50% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <a href="product_detail.html" class="block">
+              <img alt="White porsche hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrg4GEiaFPfRGZJD833QBhi_-nZZwk07TS-zP8iE7hEY5xLs73AMLWuzvaf15RQLVZ2vLlCU6DEQP6lUQ-_jY0bwptf_JEjbaOCxip2OsPiG5LjrfbqA70KCBU4I4ddHPFhFfPyZQrwEDEtJFVYOsYb5jtD1L-yUD6jgcZ0myc6etwCAG_JUKU8cycuja5NdyCh-yi_EOT3JkaTnQ8GqQg4dBao6lw9i3kEH1jMIVyq62kgiDAje-qslnOd4gPMYkK40-_LQrV855T" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">PUFFED GT3RS</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Street culture mask hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoWeq-wEuj2uIvmQ6ls5l0P9gj_TaibnwKjRizTkvuIDmtbdytg0raAm4aVLj4cH8KtySl6YnFVLJv8_Mi1rBMQ8XwKYyaDQoepN7RSG6JnPJF7e8LhSqdaDjP4a9A4FZmN0Gk7WKZm6j4yCJjZZQWPeBIoroZMk175oYq84doPa335hZK1bowVCWq8ad6tDLIkc5OosVmBahsNht21VLQ87eK4htRmq-JLLtjcI_F2a-KXi0G5JCxlBOAMv9or7Yu7U4yPjAS6R7U" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">STREET CULTURE</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,099</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 2,999</span>
+              <span class="text-green-600 text-xs font-bold">30% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Gangster orange hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk2skXxFJ-nJeqCA0-GP4QDtWCMYJC-W75lUrrnVNt7xEOnNOtlKk_wDSmGOsE2oGQY_RP61Q1JWr6ZqtXrEOSoi-ravYuTE2kkqvqtiYdAWKJL-TrgPlpMRZaq9IQWQ6XktYI-Q4TNbVB3OYLTjNt6L3x8JubCJDDBqiLTBzN5kk-kZZQFvrL_O3JEPODH0RMBaUlfcyc7IOubT1qtj6Hhx_HYZwGlS_OjaaNgdiQtmmPKJNn8wSzymKKgyGlimi-WaxC0nvlrcgU" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">GANGSTER EAGLE</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 1,799</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 2,999</span>
+              <span class="text-green-600 text-xs font-bold">40% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Night crawler hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQyx-EY10oW6HoCulDzXRv5sAnoBqjHWMSBPd75iwHeo8D2R__JhSqrWP2cCG26MkA2STMOuuOGMGLXpD-yLwxTtOTwgIZA548agOouhyZHcbCE6v9pg-LfUGDjrTZLi8A-W2NY699IKWhIEAl1m9HOBLncbhs2ARwcnm1DikQE98LImG7aq05yX_e9E-E2G4aaDm61Qf_5WGOiZGoosrdvxNA9tyogPJU9yG0AwE8wRCNjhYE3wYFmf9OCKq_55awCUSGFgNXX_mV" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">NIGHT CRAWLER</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,499</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 3,999</span>
+              <span class="text-green-600 text-xs font-bold">37% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <a href="product_detail.html" class="block">
+              <img alt="Neon demon hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5A16U-AYWn6pAfgnvo1fiBJ3jmh_PFRh04sIhZ3q_9sae-BAs6RE1Qs-vwDpGod0cUasSrQngu6i5PEihFpBBOovgZlOl6Tlma0tNX9t3bBmqvMJoKFv8zNo4XP29idWo_zoyenNDDX7uNBsG-3DdLSlopMqeOtvRcED7oI405pg8QXt_6yxhbute-UzkHyh94Jwj2Ha7f47TPAiFz5ApJTaHV92CTRj4RbUqn2bBdm7XR1-Uyvh-1BrGwg3gRRa1lOi_XRHJfiLW" />
+            </a>
+            <button
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">NEON DEMON</h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="mt-20 flex justify-center">
+        <button id="load-more-btn"
+          class="inline-flex items-center bg-black dark:bg-white text-white dark:text-black font-display font-bold uppercase px-8 py-3 rounded-full hover:opacity-90 transition-opacity">
+          Load More <span class="material-icons ml-2 text-sm">arrow_downward</span>
+        </button>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-black text-white border-t border-gray-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
+        <div class="col-span-2 md:col-span-1">
+          <a class="block mb-6 inline-block md:block" href="#">
+            <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0" src="Clothyfly-light.svg" />
+          </a>
+          <p class="text-gray-400 text-sm italic">Dress Better. Feel Better.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase mb-4 tracking-wider">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a class="hover:text-white" href="#">Home</a></li>
+            <li><a class="hover:text-white" href="#">Products</a></li>
+            <li><a class="hover:text-white" href="#">About</a></li>
+            <li><a class="hover:text-white" href="#">Contact</a></li>
+            <li><a class="hover:text-white" href="#">Wishlist</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase mb-4 tracking-wider">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a class="hover:text-white" href="#">Order Processing</a></li>
+            <li><a class="hover:text-white" href="#">Privacy Policy</a></li>
+            <li><a class="hover:text-white" href="#">Refund &amp; Exchange Policy</a></li>
+            <li><a class="hover:text-white" href="#">Terms and Conditions</a></li>
+          </ul>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <h4 class="font-bold text-sm uppercase mb-4 tracking-wider">Our Store</h4>
+          <div class="flex space-x-4 justify-center md:justify-start">
+            <a class="text-gray-400 hover:text-white transition-colors" href="#">
+              <span class="material-icons text-xl">camera_alt</span>
+            </a>
+            <a class="text-gray-400 hover:text-white transition-colors" href="#">
+              <span class="material-icons text-xl">facebook</span>
+            </a>
+            <a class="text-gray-400 hover:text-white transition-colors" href="#">
+              <span class="material-icons text-xl">location_on</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <p>&copy; <span id="copyright-year">2025</span> Clothyfly. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <button id="scroll-to-top"
+    class="fixed bottom-20 lg:bottom-6 right-6 bg-white text-black p-3 rounded-full shadow-xl hover:bg-gray-100 transition-all duration-300 z-50 opacity-0 invisible translate-y-4">
+    <span class="material-icons text-xl">arrow_upward</span>
+  </button>
+
+  <!-- Mobile Filter Menu Overlay -->
+  <div id="mobile-filter-menu" class="fixed inset-0 z-50 invisible opacity-0 transition-opacity duration-300">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleMobileFilter()"></div>
+
+    <!-- Slide-out Panel -->
+    <div
+      class="absolute top-0 left-0 bottom-0 w-[300px] bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800 shadow-2xl transform transition-transform duration-300 -translate-x-full overflow-y-auto">
+      <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
+        <h2 class="font-display text-xl font-bold uppercase tracking-wide">Filters</h2>
+        <button onclick="toggleMobileFilter()"
+          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+          <span class="material-icons-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-8">
+        <!-- Categories -->
+        <div>
+          <h3 class="font-display text-lg font-medium mb-4">CATEGORIES</h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-600 dark:text-gray-400">Men's Fashion</span>
+              <span class="text-sm text-gray-500 font-mono">3</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-600 dark:text-gray-400">Women's Fashion</span>
+              <span class="text-sm text-gray-500 font-mono">3</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-600 dark:text-gray-400">KIDS</span>
+              <span class="text-sm text-gray-500 font-mono">1</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-600 dark:text-gray-400">Men</span>
+              <span class="text-sm text-gray-500 font-mono">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 dark:border-gray-800 pt-6"></div>
+
+        <!-- Price -->
+        <div>
+          <h3 class="font-display text-lg font-medium mb-4">PRICE</h3>
+          <div class="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full mb-6 mt-2">
+            <div class="absolute left-0 right-0 h-1 bg-black dark:bg-white rounded-full"></div>
+            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-black dark:bg-white rounded-full">
+            </div>
+            <div
+              class="absolute right-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-black dark:bg-white rounded-full">
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex-1">
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">₹</span>
+                <input
+                  class="w-full pl-7 pr-3 py-2 text-sm bg-transparent border border-gray-300 dark:border-gray-700 font-mono"
+                  type="number" value="0" />
+              </div>
+            </div>
+            <span class="text-sm text-gray-400">to</span>
+            <div class="flex-1">
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">₹</span>
+                <input
+                  class="w-full pl-7 pr-3 py-2 text-sm bg-transparent border border-gray-300 dark:border-gray-700 font-mono"
+                  type="number" value="2999" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 dark:border-gray-800 pt-6"></div>
+
+        <!-- Availability -->
+        <div>
+          <h3 class="font-display text-lg font-medium mb-4">AVAILABILITY</h3>
+          <div class="space-y-3">
+            <label class="flex items-center">
+              <input class="form-checkbox h-4 w-4 text-black border-gray-300 rounded-sm" type="checkbox" />
+              <span class="ml-3 text-sm text-gray-600 dark:text-gray-400">In stock (6)</span>
+            </label>
+            <label class="flex items-center">
+              <input class="form-checkbox h-4 w-4 text-black border-gray-300 rounded-sm" type="checkbox" />
+              <span class="ml-3 text-sm text-gray-600 dark:text-gray-400">Out of stock (1)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 border-t border-gray-100 dark:border-gray-800 sticky bottom-0 bg-white dark:bg-black">
+        <button onclick="toggleMobileFilter()"
+          class="w-full bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-wider py-4 rounded-full">
+          Show Results
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleFilter(filterName) {
+      const content = document.getElementById(`filter-content-${filterName}`);
+      const icon = document.getElementById(`filter-icon-${filterName}`);
+
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.textContent = 'expand_less';
+      } else {
+        content.classList.add('hidden');
+        icon.textContent = 'expand_more';
+      }
+    }
+
+    // Mobile Filter Logic
+    function toggleMobileFilter() {
+      const menu = document.getElementById('mobile-filter-menu');
+      if (menu.classList.contains('invisible')) {
+        menu.classList.remove('invisible', 'opacity-0');
+        menu.classList.add('opacity-100');
+        menu.querySelector('div[class*="transform"]').classList.remove('-translate-x-full');
+      } else {
+        menu.classList.add('invisible', 'opacity-0');
+        menu.classList.remove('opacity-100');
+        menu.querySelector('div[class*="transform"]').classList.add('-translate-x-full');
+      }
+    }
+
+    // Grid Column Logic
+    let gridSettings = {
+      mobile: 2,
+      tablet: 3,
+      desktop: 4
+    };
+
+    function updateGridColumn(view, count) {
+      // 1. Update State
+      gridSettings[view] = count;
+
+      // 2. Update Grid Classes
+      const grid = document.getElementById('product-grid');
+      // Base classes to preserve
+      const baseClasses = "grid gap-x-6 gap-y-16";
+      // Construct dynamic classes
+      // Note: Tailwind requires full class names to be present at build time usually, but since we are not running a build process here and editing the file directly, 
+      // simple string manipulation works assuming standard Tailwind CDN or build. 
+      // However, typical Tailwind builds purge unused classes. 
+      // Assuming 'grid-cols-1' through 'grid-cols-5' are safe-listed or used elsewhere/standard.
+
+      grid.className = `${baseClasses} grid-cols-${gridSettings.mobile} sm:grid-cols-${gridSettings.tablet} lg:grid-cols-${gridSettings.desktop}`;
+
+      // 3. Update Button UI
+      updateGridButtons(view, count);
+    }
+
+    function updateGridButtons(view, count) {
+      // Get all buttons for this view
+      const buttons = document.querySelectorAll(`[id^="btn-${view}-"]`);
+
+      buttons.forEach(btn => {
+        // Parse ID to get count (e.g. btn-desktop-3)
+        const btnCount = parseInt(btn.id.split('-')[2]);
+
+        if (btnCount === count) {
+          // Active State
+          btn.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+          btn.classList.remove('text-gray-400', 'hover:text-black', 'dark:hover:text-white');
+        } else {
+          // Inactive State
+          btn.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+          btn.classList.add('text-gray-400', 'hover:text-black', 'dark:hover:text-white');
+        }
+      });
+    }
+
+    // Sort Dropdown Functionality
+    function toggleSortDropdown(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const dropdown = document.getElementById('sort-dropdown');
+      const icon = document.getElementById('sort-icon');
+
+      if (dropdown.classList.contains('invisible')) {
+        dropdown.classList.remove('invisible', 'opacity-0', 'scale-95');
+        dropdown.classList.add('opacity-100', 'scale-100');
+        icon.classList.add('rotate-180');
+      } else {
+        dropdown.classList.add('invisible', 'opacity-0', 'scale-95');
+        dropdown.classList.remove('opacity-100', 'scale-100');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    function selectSortOption(option, event) {
+      if (event) event.preventDefault();
+
+      const sortText = document.getElementById('sort-text');
+      const sortButton = document.getElementById('sort-button');
+
+      // Update text
+      sortText.textContent = option;
+
+      // Update styles for active state
+      const links = document.querySelectorAll('#sort-dropdown a');
+      links.forEach(link => {
+        const linkText = link.textContent.replace(/\s+/g, ' ').trim();
+        if (linkText === option) {
+          link.classList.add('font-bold', 'text-gray-900', 'dark:text-white', 'bg-gray-50', 'dark:bg-gray-800');
+          link.classList.remove('text-gray-700', 'dark:text-gray-300');
+        } else {
+          link.classList.remove('font-bold', 'text-gray-900', 'dark:text-white', 'bg-gray-50', 'dark:bg-gray-800');
+          link.classList.add('text-gray-700', 'dark:text-gray-300');
+        }
+      });
+
+      // Close dropdown
+      toggleSortDropdown();
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+      const dropdown = document.getElementById('sort-dropdown');
+      const sortButton = document.getElementById('sort-button');
+
+      if (!dropdown.classList.contains('invisible') &&
+        !sortButton.contains(event.target) &&
+        !dropdown.contains(event.target)) {
+        toggleSortDropdown();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      const productGrid = document.getElementById('product-grid');
+      const productCount = document.getElementById('product-count');
+      let currentCount = 8; // Starting with 8 products
+
+      if (loadMoreBtn && productGrid) {
+        loadMoreBtn.addEventListener('click', () => {
+          // 1. Show loading state
+          const originalContent = loadMoreBtn.innerHTML;
+          loadMoreBtn.innerHTML = '<span class="material-icons animate-spin mr-2 text-base">refresh</span> Loading...';
+          loadMoreBtn.classList.add('opacity-75', 'cursor-not-allowed');
+          loadMoreBtn.disabled = true;
+
+          // 2. Simulate delay (e.g. 1.5s)
+          setTimeout(() => {
+            // 3. New products HTML (4 products)
+            const newProductsHTML = `
+              <div class="group opacity-0 translate-y-4 animate-fade-in-up" style="animation-fill-mode: forwards; animation-duration: 0.5s;">
+                <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                  <a href="product_detail.html" class="block">
+                    <img alt="Urban Legend Hoodie" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2-ODXjgUQ_FRpwntKw42px6NS6pYEdoyTgeZow3Z8ZEaP8TKdGcnAdhsCTQJHnFoshn7d41wmfieyYllgcxKo7lOINW1mHi6y3X0yb-dsM3LKxbewkDr5CEgHcYUtrzLJdd4P5lfnWE7KAezKcU-qROeHcLlR8oQqWc9DypJK_zvDiH26X-w7hsgLIYu_IVfb31ZBrVnPuncyqbo_LKMZCFeBB1P42qQvZTruwlfTAeF_f7IKEaUkfKPClV4XmNIIINKkEG1hiZqL" />
+                  </a>
+                  <button class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                    <span class="material-icons text-lg">favorite_border</span>
+                  </button>
+                </div>
+                <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                  <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">URBAN LEGEND</h3>
+                  <div class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="group opacity-0 translate-y-4 animate-fade-in-up" style="animation-fill-mode: forwards; animation-duration: 0.5s; animation-delay: 0.1s;">
+                <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                   <span class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+                  <a href="product_detail.html" class="block">
+                    <img alt="Crypto Punk Hoodie" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJbmXcpOWp3cbhnnIamiZPBI9todbpLv37QMpw5KViFt67_xNegLlyg70XCnbwRsI6gSBs-JgZOoCusB0E02ai_OtmbEw7yaibfn8X4FwHXahse_VVSxcPwx3ewilO3NCMoR7Qqy2glSeojUNj0n1jDyZ-Z9nMfXEmcWmvLTVDITQ4ojo2Zp1eZRL36ndVLTt6ksAQXALuMnk-INNCzXiTkxQ7yhkIw6VK9RQZgPum5xZzB9oYJbJDvde9RA1lXhte5kFibOZBnRmy" />
+                  </a>
+                  <button class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                    <span class="material-icons text-lg">favorite_border</span>
+                  </button>
+                </div>
+                <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                  <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">CRYPTO PUNK</h3>
+                   <div class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 1,999</span>
+                    <span class="text-gray-400 line-through text-xs">Rs. 3,999</span>
+                    <span class="text-green-600 text-xs font-bold">50% OFF</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="group opacity-0 translate-y-4 animate-fade-in-up" style="animation-fill-mode: forwards; animation-duration: 0.5s; animation-delay: 0.2s;">
+                <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                  <a href="product_detail.html" class="block">
+                    <img alt="Cyber Glitch Hoodie" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxmTnUKbWgghAdRg-J4ZbH64q33DU-PWdIHCpc0brPP2pzb1muszUobPyfeSVRKFa6JsRXrusj8BaIFodiQRdaqEjOzc-R1XcKBzcTiAfTEmsuP2eCyZGp-fZdyaiJ9X1mlKr35QJBLn0sg_-7Bxb_6oe5ka3TVOb1Yq8M6Xt2eNDUeu0qe8txz1-4VPZlmIT5PjyQckCvuv_hBXIqCRLWsS-lgG6eUwe5kpshgTsMyABXdcJAxutCqkkw0K2uyqZs93-SKgS1Ge1a" />
+                  </a>
+                  <button class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                    <span class="material-icons text-lg">favorite_border</span>
+                  </button>
+                </div>
+                <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                  <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">CYBER GLITCH</h3>
+                  <div class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+                  </div>
+                </a>
+              </div>
+
+               <div class="group opacity-0 translate-y-4 animate-fade-in-up" style="animation-fill-mode: forwards; animation-duration: 0.5s; animation-delay: 0.3s;">
+                <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                  <span class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+                  <a href="product_detail.html" class="block">
+                    <img alt="Acid Wash Hoodie" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk2skXxFJ-nJeqCA0-GP4QDtWCMYJC-W75lUrrnVNt7xEOnNOtlKk_wDSmGOsE2oGQY_RP61Q1JWr6ZqtXrEOSoi-ravYuTE2kkqvqtiYdAWKJL-TrgPlpMRZaq9IQWQ6XktYI-Q4TNbVB3OYLTjNt6L3x8JubCJDDBqiLTBzN5kk-kZZQFvrL_O3JEPODH0RMBaUlfcyc7IOubT1qtj6Hhx_HYZwGlS_OjaaNgdiQtmmPKJNn8wSzymKKgyGlimi-WaxC0nvlrcgU" />
+                  </a>
+                  <button class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                    <span class="material-icons text-lg">favorite_border</span>
+                  </button>
+                </div>
+                <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                  <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">ACID WASH</h3>
+                   <div class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 1,299</span>
+                    <span class="text-gray-400 line-through text-xs">Rs. 2,999</span>
+                    <span class="text-green-600 text-xs font-bold">55% OFF</span>
+                  </div>
+                </a>
+              </div>
+            `;
+
+            // 4. Append to grid
+            productGrid.insertAdjacentHTML('beforeend', newProductsHTML);
+
+            // 5. Update UI
+            currentCount += 4;
+            if (productCount) {
+              productCount.textContent = `Showing ${currentCount} products`;
+            }
+
+            // 6. Reset button 
+            loadMoreBtn.innerHTML = originalContent;
+            loadMoreBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            loadMoreBtn.disabled = false;
+
+            // 7. Hide button if simulated end of list not requested, but let's hide it for now to mimic "no more products" or keep it if they want infinite. 
+            // User said "load more 4 products", implying a finite action. I'll hide it to prevent spamming copies.
+            loadMoreBtn.style.display = 'none';
+
+          }, 1500);
+        });
+      }
+
+      // Inline styling for the animation
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translate3d(0, 20px, 0);
+          }
+          to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        .animate-fade-in-up {
+          animation-name: fadeInUp;
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Search Results Logic
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchTerm = urlParams.get('search');
+
+      if (searchTerm) {
+        const title = document.getElementById('page-title');
+        const breadcrumb = document.getElementById('breadcrumb-nav');
+
+        if (title) title.textContent = 'Search Results';
+
+        if (breadcrumb) {
+          // Found 8 results for "replace search text"
+          breadcrumb.innerHTML = `<span class="text-gray-500 dark:text-gray-400">Found 8 results for </span><span class="text-black dark:text-white font-bold">"${searchTerm}"</span>`;
+          breadcrumb.classList.remove('uppercase');
+          breadcrumb.classList.add('text-lg', 'normal-case'); // Make it look a bit more prominent like a status message
+        }
+      }
+
+      // Dynamic Copyright Year
+      const yearSpan = document.getElementById('copyright-year');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // Scroll to Top Logic
+      const scrollToTopBtn = document.getElementById('scroll-to-top');
+      if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 300) {
+            scrollToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+            scrollToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+          } else {
+            scrollToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+            scrollToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+          }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+
+    // Mobile Menu Logic
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu-drawer');
+      const btn = document.getElementById('mobile-menu-btn');
+      const icon = document.getElementById('mobile-menu-icon');
+
+      const isOpen = !menu.classList.contains('-translate-x-full');
+
+      if (isOpen) {
+        // Close Menu
+        menu.classList.add('-translate-x-full');
+        document.body.classList.remove('overflow-hidden');
+
+        // Animate Icon to Menu
+        btn.classList.remove('rotate-90');
+        icon.textContent = 'menu';
+      } else {
+        // Open Menu
+        menu.classList.remove('-translate-x-full');
+        document.body.classList.add('overflow-hidden');
+
+        // Animate Icon to Close
+        btn.classList.add('rotate-90');
+        icon.textContent = 'close';
+      }
+    }
+  </script>
+  <!-- Sticky Bottom Navigation (Mobile/Tablet) -->
+  <div
+    class="fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 flex justify-between px-8 py-3 z-30 lg:hidden">
+    <a href="index.html"
+      class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
+      <span class="material-icons text-2xl">home</span>
+    </a>
+    <a href="product_list.html" class="flex flex-col items-center justify-center text-black dark:text-white">
+      <span class="material-icons text-2xl">grid_view</span>
+    </a>
+    <button
+      class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors relative">
+      <span class="material-icons text-2xl">shopping_bag</span>
+      <span
+        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-black dark:bg-white text-[10px] font-bold text-white dark:text-black">1</span>
+    </button>
+    <button onclick="toggleSearchModal()"
+      class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
+      <span class="material-icons text-2xl">search</span>
+    </button>
+  </div>
+  <!-- Mobile Menu Drawer (White Background) -->
+  <div id="mobile-menu-drawer"
+    class="fixed inset-0 z-40 bg-white transform -translate-x-full transition-transform duration-300 xl:hidden overflow-y-auto">
+    <div class="pt-24 px-6 pb-12 flex flex-col h-full">
+      <!-- Nav Links -->
+      <nav class="space-y-6 flex-1">
+        <a href="index.html" class="block text-lg font-medium text-black">Home</a>
+        <div class="flex items-center justify-between group cursor-pointer">
+          <a href="#" class="block text-lg font-medium text-black">Products</a>
+          <span class="material-icons text-black">chevron_right</span>
+        </div>
+        <a href="#" class="block text-lg font-medium text-black">About Us</a>
+        <a href="#" class="block text-lg font-medium text-black">Contact</a>
+        <a href="#" class="block text-lg font-medium text-black">Wishlist</a>
+      </nav>
+
+      <!-- My Account Section -->
+      <div class="mt-auto pt-10">
+        <h3 class="text-lg font-bold text-black mb-6">My Account</h3>
+        <div class="space-y-4">
+          <a href="#"
+            class="block w-full text-center py-3 border border-black text-black font-medium hover:bg-black hover:text-white transition-colors">
+            Log in
+          </a>
+          <a href="#"
+            class="block w-full text-center py-3 bg-black text-white font-medium hover:bg-gray-800 transition-colors">
+            Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Search Modal -->
+  <div id="search-modal"
+    class="fixed inset-0 z-[60] bg-white dark:bg-background-dark transform translate-y-full transition-transform duration-300 flex flex-col">
+    <div class="p-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+      <h2 class="text-lg font-medium text-gray-900 dark:text-white">Search our store</h2>
+      <button onclick="toggleSearchModal()"
+        class="text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white focus:outline-none">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+    </div>
+    <div class="p-4">
+      <div class="relative mb-6">
+        <input id="mobile-search-input" type="text" placeholder="Search products"
+          class="w-full border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 pl-4 pr-10 text-gray-900 dark:text-white bg-transparent focus:ring-1 focus:ring-black dark:focus:ring-white focus:border-transparent outline-none">
+        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <span class="material-icons text-xl">search</span>
+        </button>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Popular Searches:</p>
+        <div class="flex flex-wrap gap-2">
+          <a href="product_list.html?search=T-Shirt"
+            class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">T-Shirt</a>
+          <a href="product_list.html?search=Blue"
+            class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">Blue</a>
+          <a href="product_list.html?search=Jacket"
+            class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">Jacket</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSearchModal() {
+      const modal = document.getElementById('search-modal');
+      const input = document.getElementById('mobile-search-input');
+      const isOpen = !modal.classList.contains('translate-y-full');
+
+      if (isOpen) {
+        modal.classList.add('translate-y-full');
+        document.body.classList.remove('overflow-hidden');
+      } else {
+        modal.classList.remove('translate-y-full');
+        document.body.classList.add('overflow-hidden');
+        setTimeout(() => input.focus(), 300);
+      }
+    }
+
+    document.getElementById('mobile-search-input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
+      }
+    });
+
+    // Desktop Search Logic
+    const desktopSearchInput = document.getElementById('search-input-field');
+    const desktopSearchBtn = document.getElementById('search-btn-icon');
+
+    if (desktopSearchInput) {
+      desktopSearchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
+        }
+      });
+    }
+
+    if (desktopSearchBtn) {
+      desktopSearchBtn.addEventListener('click', function () {
+        window.location.href = 'product_list.html?search=' + encodeURIComponent(desktopSearchInput.value);
+      });
+    }
+  </script>
+</body>
+
+</html>

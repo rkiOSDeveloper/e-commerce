@@ -47,7 +47,7 @@
 </head>
 
 <body
-  class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200">
+  class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200 pb-20 lg:pb-0">
   <header
     class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,8 +55,9 @@
         <div class="flex items-center">
           <!-- Mobile Menu Button -->
           <div class="flex items-center xl:hidden">
-            <button class="text-gray-900 dark:text-gray-100 hover:text-black dark:hover:text-white p-2 -ml-2">
-              <span class="material-icons text-2xl">menu</span>
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()"
+              class="text-gray-900 dark:text-gray-100 p-2 -ml-2 relative z-50 focus:outline-none transition-transform duration-300">
+              <span id="mobile-menu-icon" class="material-icons text-2xl">menu</span>
             </button>
           </div>
 
@@ -65,7 +66,7 @@
             class="flex-shrink-0 flex items-center absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:translate-x-0 md:ml-4 xl:ml-0">
             <a class="block" href="#">
               <img alt="Clothyfly" class="h-8 lg:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
-                src="https://raw.githack.com/rkiOSDeveloper/e-commerce/refs/heads/main/Clothyfly-dark.svg" />
+                src="Clothyfly-dark.svg" />
             </a>
           </div>
         </div>
@@ -389,7 +390,8 @@
         </nav>
 
         <div class="flex items-center space-x-2 xl:space-x-4">
-          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:hidden">
+          <button id="mobile-search-btn" onclick="toggleSearchModal()"
+            class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:hidden focus:outline-none">
             <span class="material-icons text-xl">search</span>
           </button>
 
@@ -582,7 +584,7 @@
       class="relative w-full px-4 sm:px-6 lg:px-8 overflow-x-auto hide-scrollbar pb-8 scroll-smooth">
       <div class="flex space-x-6 w-max pr-8">
         <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
-          href="#">
+          href="product_list.html">
           <img alt="Model wearing hoodie"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3T8dbiiHCxS0NOST3Da6YZqbbJhbOUaep8Y82T3zDuazCyQks79nuF9HdUvqpiu-iE_srzkAESvUB1AnfoxWMZnSgk2brP6EaOt6SnaBUBvLUsqx6NKB1TgqTVbhWUGov4GEuhNtJ0pUQUprzqPGI2DZzdQrcJ-AxJE0tZNXMcXVZH_BFocQx0mImSGXRNs9l7HTkOSBtlkPxtNH-lMuSWHKjQRyP0ZXzaFxZ34SLvQH3sspEo01yLMO7m15smL_tyR8YMQqPSTOw" />
@@ -597,7 +599,7 @@
           </div>
         </a>
         <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
-          href="#">
+          href="product_list.html">
           <img alt="Model in t-shirt"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj2q4NbxAjFOr63vuTCRmNPSRPwt2mDxysi6lzSTEH6lzNDUVmdihyc7mireFDUXel9eIcRxzCOb8SQDi8m4UEVqnhGAl8HNPmPVt2ZPZBB-JIuaBSmKjZyXsyFXe0Zi2KqDGADSMlZWn7_szBYnBsxqWBcZLf6xxTrxjQfLWuoM9XaSm6AEEfOAnOyxB1IvpFAIG-41N9sGjJIbH8H1ejnK_1Vvlg3YAtCVE5GXFrz-wwVwYG5QPOOjZbJHxKaA6UMg2HOXeAxRPm" />
@@ -612,7 +614,7 @@
           </div>
         </a>
         <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
-          href="#">
+          href="product_list.html">
           <img alt="Model in Polo"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoexObi4HKwGG2L0BfqWYQ899sbEIVndCWOAGvPbm0ffrU_T0eoMA140Vlr4vxzRQadq5-d9x-DPN_saDWEiVgwEev4b406DrapFui7vsrJuEA0Px7lZGueq9dhpwtyRTwOQFDAISo8NJWMhRmP2uRr4pnKyV-bvLhYaxr63S1u_fgRyiaMnu_0-Z5WGeGb08RAd6Qh0FLiGU2fj39Louii7NW1I6DeWjxVITjJYHqr1bFk_pDU_S4_EZrDoh5fnxetAUeki1XhPTJ" />
@@ -627,7 +629,7 @@
           </div>
         </a>
         <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
-          href="#">
+          href="product_list.html">
           <img alt="Model in jacket"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYzXtaJ47qHiTR_GxCOExdWNrQcq0PV26HSh7YI2hRM1px-UaYJKz4eNYSxDYXaJ-xsSn95mE4Vr9jbAve6PK3F-LQkw-qmH7q41Ye7TW1aTM5TWS6rW2jPYtyA8V-OiDWQ2YNYePnoT-6_B5w6LKysMg-25mpXNCb0L8Gq-Bc3Sv07MnbVIcHYMILfyUUWxz7rtzEDxrNaIGmKTKRAEnEkCjRYJzjX3jV15WvDH5k3mzgC7dIkjLL6my5W_We5JoIUu6tH0u1wMv5" />
@@ -642,7 +644,7 @@
           </div>
         </a>
         <a class="group relative w-[280px] h-[420px] md:w-[340px] md:h-[500px] flex-shrink-0 rounded-lg overflow-hidden block"
-          href="#">
+          href="product_list.html">
           <img alt="Streetwear accessories"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh_gsV1-dNBvJqpu1K1WYOtnjAMUzZO4gYF3zNlpVCgnB9xoRheiHiaWj6oMY6VI7obsFmUZViltD6PL8TzU2ECB-POcoVQke4k9cbGASmglZB-IDJevrUbXNc-psucommHbhYMlFGSR1WBNeoe-wktEYZaIz572N8F8knNf2Lqo7Dc-2y6EFgNjQiUQkfjsgZSRuqZLti0yUWis7ESuD9T31NEs8b54LqznsQ1WxWiTkavePAA7AgFb_ke4HLCqv80zyVl1UJ6A3a" />
@@ -785,8 +787,7 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
         <div class="col-span-2 md:col-span-1">
           <a class="block mb-6 inline-block md:block" href="#">
-            <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0"
-              src="https://raw.githack.com/rkiOSDeveloper/e-commerce/refs/heads/main/Clothyfly-light.svg" />
+            <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0" src="Clothyfly-light.svg" />
           </a>
           <p class="text-gray-400 text-sm italic">Dress Better. Feel Better.</p>
         </div>
@@ -831,7 +832,7 @@
     </div>
   </footer>
   <button id="scroll-to-top"
-    class="fixed bottom-6 right-6 bg-white text-black p-3 rounded-full shadow-xl hover:bg-gray-100 transition-all duration-300 z-50 opacity-0 invisible translate-y-4">
+    class="fixed bottom-20 lg:bottom-6 right-6 bg-white text-black p-3 rounded-full shadow-xl hover:bg-gray-100 transition-all duration-300 z-50 opacity-0 invisible translate-y-4">
     <span class="material-icons text-xl">arrow_upward</span>
   </button>
 
@@ -1051,6 +1052,159 @@
     // Start initial timer
     if (slides.length > 0) {
       startSlider();
+    }
+
+    // Mobile Menu Logic
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu-drawer');
+      const btn = document.getElementById('mobile-menu-btn');
+      const icon = document.getElementById('mobile-menu-icon');
+
+      const isOpen = !menu.classList.contains('-translate-x-full');
+
+      if (isOpen) {
+        // Close Menu
+        menu.classList.add('-translate-x-full');
+        document.body.classList.remove('overflow-hidden');
+
+        // Animate Icon to Menu
+        btn.classList.remove('rotate-90');
+        icon.textContent = 'menu';
+      } else {
+        // Open Menu
+        menu.classList.remove('-translate-x-full');
+        document.body.classList.add('overflow-hidden');
+
+        // Animate Icon to Close
+        btn.classList.add('rotate-90');
+        icon.textContent = 'close';
+      }
+    }
+  </script>
+  <!-- Sticky Bottom Navigation (Mobile/Tablet) -->
+  <div
+    class="fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 flex justify-between px-8 py-3 z-30 lg:hidden">
+    <a href="index.html" class="flex flex-col items-center justify-center text-black dark:text-white">
+      <span class="material-icons text-2xl">home</span>
+    </a>
+    <a href="product_list.html"
+      class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
+      <span class="material-icons text-2xl">grid_view</span>
+    </a>
+    <button
+      class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors relative">
+      <span class="material-icons text-2xl">shopping_bag</span>
+      <span
+        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-black dark:bg-white text-[10px] font-bold text-white dark:text-black">1</span>
+    </button>
+    <button onclick="toggleSearchModal()"
+      class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
+      <span class="material-icons text-2xl">search</span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Drawer (White Background) -->
+  <div id="mobile-menu-drawer"
+    class="fixed inset-0 z-40 bg-white transform -translate-x-full transition-transform duration-300 xl:hidden overflow-y-auto">
+    <div class="pt-24 px-6 pb-12 flex flex-col h-full">
+      <!-- Nav Links -->
+      <nav class="space-y-6 flex-1">
+        <a href="#" class="block text-lg font-medium text-black">Home</a>
+        <div class="flex items-center justify-between group cursor-pointer">
+          <a href="#" class="block text-lg font-medium text-black">Products</a>
+          <span class="material-icons text-black">chevron_right</span>
+        </div>
+        <a href="#" class="block text-lg font-medium text-black">About Us</a>
+        <a href="#" class="block text-lg font-medium text-black">Contact</a>
+        <a href="#" class="block text-lg font-medium text-black">Wishlist</a>
+      </nav>
+
+      <!-- My Account Section -->
+      <div class="mt-auto pt-10">
+        <h3 class="text-lg font-bold text-black mb-6">My Account</h3>
+        <div class="space-y-4">
+          <a href="#"
+            class="block w-full text-center py-3 border border-black text-black font-medium hover:bg-black hover:text-white transition-colors">
+            Log in
+          </a>
+          <a href="#"
+            class="block w-full text-center py-3 bg-black text-white font-medium hover:bg-gray-800 transition-colors">
+            Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Search Modal -->
+  <div id="search-modal"
+    class="fixed inset-0 z-[60] bg-white dark:bg-background-dark transform translate-y-full transition-transform duration-300 flex flex-col">
+    <div class="p-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+      <h2 class="text-lg font-medium text-gray-900 dark:text-white">Search our store</h2>
+      <button onclick="toggleSearchModal()"
+        class="text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white focus:outline-none">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+    </div>
+    <div class="p-4">
+      <div class="relative mb-6">
+        <input id="mobile-search-input" type="text" placeholder="Search products"
+          class="w-full border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 pl-4 pr-10 text-gray-900 dark:text-white bg-transparent focus:ring-1 focus:ring-black dark:focus:ring-white focus:border-transparent outline-none">
+        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <span class="material-icons text-xl">search</span>
+        </button>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Popular Searches:</p>
+        <div class="flex flex-wrap gap-2">
+          <a href="product_list.html?search=T-Shirt"
+            class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">T-Shirt</a>
+          <a href="product_list.html?search=Blue"
+            class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">Blue</a>
+          <a href="product_list.html?search=Jacket"
+            class="text-sm underline text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">Jacket</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSearchModal() {
+      const modal = document.getElementById('search-modal');
+      const input = document.getElementById('mobile-search-input');
+      const isOpen = !modal.classList.contains('translate-y-full');
+
+      if (isOpen) {
+        modal.classList.add('translate-y-full');
+        document.body.classList.remove('overflow-hidden');
+      } else {
+        modal.classList.remove('translate-y-full');
+        document.body.classList.add('overflow-hidden');
+        setTimeout(() => input.focus(), 300);
+      }
+    }
+
+    document.getElementById('mobile-search-input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
+      }
+    });
+
+    // Desktop Search Logic
+    const desktopSearchInput = document.getElementById('search-input-field');
+    const desktopSearchBtn = document.getElementById('search-btn-icon');
+
+    if (desktopSearchInput) {
+      desktopSearchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
+        }
+      });
+    }
+
+    if (desktopSearchBtn) {
+      desktopSearchBtn.addEventListener('click', function () {
+        window.location.href = 'product_list.html?search=' + encodeURIComponent(desktopSearchInput.value);
+      });
     }
   </script>
 </body>
