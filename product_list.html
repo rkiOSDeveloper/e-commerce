@@ -69,7 +69,7 @@
 </head>
 
 <body
-  class="bg-background-light dark:bg-background-dark text-black dark:text-white font-body transition-colors duration-300 antialiased pb-20 lg:pb-0">
+  class="bg-background-light dark:bg-background-dark text-black dark:text-white font-body transition-colors duration-300 antialiased pb-10 lg:pb-0">
   <header
     class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -568,7 +568,7 @@
           <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
             <span class="material-icons text-xl">shopping_bag</span>
             <span
-              class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">2</span>
+              class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">0</span>
           </button>
         </div>
       </div>
@@ -631,31 +631,34 @@
             <span id="filter-icon-price" class="material-icons-outlined text-sm">expand_less</span>
           </h3>
           <div id="filter-content-price" class="transition-all duration-300">
-            <div class="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full mb-6 mt-2">
-              <div class="absolute left-0 right-0 h-1 bg-black dark:bg-white rounded-full"></div>
-              <div
-                class="absolute left-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-black dark:bg-white rounded-full cursor-pointer hover:scale-110 transition-transform">
+            <div id="price-slider-container"
+              class="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full mb-6 mt-2 select-none">
+              <div id="price-slider-track" class="absolute left-0 right-0 h-1 bg-black dark:bg-white rounded-full"
+                style="left: 0%; right: 0%;"></div>
+              <div id="price-slider-min"
+                class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-black dark:bg-white rounded-full cursor-pointer hover:scale-110 transition-transform z-10 shadow-md">
               </div>
-              <div
-                class="absolute right-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-black dark:bg-white rounded-full cursor-pointer hover:scale-110 transition-transform">
+              <div id="price-slider-max"
+                class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-black dark:bg-white rounded-full cursor-pointer hover:scale-110 transition-transform z-10 shadow-md"
+                style="left: 100%;">
               </div>
             </div>
             <div class="flex items-center space-x-4">
               <div class="flex-1">
                 <div class="relative">
                   <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">₹</span>
-                  <input
+                  <input id="price-input-min"
                     class="w-full pl-7 pr-3 py-2 text-sm bg-transparent border border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white focus:ring-0 transition-colors font-mono"
-                    type="number" value="0" />
+                    type="number" value="0" min="0" max="2999" />
                 </div>
               </div>
               <span class="text-sm text-gray-400">to</span>
               <div class="flex-1">
                 <div class="relative">
                   <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">₹</span>
-                  <input
+                  <input id="price-input-max"
                     class="w-full pl-7 pr-3 py-2 text-sm bg-transparent border border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white focus:ring-0 transition-colors font-mono"
-                    type="number" value="2999" />
+                    type="number" value="2999" min="0" max="2999" />
                 </div>
               </div>
             </div>
@@ -1418,23 +1421,196 @@
       `;
       document.head.appendChild(style);
 
-      // Search Results Logic
-      const urlParams = new URLSearchParams(window.location.search);
-      const searchTerm = urlParams.get('search');
+      // Price Slider Logic
+      const priceSlider = {
+        min: 0,
+        max: 2999,
+        currentMin: 0,
+        currentMax: 2999,
 
-      if (searchTerm) {
+        init() {
+          this.container = document.getElementById('price-slider-container');
+          this.track = document.getElementById('price-slider-track');
+          this.minThumb = document.getElementById('price-slider-min');
+          this.maxThumb = document.getElementById('price-slider-max');
+          this.minInput = document.getElementById('price-input-min');
+          this.maxInput = document.getElementById('price-input-max');
+
+          if (!this.container) return;
+
+          this.updateUI();
+
+          this.minThumb.addEventListener('mousedown', (e) => this.startDrag(e, 'min'));
+          this.minThumb.addEventListener('touchstart', (e) => this.startDrag(e, 'min'), { passive: false });
+
+          this.maxThumb.addEventListener('mousedown', (e) => this.startDrag(e, 'max'));
+          this.maxThumb.addEventListener('touchstart', (e) => this.startDrag(e, 'max'), { passive: false });
+
+          this.minInput.addEventListener('change', (e) => this.handleInput(e, 'min'));
+          this.maxInput.addEventListener('change', (e) => this.handleInput(e, 'max'));
+        },
+
+        updateUI() {
+          const minPercent = (this.currentMin / this.max) * 100;
+          const maxPercent = (this.currentMax / this.max) * 100;
+
+          if (this.minThumb) this.minThumb.style.left = minPercent + '%';
+          if (this.maxThumb) this.maxThumb.style.left = maxPercent + '%';
+          if (this.track) {
+            this.track.style.left = minPercent + '%';
+            this.track.style.right = (100 - maxPercent) + '%';
+          }
+
+          if (this.minInput) this.minInput.value = this.currentMin;
+          if (this.maxInput) this.maxInput.value = this.currentMax;
+        },
+
+        startDrag(e, type) {
+          e.preventDefault();
+          const handleDrag = (moveEvent) => {
+            const containerRect = this.container.getBoundingClientRect();
+            const clientX = moveEvent.clientX || (moveEvent.touches ? moveEvent.touches[0].clientX : 0);
+            let percent = (clientX - containerRect.left) / containerRect.width;
+            let value = Math.round(percent * this.max);
+
+            if (value < this.min) value = this.min;
+            if (value > this.max) value = this.max;
+
+            if (type === 'min') {
+              if (value > this.currentMax) value = this.currentMax;
+              this.currentMin = value;
+            } else {
+              if (value < this.currentMin) value = this.currentMin;
+              this.currentMax = value;
+            }
+
+            this.updateUI();
+            filterProducts();
+          };
+
+          const stopDrag = () => {
+            document.removeEventListener('mousemove', handleDrag);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchmove', handleDrag);
+            document.removeEventListener('touchend', stopDrag);
+          };
+
+          document.addEventListener('mousemove', handleDrag);
+          document.addEventListener('mouseup', stopDrag);
+          document.addEventListener('touchmove', handleDrag, { passive: false });
+          document.addEventListener('touchend', stopDrag);
+        },
+
+        handleInput(e, type) {
+          let value = parseInt(e.target.value) || 0;
+          if (value < this.min) value = this.min;
+          if (value > this.max) value = this.max;
+
+          if (type === 'min') {
+            if (value > this.currentMax) value = this.currentMax;
+            this.currentMin = value;
+          } else {
+            if (value < this.currentMin) value = this.currentMin;
+            this.currentMax = value;
+          }
+
+          this.updateUI();
+          filterProducts();
+        }
+      };
+
+      // Unified Filter Logic
+      function filterProducts() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchTerm = (urlParams.get('search') || '').toLowerCase();
+
+        const minPrice = priceSlider.currentMin;
+        const maxPrice = priceSlider.currentMax;
+
+        const productGrid = document.getElementById('product-grid');
+        const productCount = document.getElementById('product-count');
+        const loadMoreBtn = document.getElementById('load-more-btn');
         const title = document.getElementById('page-title');
         const breadcrumb = document.getElementById('breadcrumb-nav');
 
-        if (title) title.textContent = 'Search Results';
+        if (!productGrid) return;
 
-        if (breadcrumb) {
-          // Found 8 results for "replace search text"
-          breadcrumb.innerHTML = `<span class="text-gray-500 dark:text-gray-400">Found 8 results for </span><span class="text-black dark:text-white font-bold">"${searchTerm}"</span>`;
+        // Ensure "No Results" message exists
+        let noResultsMsg = document.getElementById('no-results-msg');
+        if (!noResultsMsg) {
+          noResultsMsg = document.createElement('div');
+          noResultsMsg.id = 'no-results-msg';
+          noResultsMsg.className = 'col-span-full text-center py-20 hidden';
+          noResultsMsg.innerHTML = `
+              <p class="text-xl text-gray-500 dark:text-gray-400">
+                Please try a different search term or go back to the <a href="index.html" class="underline hover:text-black dark:hover:text-white transition-colors">homepage</a>.
+              </p>
+            `;
+          productGrid.appendChild(noResultsMsg);
+        }
+
+        // Hide Load More if filtering (search or price)
+        if (loadMoreBtn && (searchTerm || minPrice > 0 || maxPrice < 2999)) {
+          loadMoreBtn.style.display = 'none';
+        } else if (loadMoreBtn) {
+          // loadMoreBtn.style.display = 'inline-flex'; // Restore if needed, but keeping hidden for simplicity as per previous logic
+        }
+
+        let matchCount = 0;
+        const products = Array.from(productGrid.querySelectorAll('.group'));
+
+        products.forEach(product => {
+          // Skip the no-results div if it accidentally got class=group, though it shouldn't
+          const titleEl = product.querySelector('h3');
+          const priceEls = product.querySelectorAll('.text-sm span.font-bold');
+          // Price structure varies: 
+          // Sale: .flex.flex-col ... span.font-bold (current price)
+          // Normal: .flex.flex-col ... span.font-bold
+          // We grab the first bold span in the text-sm container usually.
+
+          let price = 0;
+          // Find price
+          if (priceEls.length > 0) {
+            const text = priceEls[0].textContent; // "Rs. 1,499"
+            price = parseFloat(text.replace(/[^0-9.]/g, ''));
+          }
+
+          if (titleEl) {
+            const productTitle = titleEl.textContent.toLowerCase();
+            const matchesSearch = !searchTerm || productTitle.includes(searchTerm);
+            const matchesPrice = price >= minPrice && price <= maxPrice;
+
+            if (matchesSearch && matchesPrice) {
+              product.classList.remove('hidden');
+              matchCount++;
+            } else {
+              product.classList.add('hidden');
+            }
+          }
+        });
+
+        if (matchCount === 0) {
+          noResultsMsg.classList.remove('hidden');
+        } else {
+          noResultsMsg.classList.add('hidden');
+        }
+
+        // Update UI Text
+        if (searchTerm && breadcrumb) {
+          breadcrumb.innerHTML = `<span class="text-gray-500 dark:text-gray-400">Found ${matchCount} results for </span><span class="text-black dark:text-white font-bold">"${searchTerm}"</span>`;
           breadcrumb.classList.remove('uppercase');
-          breadcrumb.classList.add('text-lg', 'normal-case'); // Make it look a bit more prominent like a status message
+          breadcrumb.classList.add('text-lg', 'normal-case');
+          if (title) title.textContent = 'Search Results';
+        }
+
+        if (productCount) {
+          productCount.textContent = `Showing ${matchCount} products`;
         }
       }
+
+      // Initialize
+      priceSlider.init();
+      filterProducts(); // Initial filter on load
 
       // Dynamic Copyright Year
       const yearSpan = document.getElementById('copyright-year');
@@ -1502,7 +1678,7 @@
       class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors relative">
       <span class="material-icons text-2xl">shopping_bag</span>
       <span
-        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-black dark:bg-white text-[10px] font-bold text-white dark:text-black">1</span>
+        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-black dark:bg-white text-[10px] font-bold text-white dark:text-black">0</span>
     </button>
     <button onclick="toggleSearchModal()"
       class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
