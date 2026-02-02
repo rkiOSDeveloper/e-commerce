@@ -318,7 +318,7 @@ function renderCartDrawer() {
                             <span class="flex-1 text-center text-sm font-medium h-full flex items-center justify-center">${item.quantity}</span>
                             <button onclick="updateDrawerQuantity('${item.instanceId}', 1)" class="w-8 h-full flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors">+</button>
                          </div>
-                         <button onclick="updateDrawerQuantity('${item.instanceId}', -${item.quantity})" class="text-xs underline text-gray-500 hover:text-black transition-colors">
+                         <button onclick="removeFromCart('${item.instanceId}', -${item.quantity})" class="text-xs underline text-gray-500 hover:text-black transition-colors">
                             Remove
                          </button>
                      </div>
@@ -334,6 +334,22 @@ function renderCartDrawer() {
 }
 
 function updateDrawerQuantity(instanceId, change) {
+    let cart = JSON.parse(localStorage.getItem('hoodvibe_cart')) || [];
+    const itemIndex = cart.findIndex(item => item.instanceId === instanceId);
+
+    if (itemIndex > -1) {
+        cart[itemIndex].quantity += change;
+        if (cart[itemIndex].quantity < 1) cart[itemIndex].quantity = 1;
+
+        localStorage.setItem('hoodvibe_cart', JSON.stringify(cart));
+        renderCartDrawer();
+        updateCartBadge();
+        // Also update full cart if open
+        if (typeof renderFullCart === 'function') renderFullCart();
+    }
+}
+
+function removeFromCart(instanceId, change) {
     let cart = JSON.parse(localStorage.getItem('hoodvibe_cart')) || [];
     const itemIndex = cart.findIndex(item => item.instanceId === instanceId);
 
