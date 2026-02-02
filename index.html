@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <link rel="icon" href="clothyfly_favicon.jpg">
+  <link rel="icon" href="images/clothyfly_favicon.jpg">
 
   <title>Clothyfly</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
@@ -68,7 +68,7 @@
             class="flex-shrink-0 flex items-center absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:translate-x-0 md:ml-4 xl:ml-0">
             <a class="block" href="#">
               <img alt="Clothyfly" class="h-8 lg:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
-                src="Clothyfly-dark.svg" />
+                src="images/Clothyfly-dark.svg" />
             </a>
           </div>
         </div>
@@ -416,10 +416,11 @@
             <span
               class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">0</span>
           </button>
-          <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
+          <button onclick="toggleCartDrawer()"
+            class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
             <span class="material-icons text-xl">shopping_bag</span>
-            <span
-              class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">0</span>
+            <span id="cart-count-badge"
+              class="absolute -top-1 -right-1 h-3 w-3 bg-red-600 text-white rounded-full text-[8px] flex items-center justify-center font-bold hidden">0</span>
           </button>
         </div>
       </div>
@@ -429,15 +430,15 @@
     <!-- Slide 1 (Men) -->
     <a href="product_list.html" class="slide absolute inset-0 transition-opacity duration-1000 opacity-100 z-10 block">
       <picture>
-        <source media="(max-width: 1024px)" srcset="./men-mobile.webp">
-        <img src="./men.webp" class="w-full h-full object-cover" alt="Men's Fashion">
+        <source media="(max-width: 1024px)" srcset="images/men-mobile.webp">
+        <img src="images/men.webp" class="w-full h-full object-cover" alt="Men's Fashion">
       </picture>
     </a>
     <!-- Slide 2 (Women) -->
     <a href="product_list.html" class="slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0 block">
       <picture>
-        <source media="(max-width: 1024px)" srcset="./women-mobile.webp">
-        <img src="./women.webp" class="w-full h-full object-cover" alt="Women's Fashion">
+        <source media="(max-width: 1024px)" srcset="images/women-mobile.webp">
+        <img src="images/women.webp" class="w-full h-full object-cover" alt="Women's Fashion">
       </picture>
     </a>
 
@@ -795,7 +796,8 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
         <div class="col-span-2 md:col-span-1">
           <a class="block mb-6 inline-block md:block" href="#">
-            <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0" src="Clothyfly-light.svg" />
+            <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0"
+              src="images/Clothyfly-light.svg" />
           </a>
           <p class="text-gray-400 text-sm italic">Dress Better. Feel Better.</p>
         </div>
@@ -844,251 +846,7 @@
     <span class="material-icons text-xl">arrow_upward</span>
   </button>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('category-container');
-      const prevBtn = document.getElementById('category-prev');
-      const nextBtn = document.getElementById('category-next');
-      const progressBar = document.getElementById('category-progress-bar');
 
-      const updateProgress = () => {
-        if (!container || !progressBar) return;
-
-        // Calculate the ratio of visible width to total scrollable width
-        const scrollWidth = container.scrollWidth;
-        const clientWidth = container.clientWidth;
-
-        // If content fits, bar is 100%. Otherwise calculated ratio.
-        const widthPercentage = (clientWidth / scrollWidth) * 100;
-        progressBar.style.width = `${widthPercentage}%`;
-
-        // Calculate scroll progress (0 to 1)
-        const maxScrollLeft = scrollWidth - clientWidth;
-        const scrollLeft = container.scrollLeft;
-
-        if (maxScrollLeft > 0) {
-          const scrollProgress = scrollLeft / maxScrollLeft;
-          // The available space for the bar to move is (100% - widthPercentage)
-          const availableSpace = 100 - widthPercentage;
-          const marginLeft = scrollProgress * availableSpace;
-          progressBar.style.marginLeft = `${marginLeft}%`;
-        } else {
-          progressBar.style.marginLeft = '0%';
-        }
-      };
-
-      if (container && prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', () => {
-          container.scrollBy({ left: -340, behavior: 'smooth' });
-        });
-
-        nextBtn.addEventListener('click', () => {
-          container.scrollBy({ left: 340, behavior: 'smooth' });
-        });
-
-        container.addEventListener('scroll', updateProgress);
-        window.addEventListener('resize', updateProgress);
-
-        // Initial calculation
-        // Timeout to ensure layout is settled (images etc might affect it, though usually not horizontal width of flex items with fixed width)
-        setTimeout(updateProgress, 100);
-      }
-
-      // Wishlist/Favorite Button Logic
-      const wishlistBtns = document.querySelectorAll('.wishlist-btn');
-      wishlistBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const icon = btn.querySelector('.material-icons');
-          if (icon.textContent.trim() === 'favorite_border') {
-            icon.textContent = 'favorite';
-            btn.classList.remove('text-black');
-            btn.classList.add('text-red-500');
-          } else {
-            icon.textContent = 'favorite_border';
-            btn.classList.remove('text-red-500');
-            btn.classList.add('text-black');
-          }
-        });
-      });
-
-
-      // Tab selection logic
-      const tabMen = document.getElementById('tab-men');
-      const tabWomen = document.getElementById('tab-women');
-
-      if (tabMen && tabWomen) {
-        const toggleTabs = (selected, unselected) => {
-          // Active state classes
-          selected.classList.add('border-b-2', 'border-black', 'dark:border-white');
-          selected.classList.remove('text-gray-400', 'hover:text-gray-900', 'dark:hover:text-white');
-
-          // Inactive state classes
-          unselected.classList.remove('border-b-2', 'border-black', 'dark:border-white');
-          unselected.classList.add('text-gray-400', 'hover:text-gray-900', 'dark:hover:text-white');
-        };
-
-        tabMen.addEventListener('click', () => toggleTabs(tabMen, tabWomen));
-        tabWomen.addEventListener('click', () => toggleTabs(tabWomen, tabMen));
-      }
-
-      // Featured Products Filter logic
-      const filterAll = document.getElementById('filter-all');
-      const filterMen = document.getElementById('filter-men');
-      const filterWomen = document.getElementById('filter-women');
-
-      if (filterAll && filterMen && filterWomen) {
-        const filters = [filterAll, filterMen, filterWomen];
-
-        const setActiveFilter = (selected) => {
-          filters.forEach(filter => {
-            if (filter === selected) {
-              // Active state
-              filter.classList.add('font-bold', 'border-b-2', 'border-black', 'dark:border-white', '-mb-2.5', 'text-black', 'dark:text-white');
-              filter.classList.remove('text-gray-500', 'dark:text-gray-400', 'font-medium');
-            } else {
-              // Inactive state
-              filter.classList.remove('font-bold', 'border-b-2', 'border-black', 'dark:border-white', '-mb-2.5', 'text-black', 'dark:text-white');
-              filter.classList.add('text-gray-500', 'dark:text-gray-400', 'font-medium');
-            }
-          });
-        };
-
-        filterAll.addEventListener('click', () => setActiveFilter(filterAll));
-        filterMen.addEventListener('click', () => setActiveFilter(filterMen));
-        filterWomen.addEventListener('click', () => setActiveFilter(filterWomen));
-      }
-
-
-
-      // Search Bar Highlight Logic
-      const searchInput = document.getElementById('search-input-field');
-      const searchBtn = document.getElementById('search-btn-icon');
-
-      if (searchInput && searchBtn) {
-        searchInput.addEventListener('input', () => {
-          if (searchInput.value.trim() !== '') {
-            // Highlight icon
-            searchBtn.classList.remove('text-gray-500', 'dark:text-gray-400');
-            searchBtn.classList.add('text-black', 'dark:text-white');
-          } else {
-            // Revert to default
-            searchBtn.classList.add('text-gray-500', 'dark:text-gray-400');
-            searchBtn.classList.remove('text-black', 'dark:text-white');
-          }
-        });
-      }
-
-      // Dynamic Copyright Year
-      const yearSpan = document.getElementById('copyright-year');
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-
-      // Scroll to Top Logic
-      const scrollToTopBtn = document.getElementById('scroll-to-top');
-      if (scrollToTopBtn) {
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 300) {
-            scrollToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
-            scrollToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
-          } else {
-            scrollToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
-            scrollToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
-          }
-        });
-
-        scrollToTopBtn.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-
-    // Hero Slider Logic
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.slider-dot');
-    let currentSlide = 0;
-    let slideInterval;
-
-    const showSlide = (index) => {
-      // Hide all slides
-      slides.forEach(slide => {
-        slide.classList.remove('opacity-100', 'z-10');
-        slide.classList.add('opacity-0', 'z-0');
-      });
-
-      // Reset all dots
-      dots.forEach(dot => {
-        dot.classList.remove('opacity-100', 'scale-125');
-        dot.classList.add('bg-white/50');
-        dot.classList.remove('bg-white');
-      });
-
-      // Show target slide
-      slides[index].classList.remove('opacity-0', 'z-0');
-      slides[index].classList.add('opacity-100', 'z-10');
-
-      // Activate target dot
-      dots[index].classList.remove('bg-white/50');
-      dots[index].classList.add('bg-white', 'opacity-100', 'scale-125');
-
-      currentSlide = index;
-    };
-
-    const nextSlide = () => {
-      showSlide((currentSlide + 1) % slides.length);
-    };
-
-    const startSlider = () => {
-      slideInterval = setInterval(nextSlide, 5000);
-    };
-
-    const stopSlider = () => {
-      clearInterval(slideInterval);
-    };
-
-    // Event Listeners for Dots
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        stopSlider();
-        const slideIndex = parseInt(dot.getAttribute('data-slide'));
-        showSlide(slideIndex);
-        startSlider(); // Restart timer
-      });
-    });
-
-    // Start initial timer
-    if (slides.length > 0) {
-      startSlider();
-    }
-
-    // Mobile Menu Logic
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu-drawer');
-      const btn = document.getElementById('mobile-menu-btn');
-      const icon = document.getElementById('mobile-menu-icon');
-
-      const isOpen = !menu.classList.contains('-translate-x-full');
-
-      if (isOpen) {
-        // Close Menu
-        menu.classList.add('-translate-x-full');
-        document.body.classList.remove('overflow-hidden');
-
-        // Animate Icon to Menu
-        btn.classList.remove('rotate-90');
-        icon.textContent = 'menu';
-      } else {
-        // Open Menu
-        menu.classList.remove('-translate-x-full');
-        document.body.classList.add('overflow-hidden');
-
-        // Animate Icon to Close
-        btn.classList.add('rotate-90');
-        icon.textContent = 'close';
-      }
-    }
-  </script>
   <!-- Sticky Bottom Navigation (Mobile/Tablet) -->
   <div style="padding-bottom: calc(20px + env(safe-area-inset-bottom));"
     class="fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 flex justify-between px-8 pt-3 z-30 lg:hidden">
@@ -1099,12 +857,12 @@
       class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
       <span class="material-icons text-2xl">grid_view</span>
     </a>
-    <button
+    <a href="cart.html"
       class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors relative">
       <span class="material-icons text-2xl">shopping_bag</span>
       <span
-        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-black dark:bg-white text-[10px] font-bold text-white dark:text-black">0</span>
-    </button>
+        class="cart-count-badge absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 dark:bg-white text-[10px] font-bold text-white dark:text-black hidden">0</span>
+    </a>
     <button onclick="toggleSearchModal()"
       class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
       <span class="material-icons text-2xl">search</span>
@@ -1524,69 +1282,8 @@
     </div>
   </div>
 
-  <script>
-    function toggleMobileSubmenu(submenuId, chevronId) {
-      const submenu = document.getElementById(submenuId);
-      const chevron = document.getElementById(chevronId);
-
-      if (submenu.classList.contains('hidden')) {
-        submenu.classList.remove('hidden');
-        if (chevronId.includes('products')) {
-          chevron.style.transform = 'rotate(180deg)';
-        } else {
-          chevron.innerText = 'remove';
-        }
-      } else {
-        submenu.classList.add('hidden');
-        if (chevronId.includes('products')) {
-          chevron.style.transform = 'rotate(0deg)';
-        } else {
-          chevron.innerText = 'add';
-        }
-      }
-    }
-
-    function toggleSearchModal() {
-      const modal = document.getElementById('search-modal');
-      const input = document.getElementById('mobile-search-input');
-      const isOpen = !modal.classList.contains('translate-y-full');
-
-      if (isOpen) {
-        modal.classList.add('translate-y-full');
-        document.body.classList.remove('overflow-hidden');
-      } else {
-        modal.classList.remove('translate-y-full');
-        document.body.classList.add('overflow-hidden');
-        setTimeout(() => input.focus(), 300);
-      }
-    }
-
-    document.getElementById('mobile-search-input').addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
-      }
-    });
-
-    // Desktop Search Logic
-    const desktopSearchInput = document.getElementById('search-input-field');
-    const desktopSearchBtn = document.getElementById('search-btn-icon');
-
-    if (desktopSearchInput) {
-      desktopSearchInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-          window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
-        }
-      });
-    }
-
-    if (desktopSearchBtn) {
-      desktopSearchBtn.addEventListener('click', function () {
-        window.location.href = 'product_list.html?search=' + encodeURIComponent(desktopSearchInput.value);
-      });
-    }
-
-
-  </script>
+  <script src="js/common.js"></script>
+  <script src="js/home.js"></script>
 </body>
 
 </html>

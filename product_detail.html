@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link rel="icon" href="clothyfly_favicon.jpg">
+    <link rel="icon" href="images/clothyfly_favicon.jpg">
 
     <title>Clothyfly</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
@@ -80,7 +80,7 @@
                         <a class="block" href="index.html">
                             <img alt="Clothyfly"
                                 class="h-8 lg:h-12 w-auto dark:invert dark:brightness-0 dark:sepia-0 dark:saturate-0"
-                                src="Clothyfly-dark.svg" />
+                                src="images/Clothyfly-dark.svg" />
                         </a>
                     </div>
                 </div>
@@ -661,10 +661,11 @@
                         <span
                             class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">0</span>
                     </button>
-                    <button class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
+                    <button onclick="toggleCartDrawer()"
+                        class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white relative">
                         <span class="material-icons text-xl">shopping_bag</span>
-                        <span
-                            class="absolute -top-1 -right-1 h-3 w-3 bg-black dark:bg-white rounded-full text-[8px] flex items-center justify-center text-white dark:text-black font-bold">0</span>
+                        <span id="cart-count-badge"
+                            class="absolute -top-1 -right-1 h-3 w-3 bg-red-600 text-white rounded-full text-[8px] flex items-center justify-center font-bold hidden">0</span>
                     </button>
                 </div>
             </div>
@@ -725,11 +726,11 @@
                 </div>
             </div>
             <div class="lg:pl-6">
-                <h1 class="font-bold text-2xl lg:text-3xl uppercase leading-tight mb-4">
+                <h1 class="font-heading font-bold text-2xl lg:text-3xl uppercase leading-tight mb-4">
                     I Like Cars More Than People - Black
                 </h1>
                 <div class="flex flex-col items-start gap-1 lg:flex-row lg:items-end lg:gap-3 mb-6">
-                    <span class="text-2xl font-bold font-heading">Rs. 1,499.00</span>
+                    <span id="product-price" class="text-2xl font-bold font-heading">Rs. 1,499.00</span>
                     <span class="text-sm text-gray-500 line-through mb-1">Rs. 2,499.00</span>
                     <span class="text-xs font-bold text-accent mb-1 border border-accent px-1.5 py-0.5 rounded">SAVE
                         40%</span>
@@ -822,7 +823,7 @@
                             <button id="quantity-btn-plus"
                                 class="text-gray-500 hover:text-black dark:hover:text-white text-xl">+</button>
                         </div>
-                        <button
+                        <button id="add-to-cart-btn"
                             class="flex-1 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white h-12 rounded font-bold uppercase tracking-wide hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
                             Add to Cart
                         </button>
@@ -1008,7 +1009,7 @@
                 <div class="col-span-2 md:col-span-1">
                     <a class="block mb-6 inline-block md:block" href="#">
                         <img alt="Clothyfly" class="h-16 w-auto invert brightness-0 mx-auto md:mx-0"
-                            src="Clothyfly-light.svg" />
+                            src="images/Clothyfly-light.svg" />
                     </a>
                     <p class="text-gray-400 text-sm italic">Dress Better. Feel Better.</p>
                 </div>
@@ -1080,355 +1081,7 @@
                 alt="Zoomed Product Image">
         </div>
     </div>
-    <script>
-        function addWorkingDays(startDate, days) {
-            let currentDate = new Date(startDate);
-            let addedDays = 0;
-            while (addedDays < days) {
-                currentDate.setDate(currentDate.getDate() + 1);
-                // 0 is Sunday, 6 is Saturday
-                if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
-                    addedDays++;
-                }
-            }
-            return currentDate;
-        }
-
-        function formatDate(date) {
-            const options = { month: 'short', day: '2-digit' };
-            return date.toLocaleDateString('en-US', options);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date();
-            const startDelivery = addWorkingDays(today, 5);
-            const endDelivery = addWorkingDays(today, 7);
-
-            const dateString = `${formatDate(startDelivery)} - ${formatDate(endDelivery)}`;
-            const deliveryElement = document.getElementById('delivery-date');
-            if (deliveryElement) {
-                deliveryElement.textContent = dateString;
-            }
-
-            // Tab Switching Logic
-            // Tab Switching Logic
-            const tabDesc = document.getElementById('tab-description');
-            const tabShip = document.getElementById('tab-shipping');
-            const tabCancel = document.getElementById('tab-cancellation');
-            const contentDesc = document.getElementById('content-description');
-            const contentShip = document.getElementById('content-shipping');
-            const contentCancel = document.getElementById('content-cancellation');
-
-            if (tabDesc && tabShip && tabCancel && contentDesc && contentShip && contentCancel) {
-                const tabs = [tabDesc, tabShip, tabCancel];
-                const contents = [contentDesc, contentShip, contentCancel];
-
-                function setActiveTab(clickedTab) {
-                    tabs.forEach((tab, index) => {
-                        if (tab === clickedTab) {
-                            // Activate
-                            tab.classList.remove('border-transparent', 'text-gray-500', 'font-medium');
-                            tab.classList.add('border-black', 'dark:border-white', 'font-bold', 'text-black', 'dark:text-white');
-                            contents[index].classList.remove('hidden');
-
-                            // Mobile Scroll Logic
-                            if (window.innerWidth < 1024) {
-                                const tabsContainer = tab.parentElement;
-                                const headerOffset = 80;
-                                const elementPosition = tabsContainer.getBoundingClientRect().top;
-                                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                                window.scrollTo({
-                                    top: offsetPosition,
-                                    behavior: "smooth"
-                                });
-
-                                // Scroll Active Tab into View (Horizontal)
-                                const tabLeft = tab.offsetLeft;
-                                const tabWidth = tab.offsetWidth;
-                                const containerWidth = tabsContainer.offsetWidth;
-
-                                // Calculate center position
-                                const scrollLeft = tabLeft - (containerWidth / 2) + (tabWidth / 2);
-
-                                tabsContainer.scrollTo({
-                                    left: scrollLeft,
-                                    behavior: 'smooth'
-                                });
-                            }
-                        } else {
-                            // Deactivate
-                            tab.classList.add('border-transparent', 'text-gray-500', 'font-medium');
-                            tab.classList.remove('border-black', 'dark:border-white', 'font-bold', 'text-black', 'dark:text-white');
-                            contents[index].classList.add('hidden');
-                        }
-                    });
-                }
-
-                tabDesc.addEventListener('click', () => setActiveTab(tabDesc));
-                tabShip.addEventListener('click', () => setActiveTab(tabShip));
-                tabCancel.addEventListener('click', () => setActiveTab(tabCancel));
-            }
-
-            // Size Selection Logic
-            const sizeBtns = document.querySelectorAll('.size-btn');
-            const sizeLabel = document.getElementById('size-label-value');
-
-            sizeBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if (btn.disabled) return;
-
-                    // Reset all buttons
-                    sizeBtns.forEach(b => {
-                        if (!b.disabled) {
-                            b.className = 'size-btn py-3 border border-gray-300 dark:border-gray-600 rounded hover:border-black dark:hover:border-white text-sm font-medium transition-colors';
-                        }
-                    });
-
-                    // Set selected button
-                    btn.className = 'size-btn py-3 bg-black dark:bg-white text-white dark:text-black border border-black dark:border-white rounded text-sm font-bold shadow-md';
-
-                    // Update label
-                    if (sizeLabel) {
-                        sizeLabel.textContent = btn.childNodes[0].textContent.trim();
-                    }
-                });
-            });
-
-            // Color Selection Logic
-            const colorBtns = document.querySelectorAll('.color-btn');
-            const colorLabel = document.getElementById('color-label-value');
-
-            colorBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if (btn.disabled) return;
-
-                    // Reset all buttons
-                    colorBtns.forEach(b => {
-                        if (!b.disabled) {
-                            b.classList.remove('border-black', 'dark:border-white');
-                            b.classList.add('border-transparent', 'hover:border-gray-300');
-                        }
-                    });
-
-                    // Set selected button
-                    btn.classList.remove('border-transparent', 'hover:border-gray-300');
-                    btn.classList.add('border-black', 'dark:border-white');
-
-                    // Update label
-                    if (colorLabel) {
-                        colorLabel.textContent = btn.getAttribute('data-color');
-                    }
-
-                    // Update Main Image from Color Button
-                    const mainImage = document.getElementById('main-product-image');
-                    const colorImg = btn.querySelector('img');
-                    if (mainImage && colorImg) {
-                        // Add a small fade effect
-                        mainImage.style.opacity = '0.5';
-                        setTimeout(() => {
-                            mainImage.src = colorImg.src;
-                            mainImage.style.opacity = '1';
-                        }, 200);
-                    }
-                });
-            });
-
-            // Image Gallery Logic
-            const mainImage = document.getElementById('main-product-image');
-            const thumbnails = document.querySelectorAll('.thumbnail-btn');
-
-            thumbnails.forEach(thumb => {
-                thumb.addEventListener('click', () => {
-                    // Update Main Image
-                    const img = thumb.querySelector('img');
-                    if (mainImage && img) {
-                        mainImage.src = img.src;
-                    }
-
-                    // Update Thumbnail Styles
-                    thumbnails.forEach(t => {
-                        t.classList.remove('border-black', 'dark:border-white');
-                        t.classList.add('border-transparent', 'hover:border-gray-300', 'dark:hover:border-gray-600');
-                    });
-
-                    thumb.classList.remove('border-transparent', 'hover:border-gray-300', 'dark:hover:border-gray-600');
-                    thumb.classList.add('border-black', 'dark:border-white');
-                });
-            });
-
-            // Lightbox Modal Logic
-            const imageModal = document.getElementById('image-modal');
-            const modalImage = document.getElementById('modal-image');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-
-            if (mainImage && imageModal && modalImage && closeModalBtn) {
-                // Open Modal
-                mainImage.parentElement.addEventListener('click', (e) => {
-                    // Prevent opening if clicking the wishlist button (which is absolute positioned inside)
-                    if (e.target.closest('button')) return;
-
-                    modalImage.src = mainImage.src;
-                    imageModal.classList.remove('hidden');
-                    // Small delay to allow display:block to apply before opacity transition
-                    setTimeout(() => {
-                        imageModal.classList.remove('opacity-0');
-                        modalImage.classList.remove('scale-95');
-                        modalImage.classList.add('scale-100');
-                    }, 10);
-                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-                });
-
-                // Close Modal Function
-                const closeModal = () => {
-                    imageModal.classList.add('opacity-0');
-                    modalImage.classList.remove('scale-100');
-                    modalImage.classList.add('scale-95');
-                    setTimeout(() => {
-                        imageModal.classList.add('hidden');
-                    }, 300); // Wait for transition
-                    document.body.style.overflow = '';
-                };
-
-                closeModalBtn.addEventListener('click', closeModal);
-
-                // Close on background click
-                imageModal.addEventListener('click', (e) => {
-                    if (e.target === imageModal || e.target.closest('.relative') === imageModal.querySelector('.relative')) {
-                        // Check if click is outside the image (on the blurred background or container)
-                        // The structure implies clicking imageModal div directly is a background click
-                        if (e.target === imageModal || e.target.classList.contains('flex')) {
-                            closeModal();
-                        }
-                    }
-                });
-
-                // Close on Escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && !imageModal.classList.contains('hidden')) {
-                        closeModal();
-                    }
-                });
-            }
-
-            // Dynamic Copyright Year
-            const yearSpan = document.getElementById('copyright-year');
-            if (yearSpan) {
-                yearSpan.textContent = new Date().getFullYear();
-            }
-
-            // Scroll to Top Logic
-            const scrollToTopBtn = document.getElementById('scroll-to-top');
-            if (scrollToTopBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 300) {
-                        scrollToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
-                        scrollToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
-                    } else {
-                        scrollToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
-                        scrollToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                    }
-                });
-
-                scrollToTopBtn.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-
-            // Share Button Logic
-            const shareBtn = document.getElementById('share-btn');
-            if (shareBtn) {
-                shareBtn.addEventListener('click', async () => {
-                    if (navigator.share) {
-                        try {
-                            await navigator.share({
-                                title: 'Check out this product!',
-                                text: 'I found this amazing product on Clothyfly.',
-                                url: window.location.href,
-                            });
-                        } catch (err) {
-                            console.error('Error sharing:', err);
-                        }
-                    } else {
-                        // Fallback for browsers that don't support Web Share API
-                        alert('Sharing is not supported on this browser. Copying URL to clipboard is a good fallback.');
-                        // Optional: Implement clipboard copy here
-                    }
-                });
-            }
-
-            // Favorite Button Logic
-            const favoriteBtn = document.getElementById('favorite-btn');
-            if (favoriteBtn) {
-                favoriteBtn.addEventListener('click', () => {
-                    const icon = favoriteBtn.querySelector('.material-icons-outlined');
-                    if (icon) {
-                        if (icon.textContent === 'favorite_border') {
-                            icon.textContent = 'favorite';
-                            favoriteBtn.classList.add('text-red-500');
-                        } else {
-                            icon.textContent = 'favorite_border';
-                            favoriteBtn.classList.remove('text-red-500');
-                        }
-                    }
-                });
-            }
-
-            // Quantity Logic
-            const quantityMinusBtn = document.getElementById('quantity-btn-minus');
-            const quantityPlusBtn = document.getElementById('quantity-btn-plus');
-            const quantityValue = document.getElementById('quantity-value');
-
-            if (quantityMinusBtn && quantityPlusBtn && quantityValue) {
-                quantityMinusBtn.addEventListener('click', () => {
-                    let val = parseInt(quantityValue.textContent);
-                    if (val > 1) {
-                        quantityValue.textContent = val - 1;
-                    }
-                });
-
-                quantityPlusBtn.addEventListener('click', () => {
-                    let val = parseInt(quantityValue.textContent);
-                    quantityValue.textContent = val + 1;
-                });
-            }
-
-        });
-
-        // Mobile Menu Logic
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu-drawer');
-            const btn = document.getElementById('mobile-menu-btn');
-            const icon = document.getElementById('mobile-menu-icon');
-            const stickyCartBar = document.getElementById('sticky-cart-bar');
-
-            const isOpen = !menu.classList.contains('-translate-x-full');
-
-            if (isOpen) {
-                // Close Menu
-                menu.classList.add('-translate-x-full');
-                document.body.classList.remove('overflow-hidden');
-
-                // Show Sticky Cart
-                if (stickyCartBar) stickyCartBar.classList.remove('hidden');
-
-                // Animate Icon to Menu
-                btn.classList.remove('rotate-90');
-                icon.textContent = 'menu';
-            } else {
-                // Open Menu
-                menu.classList.remove('-translate-x-full');
-                document.body.classList.add('overflow-hidden');
-
-                // Hide Sticky Cart
-                if (stickyCartBar) stickyCartBar.classList.add('hidden');
-
-                // Animate Icon to Close
-                btn.classList.add('rotate-90');
-                icon.textContent = 'close';
-            }
-        }
-    </script>
+    <!-- Mobile Menu Drawer (White Background) -->
     <!-- Mobile Menu Drawer (White Background) -->
     <div id="mobile-menu-drawer"
         class="fixed inset-0 z-40 bg-white transform -translate-x-full transition-transform duration-300 xl:hidden overflow-y-auto">
@@ -1436,9 +1089,432 @@
             <!-- Nav Links -->
             <nav class="space-y-6 flex-1">
                 <a href="index.html" class="block text-lg font-medium text-black">Home</a>
-                <div class="flex items-center justify-between group cursor-pointer">
-                    <a href="#" class="block text-lg font-medium text-black">Products</a>
-                    <span class="material-icons text-black">chevron_right</span>
+                <!-- Products (Expandable) -->
+                <div>
+                    <button onclick="toggleMobileSubmenu('products-submenu', 'products-chevron')"
+                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                        <span class="block text-lg font-medium text-black">Products</span>
+                        <span id="products-chevron"
+                            class="material-icons text-black transition-transform duration-300">expand_more</span>
+                    </button>
+
+                    <!-- Products Submenu -->
+                    <div id="products-submenu" class="hidden mt-4 pl-4 space-y-4 border-l border-gray-200">
+
+                        <!-- Men Section -->
+                        <div>
+                            <button onclick="toggleMobileSubmenu('men-submenu', 'men-chevron')"
+                                class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                <span class="block text-base font-bold text-gray-800">Men</span>
+                                <span id="men-chevron"
+                                    class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                            </button>
+                            <div id="men-submenu" class="hidden mt-3 pl-4 space-y-3">
+                                <!-- Topwear -->
+                                <div>
+                                    <button onclick="toggleMobileSubmenu('men-topwear-submenu', 'men-topwear-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Topwear</span>
+                                        <span id="men-topwear-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-topwear-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">T-Shirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Casual
+                                            Shirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Formal
+                                            Shirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sweatshirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sweaters</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Jackets</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Blazers &
+                                            Coats</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Suits</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Rain
+                                            Jackets</a>
+                                    </div>
+                                </div>
+
+                                <!-- Indian & Festive Wear -->
+                                <div>
+                                    <button onclick="toggleMobileSubmenu('men-indian-submenu', 'men-indian-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Indian & Festive
+                                            Wear</span>
+                                        <span id="men-indian-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-indian-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Kurtas & Kurta
+                                            Sets</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sherwanis</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Nehru
+                                            Jackets</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Dhotis</a>
+                                    </div>
+                                </div>
+
+                                <!-- Bottomwear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('men-bottomwear-submenu', 'men-bottomwear-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Bottomwear</span>
+                                        <span id="men-bottomwear-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-bottomwear-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Jeans</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Casual
+                                            Trousers</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Formal
+                                            Trousers</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Shorts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Track Pants &
+                                            Joggers</a>
+                                    </div>
+                                </div>
+
+                                <!-- Innerwear & Sleepwear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('men-innerwear-submenu', 'men-innerwear-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Innerwear &
+                                            Sleepwear</span>
+                                        <span id="men-innerwear-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-innerwear-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Briefs &
+                                            Trunks</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Boxers</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Vests</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sleepwear &
+                                            Loungewear</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Thermals</a>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Plus Size</a>
+
+                                <!-- Footwear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('men-footwear-submenu', 'men-footwear-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Footwear</span>
+                                        <span id="men-footwear-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-footwear-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Casual
+                                            Shoes</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sports
+                                            Shoes</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Formal
+                                            Shoes</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sneakers</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sandals &
+                                            Floaters</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Flip Flops</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Socks</a>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Personal Care &
+                                    Grooming</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Sunglasses & Frames</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Watches</a>
+
+                                <!-- Sports & Active Wear -->
+                                <div>
+                                    <button onclick="toggleMobileSubmenu('men-sports-submenu', 'men-sports-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Sports & Active
+                                            Wear</span>
+                                        <span id="men-sports-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-sports-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sports
+                                            Shoes</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sports
+                                            Sandals</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Active
+                                            T-Shirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Track Pants &
+                                            Shorts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Tracksuits</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Jackets &
+                                            Sweatshirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sports
+                                            Accessories</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Swimwear</a>
+                                    </div>
+                                </div>
+
+                                <!-- Gadgets -->
+                                <div>
+                                    <button onclick="toggleMobileSubmenu('men-gadgets-submenu', 'men-gadgets-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Gadgets</span>
+                                        <span id="men-gadgets-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-gadgets-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Smart
+                                            Wearables</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Fitness
+                                            Gadgets</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Headphones</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Speakers</a>
+                                    </div>
+                                </div>
+
+                                <!-- Fashion Accessories -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('men-accessories-submenu', 'men-accessories-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Fashion
+                                            Accessories</span>
+                                        <span id="men-accessories-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="men-accessories-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Wallets</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Belts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Perfumes & Body
+                                            Mists</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Trimmers</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Deodorants</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Ties, Cufflinks
+                                            & Pocket
+                                            Squares</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Accessory Gift
+                                            Sets</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Caps & Hats</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Mufflers,
+                                            Scarves & Gloves</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Phone Cases</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Rings &
+                                            Wristwear</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Helmets</a>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Bags & Backpacks</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Luggages & Trolleys</a>
+                            </div>
+                        </div>
+
+                        <!-- Women Section -->
+                        <div>
+                            <button onclick="toggleMobileSubmenu('women-submenu', 'women-chevron')"
+                                class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                <span class="block text-base font-bold text-gray-800">Women</span>
+                                <span id="women-chevron"
+                                    class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                            </button>
+                            <div id="women-submenu" class="hidden mt-3 pl-4 space-y-3">
+                                <!-- Indian & Fusion Wear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-indian-submenu', 'women-indian-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Indian & Fusion
+                                            Wear</span>
+                                        <span id="women-indian-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-indian-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Kurtas &
+                                            Suits</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Kurtis, Tunics
+                                            & Tops</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sarees</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Ethnic Wear</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Leggings,
+                                            Salwars & Churidars</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Skirts &
+                                            Palazzos</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Dress
+                                            Materials</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Lehenga
+                                            Cholis</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Dupattas &
+                                            Shawls</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Jackets</a>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Belts, Scarves &
+                                    More</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Watches & Wearables</a>
+
+                                <!-- Western Wear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-western-submenu', 'women-western-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Western Wear</span>
+                                        <span id="women-western-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-western-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Dresses</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Tops</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Tshirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Jeans</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Trousers &
+                                            Capris</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Shorts &
+                                            Skirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Co-ords</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Playsuits</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Jumpsuits</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Shrugs</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sweaters &
+                                            Sweatshirts</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Jackets &
+                                            Coats</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Blazers &
+                                            Waistcoats</a>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Plus Size</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Maternity</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Sunglasses & Frames</a>
+
+                                <!-- Footwear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-footwear-submenu', 'women-footwear-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Footwear</span>
+                                        <span id="women-footwear-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-footwear-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Flats</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Casual
+                                            Shoes</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Heels</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Boots</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sports Shoes &
+                                            Floaters</a>
+                                    </div>
+                                </div>
+
+                                <!-- Sports & Active Wear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-sports-submenu', 'women-sports-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Sports & Active
+                                            Wear</span>
+                                        <span id="women-sports-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-sports-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Clothing</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Footwear</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sports
+                                            Accessories</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sports
+                                            Equipment</a>
+                                    </div>
+                                </div>
+
+                                <!-- Lingerie & Sleepwear -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-lingerie-submenu', 'women-lingerie-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Lingerie &
+                                            Sleepwear</span>
+                                        <span id="women-lingerie-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-lingerie-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Bra</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Briefs</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Shapewear</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Sleepwear &
+                                            Loungewear</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Swimwear</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Camisoles &
+                                            Thermals</a>
+                                    </div>
+                                </div>
+
+                                <!-- Beauty & Personal Care -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-beauty-submenu', 'women-beauty-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Beauty & Personal
+                                            Care</span>
+                                        <span id="women-beauty-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-beauty-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Makeup</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Skincare</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Premium
+                                            Beauty</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Lipsticks</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Fragrances</a>
+                                    </div>
+                                </div>
+
+                                <!-- Gadgets -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-gadgets-submenu', 'women-gadgets-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Gadgets</span>
+                                        <span id="women-gadgets-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-gadgets-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Smart
+                                            Wearables</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Fitness
+                                            Gadgets</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Headphones</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Speakers</a>
+                                    </div>
+                                </div>
+
+                                <!-- Jewellery -->
+                                <div>
+                                    <button
+                                        onclick="toggleMobileSubmenu('women-jewellery-submenu', 'women-jewellery-chevron')"
+                                        class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                                        <span class="block text-sm text-gray-600 hover:text-black">Jewellery</span>
+                                        <span id="women-jewellery-chevron"
+                                            class="material-icons text-gray-500 text-sm transition-transform duration-300">add</span>
+                                    </button>
+                                    <div id="women-jewellery-submenu" class="hidden mt-2 pl-4 space-y-2">
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Fashion
+                                            Jewellery</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Fine
+                                            Jewellery</a>
+                                        <a href="#" class="block text-sm text-gray-500 hover:text-black">Earrings</a>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Backpacks</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Handbags, Bags &
+                                    Wallets</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-black">Luggages & Trolleys</a>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <a href="#" class="block text-lg font-medium text-black">About Us</a>
                 <a href="#" class="block text-lg font-medium text-black">Contact</a>
@@ -1493,49 +1569,8 @@
         </div>
     </div>
 
-    <script>
-        function toggleSearchModal() {
-            const modal = document.getElementById('search-modal');
-            const input = document.getElementById('mobile-search-input');
-            const isOpen = !modal.classList.contains('translate-y-full');
-
-            if (isOpen) {
-                modal.classList.add('translate-y-full');
-                document.body.classList.remove('overflow-hidden');
-            } else {
-                modal.classList.remove('translate-y-full');
-                document.body.classList.add('overflow-hidden');
-                setTimeout(() => input.focus(), 300);
-            }
-        }
-
-        document.getElementById('mobile-search-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
-            }
-        });
-
-        // Desktop Search Logic
-        const desktopSearchInput = document.getElementById('search-input-field');
-        const desktopSearchBtn = document.getElementById('search-btn-icon');
-
-        if (desktopSearchInput) {
-            desktopSearchInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    window.location.href = 'product_list.html?search=' + encodeURIComponent(e.target.value);
-                }
-            });
-        }
-
-        if (desktopSearchBtn) {
-            desktopSearchBtn.addEventListener('click', function () {
-                window.location.href = 'product_list.html?search=' + encodeURIComponent(desktopSearchInput.value);
-            });
-        }
-
-        // PWA Service Worker Registration
-
-    </script>
+    <script src="js/common.js"></script>
+    <script src="js/product_detail.js"></script>
 </body>
 
 </html>
