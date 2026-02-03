@@ -812,6 +812,11 @@ function checkLoginState() {
         // Mobile Drawer: Show User View
         const mobileGuest = document.getElementById("mobile-drawer-guest");
         const mobileUser = document.getElementById("mobile-drawer-user");
+        const mobileName = document.getElementById("mobile-user-name");
+
+        if (mobileGuest) mobileGuest.classList.add("hidden");
+        if (mobileUser) mobileUser.classList.remove("hidden");
+
         if (mobileName)
             mobileName.textContent = `${user.firstname} ${user.lastname}`;
     } else {
