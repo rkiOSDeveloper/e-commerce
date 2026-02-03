@@ -646,39 +646,239 @@
   </header>
 
   <main class="flex-grow pb-20 bg-gray-50 dark:bg-background-dark pt-8">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <!-- Personal Info Card -->
-      <div class="bg-white dark:bg-card-dark rounded-xl shadow-sm p-6 mb-6">
-        <div class="flex justify-between items-center mb-6">
-          <div class="flex items-center gap-2">
-            <h2 id="profile-display-name" class="text-lg font-bold text-gray-900 dark:text-white">Rohit Kardani</h2>
-            <button onclick="openEditProfilePopup()" class="text-blue-600 hover:text-blue-700">
-              <span class="material-icons text-sm">edit</span>
-            </button>
+      <!-- Tabs -->
+      <div class="border-b border-gray-200 dark:border-gray-800 mb-8">
+        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+          <a href="#"
+            class="border-red-500 text-red-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tracking-wider">ALL</a>
+          <a href="#"
+            class="border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tracking-wider">ONGOING</a>
+          <a href="#"
+            class="border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tracking-wider">DELIVERED</a>
+          <a href="#"
+            class="border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tracking-wider">CANCELLED</a>
+        </nav>
+      </div>
+
+      <!-- Order List -->
+      <div class="space-y-8">
+
+        <!-- Order 1: Confirmed -->
+        <div
+          class="bg-white dark:bg-card-dark rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <!-- Header -->
+          <div
+            class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex flex-wrap justify-between items-center bg-gray-50/50 dark:bg-gray-800/30 gap-4">
+            <div class="flex items-center gap-6">
+              <div>
+                <span
+                  class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider block mb-0.5">Order
+                  ID</span>
+                <span class="text-base font-bold text-gray-900 dark:text-white">#CF-89234</span>
+              </div>
+              <div class="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block"></div>
+              <div>
+                <span
+                  class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider block mb-0.5">Date
+                  Placed</span>
+                <span class="text-base font-medium text-gray-900 dark:text-white">Oct 12, 2023</span>
+              </div>
+            </div>
+            <span
+              class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+              Confirmed
+            </span>
+          </div>
+
+          <!-- Body -->
+          <div class="p-6">
+            <div class="flex gap-4 sm:gap-6">
+              <!-- Product Image -->
+              <div
+                class="w-20 h-24 sm:w-24 sm:h-32 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden shrink-0 border border-gray-200 dark:border-gray-700">
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=300&q=80"
+                  class="w-full h-full object-cover">
+              </div>
+              <!-- Product Details -->
+              <div class="flex-grow">
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-1">Oversized Premium Hoodie
+                </h4>
+                <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Color:</span> Black</p>
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Size:</span> M</p>
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Qty:</span> 1</p>
+                </div>
+                <p class="text-base font-bold text-gray-900 dark:text-white">Rs. 2,499</p>
+              </div>
+            </div>
+
+            <!-- Additional Items Indicator -->
+            <div class="mt-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 pl-1">
+              <span class="material-icons text-base">layers</span>
+              <span>+ 1 more item in this order</span>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div
+            class="px-6 py-4 bg-gray-50/50 dark:bg-gray-800/30 flex flex-wrap justify-between items-center gap-4 border-t border-gray-100 dark:border-gray-800">
+            <div>
+              <span
+                class="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold tracking-wider block mb-0.5">Total
+                Amount</span>
+              <p class="text-xl font-bold text-gray-900 dark:text-white">Rs. 3,599</p>
+            </div>
+            <div>
+              <button onclick="openCancelPopup()"
+                class="px-6 py-2.5 rounded-full border border-red-200 bg-red-50 text-red-600 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-400 text-xs font-bold tracking-wider hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors uppercase">
+                Cancel Order
+              </button>
+            </div>
           </div>
         </div>
 
-        <div>
-          <h3 class="text-sm text-gray-500 dark:text-gray-400 mb-1">Email</h3>
-          <p id="profile-display-email" class="text-base text-gray-900 dark:text-white font-medium">
-            kardanirohit8@gmail.com</p>
-        </div>
-      </div>
+        <!-- Order 2: In Transit -->
+        <div
+          class="bg-white dark:bg-card-dark rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <!-- Header -->
+          <div
+            class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex flex-wrap justify-between items-center bg-gray-50/50 dark:bg-gray-800/30 gap-4">
+            <div class="flex items-center gap-6">
+              <div>
+                <span
+                  class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider block mb-0.5">Order
+                  ID</span>
+                <span class="text-base font-bold text-gray-900 dark:text-white">#CF-89102</span>
+              </div>
+              <div class="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block"></div>
+              <div>
+                <span
+                  class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider block mb-0.5">Date
+                  Placed</span>
+                <span class="text-base font-medium text-gray-900 dark:text-white">Sept 28, 2023</span>
+              </div>
+            </div>
+            <span
+              class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+              In Transit
+            </span>
+          </div>
 
-      <!-- Addresses Card -->
-      <div class="bg-white dark:bg-card-dark rounded-xl shadow-sm p-6">
-        <div class="flex justify-between items-center mb-8">
-          <h2 class="text-lg font-bold text-gray-900 dark:text-white">Addresses</h2>
-          <button onclick="openAddAddressPopup()"
-            class="text-blue-600 font-bold text-sm flex items-center hover:bg-blue-50 dark:hover:bg-gray-800 px-3 py-1 rounded-md transition-colors">
-            + Add
-          </button>
+          <!-- Body -->
+          <div class="p-6">
+            <div class="flex gap-4 sm:gap-6">
+              <!-- Product Image -->
+              <div
+                class="w-20 h-24 sm:w-24 sm:h-32 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden shrink-0 border border-gray-200 dark:border-gray-700">
+                <img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?auto=format&fit=crop&w=300&q=80"
+                  class="w-full h-full object-cover">
+              </div>
+              <!-- Product Details -->
+              <div class="flex-grow">
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-1">Tactical Cargo Pants</h4>
+                <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Color:</span> Grey</p>
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Size:</span> 32</p>
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Qty:</span> 1</p>
+                </div>
+                <p class="text-base font-bold text-gray-900 dark:text-white">Rs. 1,899</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div
+            class="px-6 py-4 bg-gray-50/50 dark:bg-gray-800/30 flex flex-wrap justify-between items-center gap-4 border-t border-gray-100 dark:border-gray-800">
+            <div>
+              <span
+                class="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold tracking-wider block mb-0.5">Total
+                Amount</span>
+              <p class="text-xl font-bold text-gray-900 dark:text-white">Rs. 1,899</p>
+            </div>
+            <div>
+              <button
+                class="px-6 py-2.5 rounded-full border border-gray-200 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white text-xs font-bold tracking-wider hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors uppercase">
+                Track Package
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div id="address-list-container" class="grid md:grid-cols-2 gap-8 md:gap-12">
-          <!-- Addresses will be injected here by JS -->
+        <!-- Order 3: Delivered -->
+        <div
+          class="bg-white dark:bg-card-dark rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <!-- Header -->
+          <div
+            class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex flex-wrap justify-between items-center bg-gray-50/50 dark:bg-gray-800/30 gap-4">
+            <div class="flex items-center gap-6">
+              <div>
+                <span
+                  class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider block mb-0.5">Order
+                  ID</span>
+                <span class="text-base font-bold text-gray-900 dark:text-white">#CF-88991</span>
+              </div>
+              <div class="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block"></div>
+              <div>
+                <span
+                  class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider block mb-0.5">Date
+                  Placed</span>
+                <span class="text-base font-medium text-gray-900 dark:text-white">Aug 15, 2023</span>
+              </div>
+            </div>
+            <span
+              class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
+              Delivered
+            </span>
+          </div>
+
+          <!-- Body -->
+          <div class="p-6">
+            <div class="flex gap-4 sm:gap-6">
+              <!-- Product Image -->
+              <div
+                class="w-20 h-24 sm:w-24 sm:h-32 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden shrink-0 border border-gray-200 dark:border-gray-700">
+                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=300&q=80"
+                  class="w-full h-full object-cover">
+              </div>
+              <!-- Product Details -->
+              <div class="flex-grow">
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-1">Urban Street Sneakers</h4>
+                <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Color:</span> White/Black</p>
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Size:</span> 9</p>
+                  <p><span class="font-medium text-gray-700 dark:text-gray-300">Qty:</span> 1</p>
+                </div>
+                <p class="text-base font-bold text-gray-900 dark:text-white">Rs. 3,999</p>
+              </div>
+            </div>
+
+            <!-- Additional Items Indicator -->
+            <div class="mt-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 pl-1">
+              <span class="material-icons text-base">layers</span>
+              <span>+ 1 more item in this order</span>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div
+            class="px-6 py-4 bg-gray-50/50 dark:bg-gray-800/30 flex flex-wrap justify-between items-center gap-4 border-t border-gray-100 dark:border-gray-800">
+            <div>
+              <span
+                class="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold tracking-wider block mb-0.5">Total
+                Amount</span>
+              <p class="text-xl font-bold text-gray-900 dark:text-white">Rs. 4,499</p>
+            </div>
+            <div>
+              <button onclick="openReturnPopup()"
+                class="px-6 py-2.5 rounded-full border border-black dark:border-white text-black dark:text-white text-xs font-bold tracking-wider hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors uppercase">
+                Return Order
+              </button>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </main>
@@ -1288,7 +1488,262 @@
     </button>
   </div>
   <script src="js/common.js"></script>
-  <script src="js/profile.js"></script>
+  <script src="js/orders.js"></script>
+
+  <!-- Return Order Popup -->
+  <div id="return-popup" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeReturnPopup()"></div>
+
+    <!-- Modal Content -->
+    <div id="return-popup-content"
+      class="absolute bottom-0 left-0 right-0 md:top-1/2 md:left-1/2 md:bottom-auto md:right-auto md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-lg bg-white dark:bg-card-dark rounded-t-3xl md:rounded-2xl shadow-2xl transition-transform duration-300 translate-y-full flex flex-col max-h-[90vh]">
+
+      <!-- Header -->
+      <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center shrink-0">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Request Return</h3>
+        <button onclick="closeReturnPopup()"
+          class="p-2 -mr-2 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <!-- Body (Scrollable) -->
+      <div class="p-6 overflow-y-auto">
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 font-medium">Please select a reason for your return:</p>
+
+        <div class="space-y-3 mb-6">
+          <!-- Reason Option 1 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="return_reason" class="peer sr-only" value="wrong_item">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Received
+                wrong item</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 2 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="return_reason" class="peer sr-only" value="defective">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Item
+                defective or damaged</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 3 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="return_reason" class="peer sr-only" value="quality">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Quality
+                not as expected</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 4 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="return_reason" class="peer sr-only" value="size_fit">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Size
+                fit issue</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 5 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="return_reason" class="peer sr-only" value="too_late">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Arrived
+                too late</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="mb-2">
+          <label for="return_comment" class="block text-sm font-bold text-gray-900 dark:text-white mb-2">Additional
+            Comments (Optional)</label>
+          <textarea id="return_comment" rows="3"
+            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border-transparent focus:border-black dark:focus:border-white focus:bg-white dark:focus:bg-gray-800 focus:ring-0 text-sm transition-all resize-none placeholder-gray-400"
+            placeholder="Tell us more about the issue..."></textarea>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="p-6 border-t border-gray-100 dark:border-gray-800 flex gap-4 shrink-0">
+        <button onclick="closeReturnPopup()"
+          class="flex-1 py-3.5 text-sm font-bold border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors uppercase tracking-wider">
+          Cancel
+        </button>
+        <button onclick="confirmReturn()"
+          class="flex-1 py-3.5 text-sm font-bold bg-black text-white dark:bg-white dark:text-black rounded-full hover:opacity-90 transition-opacity uppercase tracking-wider shadow-lg">
+          Confirm Return
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cancel Order Popup -->
+  <div id="cancel-popup" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCancelPopup()"></div>
+
+    <!-- Modal Content -->
+    <div id="cancel-popup-content"
+      class="absolute bottom-0 left-0 right-0 md:top-1/2 md:left-1/2 md:bottom-auto md:right-auto md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-lg bg-white dark:bg-card-dark rounded-t-3xl md:rounded-2xl shadow-2xl transition-transform duration-300 translate-y-full flex flex-col max-h-[90vh]">
+
+      <!-- Header -->
+      <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center shrink-0">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Reason for Cancellation</h3>
+        <button onclick="closeCancelPopup()"
+          class="p-2 -mr-2 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <!-- Body (Scrollable) -->
+      <div class="p-6 overflow-y-auto">
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 font-medium">Please select a reason for cancellation:
+        </p>
+
+        <div class="space-y-3 mb-6">
+          <!-- Reason Option 1 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="cancel_reason" class="peer sr-only" value="incorrect_size">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-red-500 dark:hover:border-red-500 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-50 dark:peer-checked:bg-red-900/10 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Incorrect
+                size ordered</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-600 dark:peer-checked:bg-red-500 flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 2 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="cancel_reason" class="peer sr-only" value="not_required">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-red-500 dark:hover:border-red-500 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-50 dark:peer-checked:bg-red-900/10 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Product
+                not required anymore</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-600 dark:peer-checked:bg-red-500 flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 3 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="cancel_reason" class="peer sr-only" value="cash_issue">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-red-500 dark:hover:border-red-500 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-50 dark:peer-checked:bg-red-900/10 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Cash
+                Issue</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-600 dark:peer-checked:bg-red-500 flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 4 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="cancel_reason" class="peer sr-only" value="mistake">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-red-500 dark:hover:border-red-500 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-50 dark:peer-checked:bg-red-900/10 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Ordered
+                by mistake</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-600 dark:peer-checked:bg-red-500 flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Reason Option 5 -->
+          <label class="cursor-pointer group block">
+            <input type="radio" name="cancel_reason" class="peer sr-only" value="change_style">
+            <div
+              class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-red-500 dark:hover:border-red-500 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-50 dark:peer-checked:bg-red-900/10 transition-all flex items-center justify-between">
+              <span
+                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Wants
+                to change style/color</span>
+              <div
+                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-red-600 dark:peer-checked:border-red-500 peer-checked:bg-red-600 dark:peer-checked:bg-red-500 flex items-center justify-center">
+                <span
+                  class="material-icons text-[10px] text-white opacity-0 peer-checked:opacity-100 font-bold">check</span>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="mb-2">
+          <label for="cancel_comment" class="block text-sm font-bold text-gray-900 dark:text-white mb-2">Additional
+            Comments (Optional)</label>
+          <textarea id="cancel_comment" rows="3"
+            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border-transparent focus:border-red-500 dark:focus:border-red-500 focus:bg-white dark:focus:bg-gray-800 focus:ring-0 text-sm transition-all resize-none placeholder-gray-400"
+            placeholder="Tell us more about why you're cancelling..."></textarea>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="p-6 border-t border-gray-100 dark:border-gray-800 flex gap-4 shrink-0">
+        <button onclick="closeCancelPopup()"
+          class="flex-1 py-3.5 text-sm font-bold border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors uppercase tracking-wider">
+          Don't Cancel
+        </button>
+        <button onclick="confirmCancel()"
+          class="flex-1 py-3.5 text-sm font-bold bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors uppercase tracking-wider shadow-lg shadow-red-200 dark:shadow-none">
+          Cancel Order
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Edit Profile Popup -->
   <div id="edit-profile-popup" class="fixed inset-0 z-50 hidden">
