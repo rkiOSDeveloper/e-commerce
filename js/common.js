@@ -507,6 +507,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Mobile Search Button Click Handler
+    // Note: Using adjacent sibling selector to get the search button next to input, not the close button
+    const mobileSearchBtn = document.querySelector('#mobile-search-input + button');
+    if (mobileSearchBtn && mobileSearchInput) {
+        mobileSearchBtn.addEventListener('click', function () {
+            const query = mobileSearchInput.value.trim();
+            if (query) {
+                window.location.href = "/product_list?search=" + encodeURIComponent(query);
+            }
+        });
+    }
+
     // Desktop Search Logic - Enter Key
     const desktopSearchInput = DOMUtils.get(`#${CONFIG.IDS.SEARCH_INPUT_FIELD}`);
     const desktopSearchBtn = DOMUtils.get(`#${CONFIG.IDS.SEARCH_BTN_ICON}`);
