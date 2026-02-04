@@ -286,6 +286,35 @@ class DOMUtils {
 }
 
 // ============================================
+// 3. Performance Utilities
+// ============================================
+/**
+ * PerformanceUtils: Optimize event handlers
+ */
+class PerformanceUtils {
+    static debounce(func, wait = 300) {
+        let timeout;
+        return function executedFunction(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    }
+
+    static throttle(func, limit = 100) {
+        let inThrottle;
+        return function (...args) {
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+}
+
+// ============================================
 // MAIN CODE STARTS HERE
 // ============================================
 
@@ -297,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Scroll to Top Logic
     const scrollToTopBtn = document.getElementById("scroll-to-top");
     if (scrollToTopBtn) {
-        window.addEventListener("scroll", () => {
+        window.addEventListener("scroll", PerformanceUtils.throttle(() => {
             if (window.scrollY > 300) {
                 scrollToTopBtn.classList.remove(
                     "opacity-0",
@@ -313,16 +342,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     "translate-y-0",
                 );
             }
-        });
+        }, 100), { passive: true });
 
         scrollToTopBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
 
-    // Mobile Search Input Listener
+    // Mobile Search Input Listener - OPTIMIZED
     const mobileSearchInput = document.getElementById("mobile-search-input");
     if (mobileSearchInput) {
+        // Debounce input for better performance
+        mobileSearchInput.addEventListener("input", PerformanceUtils.debounce(function (e) {
+            const query = e.target.value.trim();
+            if (query.length > 0) {
+                window.location.href = "product_list.html?search=" + encodeURIComponent(query);
+            }
+        }, 500));
         mobileSearchInput.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
                 window.location.href =
@@ -331,11 +367,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Desktop Search Logic
+    // Desktop Search Logic - OPTIMIZED
     const desktopSearchInput = document.getElementById("search-input-field");
     const desktopSearchBtn = document.getElementById("search-btn-icon");
 
     if (desktopSearchInput) {
+        // Debounce input for better performance
+        desktopSearchInput.addEventListener("input", PerformanceUtils.debounce(function (e) {
+            const query = e.target.value.trim();
+            if (query.length > 0) {
+                window.location.href = "product_list.html?search=" + encodeURIComponent(query);
+            }
+        }, 500));
         desktopSearchInput.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
                 window.location.href =
