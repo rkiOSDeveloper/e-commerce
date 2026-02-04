@@ -1,208 +1,80 @@
 /**
- * DOM Utilities
- * Helper functions for common DOM manipulation tasks
+ * DOMUtils: DOM manipulation utilities
+ * Centralized methods for common DOM operations
  */
-
-import { CLASSES } from '../config/constants.js';
 
 export class DOMUtils {
     /**
-     * Get element by selector (string or element)
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @returns {Element|null}
+     * Get single element by selector
      */
-    static getElement(selector) {
-        if (typeof selector === 'string') {
-            return document.querySelector(selector);
-        }
-        return selector instanceof Element ? selector : null;
+    static get(selector) {
+        return document.querySelector(selector);
     }
 
     /**
-     * Show element (remove hidden classes, add visible classes)
-     * @param {string|Element} selector - CSS selector or DOM element
-     */
-    static show(selector) {
-        const el = this.getElement(selector);
-        if (!el) return;
-
-        el.classList.remove(CLASSES.HIDDEN, CLASSES.OPACITY_0, CLASSES.INVISIBLE);
-        el.classList.add(CLASSES.VISIBLE, CLASSES.OPACITY_100);
-    }
-
-    /**
-     * Hide element (add hidden classes, remove visible classes)
-     * @param {string|Element} selector - CSS selector or DOM element
-     */
-    static hide(selector) {
-        const el = this.getElement(selector);
-        if (!el) return;
-
-        el.classList.add(CLASSES.HIDDEN, CLASSES.OPACITY_0, CLASSES.INVISIBLE);
-        el.classList.remove(CLASSES.VISIBLE, CLASSES.OPACITY_100);
-    }
-
-    /**
-     * Toggle element visibility
-     * @param {string|Element} selector - CSS selector or DOM element
-     */
-    static toggle(selector) {
-        const el = this.getElement(selector);
-        if (!el) return;
-
-        if (el.classList.contains(CLASSES.HIDDEN)) {
-            this.show(el);
-        } else {
-            this.hide(el);
-        }
-    }
-
-    /**
-     * Check if element is visible
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @returns {boolean}
-     */
-    static isVisible(selector) {
-        const el = this.getElement(selector);
-        if (!el) return false;
-        return !el.classList.contains(CLASSES.HIDDEN);
-    }
-
-    /**
-     * Add class(es) to element
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @param {...string} classes - Classes to add
-     */
-    static addClass(selector, ...classes) {
-        const el = this.getElement(selector);
-        if (!el) return;
-        el.classList.add(...classes);
-    }
-
-    /**
-     * Remove class(es) from element
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @param {...string} classes - Classes to remove
-     */
-    static removeClass(selector, ...classes) {
-        const el = this.getElement(selector);
-        if (!el) return;
-        el.classList.remove(...classes);
-    }
-
-    /**
-     * Toggle class on element
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @param {string} className - Class to toggle
-     */
-    static toggleClass(selector, className) {
-        const el = this.getElement(selector);
-        if (!el) return;
-        el.classList.toggle(className);
-    }
-
-    /**
-     * Set text content
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @param {string} text - Text to set
-     */
-    static setText(selector, text) {
-        const el = this.getElement(selector);
-        if (!el) return;
-        el.textContent = text;
-    }
-
-    /**
-     * Set HTML content
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @param {string} html - HTML to set
-     */
-    static setHTML(selector, html) {
-        const el = this.getElement(selector);
-        if (!el) return;
-        el.innerHTML = html;
-    }
-
-    /**
-     * Clear element content
-     * @param {string|Element} selector - CSS selector or DOM element
-     */
-    static clear(selector) {
-        const el = this.getElement(selector);
-        if (!el) return;
-        el.innerHTML = '';
-    }
-
-    /**
-     * Get all elements matching selector
-     * @param {string} selector - CSS selector
-     * @returns {NodeList}
+     * Get multiple elements by selector
      */
     static getAll(selector) {
         return document.querySelectorAll(selector);
     }
 
     /**
-     * Add event listener with optional delegation
-     * @param {string|Element} selector - CSS selector or DOM element
-     * @param {string} event - Event name
-     * @param {Function} handler - Event handler
-     * @param {string} [delegateSelector] - Optional delegate selector
+     * Show element(s) by removing visibility classes
      */
-    static on(selector, event, handler, delegateSelector = null) {
-        const el = this.getElement(selector);
-        if (!el) return;
-
-        if (delegateSelector) {
-            el.addEventListener(event, (e) => {
-                if (e.target.matches(delegateSelector)) {
-                    handler.call(e.target, e);
-                }
-            });
+    static show(selector) {
+        if (typeof selector === 'string') {
+            const el = this.get(selector);
+            if (el) el.classList.remove('hidden', 'invisible', 'opacity-0');
         } else {
-            el.addEventListener(event, handler);
+            if (selector) selector.classList.remove('hidden', 'invisible', 'opacity-0');
         }
     }
 
     /**
-     * Disable body scroll (for modals)
+     * Hide element by adding hidden class
      */
-    static disableScroll() {
-        document.body.classList.add(CLASSES.OVERFLOW_HIDDEN);
+    static hide(selector) {
+        if (typeof selector === 'string') {
+            const el = this.get(selector);
+            if (el) el.classList.add('hidden');
+        } else {
+            if (selector) selector.classList.add('hidden');
+        }
     }
 
     /**
-     * Enable body scroll
+     * Set text content of element
      */
-    static enableScroll() {
-        document.body.classList.remove(CLASSES.OVERFLOW_HIDDEN);
+    static setText(selector, text) {
+        const el = typeof selector === 'string' ? this.get(selector) : selector;
+        if (el) el.textContent = text;
     }
 
     /**
-     * Create element from HTML string
-     * @param {string} html - HTML string
-     * @returns {Element}
+     * Add class(es) to element
      */
-    static createFromHTML(html) {
-        const template = document.createElement('template');
-        template.innerHTML = html.trim();
-        return template.content.firstElementChild;
+    static addClass(element, ...classes) {
+        if (element) element.classList.add(...classes);
     }
 
     /**
-     * Smooth scroll to element
-     * @param {string|Element} selector - CSS selector or DOM element
+     * Remove class(es) from element
      */
-    static scrollTo(selector) {
-        const el = this.getElement(selector);
-        if (!el) return;
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    static removeClass(element, ...classes) {
+        if (element) element.classList.remove(...classes);
     }
 
     /**
-     * Smooth scroll to top
+     * Toggle class on element
      */
-    static scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    static toggleClass(element, className) {
+        if (element) element.classList.toggle(className);
+    }
+
+    /**
+     * Check if element has class
+     */
+    static hasClass(element, className) {
+        return element ? element.classList.contains(className) : false;
     }
 }
