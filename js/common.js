@@ -494,50 +494,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Mobile Search Input Listener - OPTIMIZED
+    // Mobile Search Input - Enter Key Only
     const mobileSearchInput = DOMUtils.get(`#${CONFIG.IDS.MOBILE_SEARCH_INPUT}`);
     if (mobileSearchInput) {
-        // Debounce input for better performance
-        mobileSearchInput.addEventListener("input", PerformanceUtils.debounce(function (e) {
-            const query = e.target.value.trim();
-            if (query.length > 0) {
-                window.location.href = "product_list.html?search=" + encodeURIComponent(query);
-            }
-        }, 500));
         mobileSearchInput.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
-                window.location.href =
-                    "product_list.html?search=" + encodeURIComponent(e.target.value);
+                const query = e.target.value.trim();
+                if (query) {
+                    window.location.href = "/product_list?search=" + encodeURIComponent(query);
+                }
             }
         });
     }
 
-    // Desktop Search Logic - OPTIMIZED
+    // Desktop Search Logic - Enter Key
     const desktopSearchInput = DOMUtils.get(`#${CONFIG.IDS.SEARCH_INPUT_FIELD}`);
     const desktopSearchBtn = DOMUtils.get(`#${CONFIG.IDS.SEARCH_BTN_ICON}`);
 
     if (desktopSearchInput) {
-        // Debounce input for better performance
-        desktopSearchInput.addEventListener("input", PerformanceUtils.debounce(function (e) {
-            const query = e.target.value.trim();
-            if (query.length > 0) {
-                window.location.href = "product_list.html?search=" + encodeURIComponent(query);
-            }
-        }, 500));
         desktopSearchInput.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
-                window.location.href =
-                    "product_list.html?search=" + encodeURIComponent(e.target.value);
+                const query = e.target.value.trim();
+                if (query) {
+                    window.location.href = "/product_list?search=" + encodeURIComponent(query);
+                }
             }
         });
     }
 
-    // ===========================================
-    // FORM VALIDATION - Real-time feedback
-    // ===========================================
-
-    // Email validation for login form
-    const loginEmailInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL}`);
+    // Search Button Click Handler
+    if (desktopSearchBtn && desktopSearchInput) {
+        desktopSearchBtn.addEventListener("click", function () {
+            const query = desktopSearchInput.value.trim();
+            if (query) {
+                window.location.href = "/product_list?search=" + encodeURIComponent(query);
+            }
+        });
+    }
     if (loginEmailInput) {
         // Clear error as user types
         loginEmailInput.addEventListener('input', function () {
@@ -918,38 +911,38 @@ function handleCreateAccountSubmit(event) {
 
     // Validate First Name
     if (!firstName) {
-        firstNameInput.classList.add("border-red-600", "focus:ring-red-600");
-        firstNameInput.classList.remove("focus:ring-black");
-        firstNameError.classList.remove("hidden");
+        DOMUtils.addClass(firstNameInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.removeClass(firstNameInput, "focus:ring-black");
+        DOMUtils.removeClass(firstNameError, CONFIG.CLASSES.HIDDEN);
         isValid = false;
     } else {
-        firstNameInput.classList.remove("border-red-600", "focus:ring-red-600");
-        firstNameInput.classList.add("focus:ring-black");
-        firstNameError.classList.add("hidden");
+        DOMUtils.removeClass(firstNameInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.addClass(firstNameInput, "focus:ring-black");
+        DOMUtils.addClass(firstNameError, CONFIG.CLASSES.HIDDEN);
     }
 
     // Validate Last Name
     if (!lastName) {
-        lastNameInput.classList.add("border-red-600", "focus:ring-red-600");
-        lastNameInput.classList.remove("focus:ring-black");
-        lastNameError.classList.remove("hidden");
+        DOMUtils.addClass(lastNameInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.removeClass(lastNameInput, "focus:ring-black");
+        DOMUtils.removeClass(lastNameError, CONFIG.CLASSES.HIDDEN);
         isValid = false;
     } else {
-        lastNameInput.classList.remove("border-red-600", "focus:ring-red-600");
-        lastNameInput.classList.add("focus:ring-black");
-        lastNameError.classList.add("hidden");
+        DOMUtils.removeClass(lastNameInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.addClass(lastNameInput, "focus:ring-black");
+        DOMUtils.addClass(lastNameError, CONFIG.CLASSES.HIDDEN);
     }
 
     // Validate Email
     if (!email || !emailRegex.test(email)) {
-        emailInput.classList.add("border-red-600", "focus:ring-red-600");
-        emailInput.classList.remove("focus:ring-black");
-        emailError.classList.remove("hidden");
+        DOMUtils.addClass(emailInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.removeClass(emailInput, "focus:ring-black");
+        DOMUtils.removeClass(emailError, CONFIG.CLASSES.HIDDEN);
         isValid = false;
     } else {
-        emailInput.classList.remove("border-red-600", "focus:ring-red-600");
-        emailInput.classList.add("focus:ring-black");
-        emailError.classList.add("hidden");
+        DOMUtils.removeClass(emailInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.addClass(emailInput, "focus:ring-black");
+        DOMUtils.addClass(emailError, CONFIG.CLASSES.HIDDEN);
     }
 
     if (isValid) {
@@ -1028,16 +1021,14 @@ function handleOtpSubmit(event) {
     // Check if OTP is exactly 6 digits
     if (otp.length !== 6 || !/^\d+$/.test(otp)) {
         // Show Error
-        otpInput.classList.add("border-red-600");
-        otpInput.classList.remove("focus:ring-black");
-        otpInput.classList.add("focus:ring-red-600");
-        errorMsg.classList.remove("hidden");
+        DOMUtils.addClass(otpInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.removeClass(otpInput, "focus:ring-black");
+        DOMUtils.removeClass(errorMsg, CONFIG.CLASSES.HIDDEN);
     } else {
         // Hide Error
-        otpInput.classList.remove("border-red-600");
-        otpInput.classList.remove("focus:ring-red-600");
-        otpInput.classList.add("focus:ring-black");
-        errorMsg.classList.add("hidden");
+        DOMUtils.removeClass(otpInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.addClass(otpInput, "focus:ring-black");
+        DOMUtils.addClass(errorMsg, CONFIG.CLASSES.HIDDEN);
 
         // Simulate OTP verification & Login
         const mockUser = {
@@ -1078,13 +1069,13 @@ function switchBackToEmail() {
 function resetCreateAccountForm() {
     const caFields = ["firstname", "lastname", "email"];
     caFields.forEach((field) => {
-        const input = document.getElementById(`create-account-${field}`);
-        const error = document.getElementById(`create-account-${field}-error`);
+        const input = DOMUtils.get(`#create-account-${field}`);
+        const error = DOMUtils.get(`#create-account-${field}-error`);
         if (input && error) {
             input.value = "";
-            input.classList.remove("border-red-600", "focus:ring-red-600");
-            input.classList.add("focus:ring-black", "border-gray-300");
-            error.classList.add("hidden");
+            DOMUtils.removeClass(input, "border-red-600", "focus:ring-red-600");
+            DOMUtils.addClass(input, "focus:ring-black", "border-gray-300");
+            DOMUtils.addClass(error, CONFIG.CLASSES.HIDDEN);
         }
     });
 }
@@ -1108,18 +1099,14 @@ function resetLoginPopupUI() {
     DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL}`).value = "";
     DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL_ERROR}`), CONFIG.CLASSES.HIDDEN);
     DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP_ERROR}`), CONFIG.CLASSES.HIDDEN);
-    document
-        .getElementById("login-otp")
-        .classList.remove("border-red-600", "focus:ring-red-600");
-    document
-        .getElementById("login-otp")
-        .classList.add("focus:ring-black", "border-gray-300");
-    document
-        .getElementById("login-email")
-        .classList.remove("border-red-600", "focus:ring-red-600");
-    document
-        .getElementById("login-email")
-        .classList.add("focus:ring-black", "border-gray-300");
+
+    const loginOtpInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`);
+    DOMUtils.removeClass(loginOtpInput, "border-red-600", "focus:ring-red-600");
+    DOMUtils.addClass(loginOtpInput, "focus:ring-black", "border-gray-300");
+
+    const loginEmailInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL}`);
+    DOMUtils.removeClass(loginEmailInput, "border-red-600", "focus:ring-red-600");
+    DOMUtils.addClass(loginEmailInput, "focus:ring-black", "border-gray-300");
 
     // Reset Create Account UI (reusing logic implicitly by ensuring clean state)
     // For cleaner code, we can call switchToCreateAccount reset logic here if extracted,
