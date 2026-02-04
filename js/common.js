@@ -3,12 +3,296 @@
  * Shared across index.html, product_list.html, and product_detail.html
  */
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Dynamic Copyright Year
-    const yearSpan = document.getElementById("copyright-year");
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
+// ============================================
+// CONSTANTS & CONFIGURATION
+// Centralized configuration and magic strings
+// ============================================
+const CONFIG = {
+    // Storage Keys
+    STORAGE_KEYS: {
+        CART: 'hoodvibe_cart',
+        USER: 'hoodvibe_user',
+        WISHLIST: 'hoodvibe_wishlist',
+        PENDING_WISHLIST: 'hoodvibe_pending_wishlist'
+    },
+
+    // Element IDs
+    IDS: {
+        CART_DRAWER: 'cart-drawer',
+        CART_DRAWER_ITEMS: 'cart-drawer-items',
+        CART_DRAWER_BOTTOM: 'cart-drawer-bottom',
+        CART_DRAWER_SUBTOTAL: 'cart-drawer-subtotal',
+        CART_COUNT_BADGE: 'cart-count-badge',
+        WISHLIST_COUNT_BADGE: 'wishlist-count-badge',
+        MOBILE_WISHLIST_BADGE: 'mobile-wishlist-badge',
+        COPYRIGHT_YEAR: 'copyright-year',
+        SCROLL_TO_TOP: 'scroll-to-top',
+        PROFILE_POPUP: 'profile-popup',
+        MOBILE_MENU: 'mobile-menu',
+        LOGIN_POPUP: 'login-popup',
+        LOGIN_STEP_EMAIL: 'login-step-email',
+        LOGIN_STEP_OTP: 'login-step-otp',
+        LOGIN_STEP_CREATE_ACCOUNT: 'login-step-create-account'
+    },
+
+    // CSS Selectors
+    SELECTORS: {
+        CART_BADGES: '.cart-count-badge, #cart-count-badge',
+        WISHLIST_BADGES: 'a[href="wishlist.html"] span.absolute',
+        WISHLIST_BTN: '.wishlist-btn',
+        LOGIN_BTN: 'button[onclick="toggleLoginPopup()"]',
+        PROFILE_BTN: 'button[onclick="toggleProfilePopup()"]'
+    },
+
+    // CSS Classes
+    CLASSES: {
+        HIDDEN: 'hidden',
+        INVISIBLE: 'invisible',
+        OPACITY_0: 'opacity-0',
+        OVERFLOW_HIDDEN: 'overflow-hidden',
+        TRANSLATE_X_FULL: 'translate-x-full',
+        TRANSLATE_Y_4: 'translate-y-4'
+    },
+
+    // Default Values
+    DEFAULTS: {
+        SIZE: 'M',
+        COLOR: 'Default',
+        SCROLL_THRESHOLD: 300
     }
+};
+
+// ============================================
+// UTILITY: StorageManager
+// Centralized localStorage management with error handling
+// ============================================
+class StorageManager {
+    static get(key, defaultValue = null) {
+        try {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : defaultValue;
+        } catch (error) {
+            console.error(`Error reading from localStorage (${key}):`, error);
+            return defaultValue;
+        }
+    }
+
+    static set(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+            return true;
+        } catch (error) {
+            console.error(`Error writing to localStorage (${key}):`, error);
+            return false;
+        }
+    }
+
+    static remove(key) {
+        try {
+            localStorage.removeItem(key);
+            return true;
+        } catch (error) {
+            console.error(`Error removing from localStorage (${key}):`, error);
+            return false;
+        }
+    }
+
+    // Cart methods
+    static getCart() {
+        return this.get(CONFIG.STORAGE_KEYS.CART, []);
+    }
+
+    static saveCart(cart) {
+        return this.set(CONFIG.STORAGE_KEYS.CART, cart);
+    }
+
+    // Wishlist methods
+    static getWishlist() {
+        return this.get(CONFIG.STORAGE_KEYS.WISHLIST, []);
+    }
+
+    static saveWishlist(wishlist) {
+        return this.set(CONFIG.STORAGE_KEYS.WISHLIST, wishlist);
+    }
+
+    // User methods
+    static getUser() {
+        return this.get(CONFIG.STORAGE_KEYS.USER, null);
+    }
+
+    static saveUser(user) {
+        return this.set(CONFIG.STORAGE_KEYS.USER, user);
+    }
+
+    static clearUser() {
+        return this.remove(CONFIG.STORAGE_KEYS.USER);
+    }
+
+    static isLoggedIn() {
+        return this.getUser() !== null;
+    }
+
+    // Pending wishlist (sessionStorage)
+    static getPendingWishlist() {
+        try {
+            const item = sessionStorage.getItem(CONFIG.STORAGE_KEYS.PENDING_WISHLIST);
+            return item ? JSON.parse(item) : null;
+        } catch (error) {
+            console.error('Error reading pending wishlist:', error);
+            return null;
+        }
+    }
+
+    static savePendingWishlist(product) {
+        try {
+            sessionStorage.setItem(CONFIG.STORAGE_KEYS.PENDING_WISHLIST, JSON.stringify(product));
+            return true;
+        } catch (error) {
+            console.error('Error saving pending wishlist:', error);
+            return false;
+        }
+    }
+
+    static clearPendingWishlist() {
+        try {
+            sessionStorage.removeItem(CONFIG.STORAGE_KEYS.PENDING_WISHLIST);
+            return true;
+        } catch (error) {
+            console.error('Error clearing pending wishlist:', error);
+            return false;
+        }
+    }
+}
+
+// ============================================
+// UTILITY: DOMUtils
+// Helper functions for common DOM operations
+// ============================================
+class DOMUtils {
+    /**
+     * Get element by selector (ID, class, or CSS selector)
+     */
+    static get(selector) {
+        if (typeof selector === 'string') {
+            return document.querySelector(selector);
+        }
+        return selector; // Already an element
+    }
+
+    /**
+     * Get all elements matching selector
+     */
+    static getAll(selector) {
+        return document.querySelectorAll(selector);
+    }
+
+    /**
+     * Show element(s)
+     */
+    static show(selector) {
+        const elements = typeof selector === 'string' ? this.getAll(selector) : [selector];
+        elements.forEach(el => {
+            if (el) el.classList.remove('hidden', 'invisible', 'opacity-0');
+        });
+    }
+
+    /**
+     * Hide element(s)
+     */
+    static hide(selector) {
+        const elements = typeof selector === 'string' ? this.getAll(selector) : [selector];
+        elements.forEach(el => {
+            if (el) el.classList.add('hidden');
+        });
+    }
+
+    /**
+     * Toggle element visibility
+     */
+    static toggle(selector) {
+        const element = this.get(selector);
+        if (!element) return;
+
+        if (element.classList.contains('hidden')) {
+            this.show(element);
+        } else {
+            this.hide(element);
+        }
+    }
+
+    /**
+     * Add class(es) to element
+     */
+    static addClass(selector, ...classes) {
+        const element = this.get(selector);
+        if (element) element.classList.add(...classes);
+    }
+
+    /**
+     * Remove class(es) from element
+     */
+    static removeClass(selector, ...classes) {
+        const element = this.get(selector);
+        if (element) element.classList.remove(...classes);
+    }
+
+    /**
+     * Toggle class on element
+     */
+    static toggleClass(selector, className) {
+        const element = this.get(selector);
+        if (element) element.classList.toggle(className);
+    }
+
+    /**
+     * Check if element has class
+     */
+    static hasClass(selector, className) {
+        const element = this.get(selector);
+        return element ? element.classList.contains(className) : false;
+    }
+
+    /**
+     * Set text content
+     */
+    static setText(selector, text) {
+        const element = this.get(selector);
+        if (element) element.textContent = text;
+    }
+
+    /**
+     * Set HTML content
+     */
+    static setHTML(selector, html) {
+        const element = this.get(selector);
+        if (element) element.innerHTML = html;
+    }
+
+    /**
+     * Get text content
+     */
+    static getText(selector) {
+        const element = this.get(selector);
+        return element ? element.textContent : '';
+    }
+
+    /**
+     * Get HTML content
+     */
+    static getHTML(selector) {
+        const element = this.get(selector);
+        return element ? element.innerHTML : '';
+    }
+}
+
+// ============================================
+// MAIN CODE STARTS HERE
+// ============================================
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Dynamic Copyright Year - Using DOMUtils
+    DOMUtils.setText('#copyright-year', new Date().getFullYear());
 
     // Scroll to Top Logic
     const scrollToTopBtn = document.getElementById("scroll-to-top");
@@ -115,44 +399,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Mobile Menu Logic
 function toggleMobileMenu() {
-    const menu = document.getElementById("mobile-menu-drawer");
-    const btn = document.getElementById("mobile-menu-btn");
-    const icon = document.getElementById("mobile-menu-icon");
-    const stickyCartBar = document.getElementById("sticky-cart-bar");
+    const menu = DOMUtils.get("#mobile-menu-drawer");
+    const btn = DOMUtils.get("#mobile-menu-btn");
+    const icon = DOMUtils.get("#mobile-menu-icon");
+    const stickyCartBar = DOMUtils.get("#sticky-cart-bar");
 
-    const isOpen = !menu.classList.contains("-translate-x-full");
+    const isOpen = menu && !DOMUtils.hasClass(menu, "-translate-x-full");
 
     if (isOpen) {
         // Close Menu
-        menu.classList.add("-translate-x-full");
-        document.body.classList.remove("overflow-hidden");
+        if (menu) DOMUtils.addClass(menu, "-translate-x-full");
+        DOMUtils.removeClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
 
         // Show Sticky Cart (Product Detail Page specific, simplified check)
-        if (stickyCartBar) stickyCartBar.classList.remove("hidden");
+        if (stickyCartBar) DOMUtils.removeClass(stickyCartBar, CONFIG.CLASSES.HIDDEN);
 
         // Animate Icon to Menu
-        if (btn) btn.classList.remove("rotate-90");
+        if (btn) DOMUtils.removeClass(btn, "rotate-90");
         if (icon) icon.textContent = "menu";
     } else {
         // Open Menu
-        menu.classList.remove("-translate-x-full");
-        document.body.classList.add("overflow-hidden");
+        if (menu) DOMUtils.removeClass(menu, "-translate-x-full");
+        DOMUtils.addClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
 
         // Hide Sticky Cart
-        if (stickyCartBar) stickyCartBar.classList.add("hidden");
+        if (stickyCartBar) DOMUtils.addClass(stickyCartBar, CONFIG.CLASSES.HIDDEN);
 
         // Animate Icon to Close
-        if (btn) btn.classList.add("rotate-90");
+        if (btn) DOMUtils.addClass(btn, "rotate-90");
         if (icon) icon.textContent = "close";
     }
 }
 
 function toggleMobileSubmenu(submenuId, chevronId) {
-    const submenu = document.getElementById(submenuId);
-    const chevron = document.getElementById(chevronId);
+    const submenu = DOMUtils.get(`#${submenuId}`);
+    const chevron = DOMUtils.get(`#${chevronId}`);
 
     if (submenu && submenu.classList.contains("hidden")) {
-        submenu.classList.remove("hidden");
+        DOMUtils.removeClass(submenu, CONFIG.CLASSES.HIDDEN);
         if (
             (chevronId.includes("products") || chevronId.includes("user")) &&
             chevron
@@ -162,7 +446,7 @@ function toggleMobileSubmenu(submenuId, chevronId) {
             chevron.innerText = "remove";
         }
     } else if (submenu) {
-        submenu.classList.add("hidden");
+        DOMUtils.addClass(submenu, CONFIG.CLASSES.HIDDEN);
         if (
             (chevronId.includes("products") || chevronId.includes("user")) &&
             chevron
@@ -175,19 +459,19 @@ function toggleMobileSubmenu(submenuId, chevronId) {
 }
 
 function toggleSearchModal() {
-    const modal = document.getElementById("search-modal");
-    const input = document.getElementById("mobile-search-input");
+    const modal = DOMUtils.get("#search-modal");
+    const input = DOMUtils.get("#mobile-search-input");
 
     if (!modal) return;
 
     const isOpen = !modal.classList.contains("translate-y-full");
 
     if (isOpen) {
-        modal.classList.add("translate-y-full");
-        document.body.classList.remove("overflow-hidden");
+        DOMUtils.addClass(modal, "translate-y-full");
+        DOMUtils.removeClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
     } else {
-        modal.classList.remove("translate-y-full");
-        document.body.classList.add("overflow-hidden");
+        DOMUtils.removeClass(modal, "translate-y-full");
+        DOMUtils.addClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
         if (input) setTimeout(() => input.focus(), 300);
     }
 }
@@ -499,17 +783,16 @@ function handleOtpSubmit(event) {
             lastname: "Kardani",
             email: "kardanirohit9@gmail.com",
         };
-        localStorage.setItem("hoodvibe_user", JSON.stringify(mockUser));
+        StorageManager.saveUser(mockUser);
         console.log("User logged in:", mockUser);
         checkLoginState(); // Update Header Icon
 
         // Check for pending wishlist item
-        const pendingWishlist = sessionStorage.getItem("hoodvibe_pending_wishlist");
+        const pendingWishlist = StorageManager.getPendingWishlist();
         if (pendingWishlist) {
             try {
-                const product = JSON.parse(pendingWishlist);
-                toggleWishlist(product, null); // Add to wishlist (btn is null, but checkWishlistUI handles icons)
-                sessionStorage.removeItem("hoodvibe_pending_wishlist");
+                toggleWishlist(pendingWishlist, null); // Add to wishlist (btn is null, but checkWishlistUI handles icons)
+                StorageManager.clearPendingWishlist();
             } catch (e) {
                 console.error("Error processing pending wishlist item", e);
             }
@@ -610,44 +893,43 @@ function toggleLoginPopup() {
 
 // Dumb Visibility Toggle: Called by Internal Interactions (Close Btn, OTP Success)
 function toggleLoginModal() {
-    const popup = document.getElementById("login-popup");
+    const popup = DOMUtils.get(`#${CONFIG.IDS.LOGIN_POPUP}`);
     if (popup) {
-        if (popup.classList.contains("invisible")) {
+        if (DOMUtils.hasClass(popup, CONFIG.CLASSES.INVISIBLE)) {
             // Opening
             resetLoginPopupUI();
             switchBackToEmail();
-            popup.classList.remove("invisible", "opacity-0");
-            document.body.classList.add("overflow-hidden");
+            DOMUtils.removeClass(popup, CONFIG.CLASSES.INVISIBLE, CONFIG.CLASSES.OPACITY_0);
+            DOMUtils.addClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
         } else {
             // Closing
-            popup.classList.add("invisible", "opacity-0");
-            document.body.classList.remove("overflow-hidden");
+            DOMUtils.addClass(popup, CONFIG.CLASSES.INVISIBLE, CONFIG.CLASSES.OPACITY_0);
+            DOMUtils.removeClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
         }
     }
 }
 
 function toggleCartDrawer() {
-    const drawer = document.getElementById("cart-drawer");
+    const drawer = DOMUtils.get(`#${CONFIG.IDS.CART_DRAWER}`);
     if (drawer) {
-        if (drawer.classList.contains("invisible")) {
-            drawer.classList.remove("invisible", "opacity-0");
-            drawer
-                .querySelector('div[class*="translate-x-full"]')
-                .classList.remove("translate-x-full");
-            document.body.classList.add("overflow-hidden");
+        if (DOMUtils.hasClass(drawer, CONFIG.CLASSES.INVISIBLE)) {
+            DOMUtils.removeClass(drawer, CONFIG.CLASSES.INVISIBLE, CONFIG.CLASSES.OPACITY_0);
+            const innerDrawer = drawer.querySelector('div[class*="translate-x-full"]');
+            if (innerDrawer) DOMUtils.removeClass(innerDrawer, CONFIG.CLASSES.TRANSLATE_X_FULL);
+            DOMUtils.addClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
             renderCartDrawer();
         } else {
-            drawer.classList.add("invisible", "opacity-0");
-            drawer
-                .querySelector('div[class*="translate-x-full"]')
-                .classList.add("translate-x-full");
-            document.body.classList.remove("overflow-hidden");
+            DOMUtils.addClass(drawer, CONFIG.CLASSES.INVISIBLE, CONFIG.CLASSES.OPACITY_0);
+            const innerDrawer = drawer.querySelector('div[class*="translate-x-full"]');
+            if (innerDrawer) DOMUtils.addClass(innerDrawer, CONFIG.CLASSES.TRANSLATE_X_FULL);
+            DOMUtils.removeClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
         }
     }
 }
 
 function addToCart(product) {
-    let cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
+    // Using StorageManager - automatic error handling!
+    let cart = StorageManager.getCart();
 
     // Create unique instance ID based on product ID + options
     // (so same product with different sizes are different items)
@@ -667,54 +949,58 @@ function addToCart(product) {
         });
     }
 
-    localStorage.setItem("hoodvibe_cart", JSON.stringify(cart));
+    // Using StorageManager - returns true/false for success
+    StorageManager.saveCart(cart);
     updateCartBadge();
-    toggleCartDrawer(); // Open drawer on add
+
+
+    // Always render cart to refresh contents
+    renderCartDrawer();
+
+    // Open drawer if it's currently closed
+    const drawer = document.getElementById("cart-drawer");
+    if (drawer && drawer.classList.contains("invisible")) {
+        toggleCartDrawer();
+    }
 }
 
 function updateCartBadge() {
-    const cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
+    const cart = StorageManager.getCart();
     const count = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-    // Select all elements with class 'cart-count-badge' (header + bottom bar)
-    // Also keeping ID selection as fallback or for specific elements if needed,
-    // but class is preferred for multiple instances.
-    const badges = document.querySelectorAll(
-        ".cart-count-badge, #cart-count-badge",
-    );
-
-    badges.forEach((badge) => {
+    // Update all cart count badges using DOMUtils
+    DOMUtils.getAll('.cart-count-badge, #cart-count-badge').forEach((badge) => {
         if (badge) {
-            badge.textContent = count;
+            DOMUtils.setText(badge, count);
             if (count > 0) {
-                badge.classList.remove("hidden");
+                DOMUtils.show(badge);
             } else {
-                badge.classList.add("hidden");
+                DOMUtils.hide(badge);
             }
         }
     });
 }
 
 function renderCartDrawer() {
-    const list = document.getElementById("cart-drawer-items");
-    const bottomSection = document.getElementById("cart-drawer-bottom");
-    const subtotalEl = document.getElementById("cart-drawer-subtotal");
+    const list = DOMUtils.get(`#${CONFIG.IDS.CART_DRAWER_ITEMS}`);
+    const bottomSection = DOMUtils.get(`#${CONFIG.IDS.CART_DRAWER_BOTTOM}`);
+    const subtotalEl = DOMUtils.get(`#${CONFIG.IDS.CART_DRAWER_SUBTOTAL}`);
 
     if (!list) return;
 
-    const cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
+    const cart = StorageManager.getCart();
     list.innerHTML = "";
 
     if (cart.length === 0) {
         list.innerHTML =
             '<p class="text-left text-base text-black dark:text-gray-300 pt-2 px-1">Your cart is currently empty.</p>';
-        if (bottomSection) bottomSection.classList.add("hidden");
+        if (bottomSection) DOMUtils.addClass(bottomSection, CONFIG.CLASSES.HIDDEN);
         if (subtotalEl) subtotalEl.textContent = "Rs. 0.00";
         return;
     }
 
     // If we have items, show the bottom section
-    if (bottomSection) bottomSection.classList.remove("hidden");
+    if (bottomSection) DOMUtils.removeClass(bottomSection, CONFIG.CLASSES.HIDDEN);
 
     let total = 0;
 
@@ -760,14 +1046,14 @@ function renderCartDrawer() {
 }
 
 function updateDrawerQuantity(instanceId, change) {
-    let cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
+    let cart = StorageManager.getCart();
     const itemIndex = cart.findIndex((item) => item.instanceId === instanceId);
 
     if (itemIndex > -1) {
         cart[itemIndex].quantity += change;
         if (cart[itemIndex].quantity < 1) cart[itemIndex].quantity = 1;
 
-        localStorage.setItem("hoodvibe_cart", JSON.stringify(cart));
+        StorageManager.saveCart(cart);
         renderCartDrawer();
         updateCartBadge();
         // Also update full cart if open
@@ -776,7 +1062,7 @@ function updateDrawerQuantity(instanceId, change) {
 }
 
 function removeFromCart(instanceId, change) {
-    let cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
+    let cart = StorageManager.getCart();
     const itemIndex = cart.findIndex((item) => item.instanceId === instanceId);
 
     if (itemIndex > -1) {
@@ -787,7 +1073,7 @@ function removeFromCart(instanceId, change) {
             cart.splice(itemIndex, 1);
         }
 
-        localStorage.setItem("hoodvibe_cart", JSON.stringify(cart));
+        StorageManager.saveCart(cart);
         renderCartDrawer();
         updateCartBadge();
         // Also update full cart if open
@@ -797,7 +1083,7 @@ function removeFromCart(instanceId, change) {
 
 // Check Login State on Load
 function checkLoginState() {
-    const user = JSON.parse(localStorage.getItem("hoodvibe_user"));
+    const user = StorageManager.getUser();
     // Select the button by its onclick attribute
     const loginBtn = document.querySelector(
         'button[onclick="toggleLoginPopup()"]',
@@ -809,9 +1095,9 @@ function checkLoginState() {
         loginIcon.textContent = "person";
 
         // Populate Profile Popup if it exists
-        const initials = document.getElementById("profile-initials");
-        const name = document.getElementById("profile-name");
-        const email = document.getElementById("profile-email");
+        const initials = DOMUtils.get("#profile-initials");
+        const name = DOMUtils.get("#profile-name");
+        const email = DOMUtils.get("#profile-email");
 
         if (initials && name && email) {
             initials.textContent = (
@@ -822,12 +1108,12 @@ function checkLoginState() {
         }
 
         // Mobile Drawer: Show User View
-        const mobileGuest = document.getElementById("mobile-drawer-guest");
-        const mobileUser = document.getElementById("mobile-drawer-user");
-        const mobileName = document.getElementById("mobile-user-name");
+        const mobileGuest = DOMUtils.get("#mobile-drawer-guest");
+        const mobileUser = DOMUtils.get("#mobile-drawer-user");
+        const mobileName = DOMUtils.get("#mobile-user-name");
 
-        if (mobileGuest) mobileGuest.classList.add("hidden");
-        if (mobileUser) mobileUser.classList.remove("hidden");
+        if (mobileGuest) DOMUtils.addClass(mobileGuest, CONFIG.CLASSES.HIDDEN);
+        if (mobileUser) DOMUtils.removeClass(mobileUser, CONFIG.CLASSES.HIDDEN);
 
         if (mobileName)
             mobileName.textContent = `${user.firstname} ${user.lastname}`;
@@ -848,15 +1134,15 @@ function checkLoginState() {
 
 function toggleWishlist(product, btn) {
     // Check if user is logged in
-    const user = localStorage.getItem("hoodvibe_user");
+    const user = StorageManager.getUser();
     if (!user) {
         // Not logged in: Store intent and show login popup
-        sessionStorage.setItem("hoodvibe_pending_wishlist", JSON.stringify(product));
+        StorageManager.savePendingWishlist(product);
         toggleLoginModal();
         return;
     }
 
-    let wishlist = JSON.parse(localStorage.getItem("hoodvibe_wishlist")) || [];
+    let wishlist = StorageManager.getWishlist();
     const index = wishlist.findIndex((item) => item.id === product.id);
 
     if (index > -1) {
@@ -869,7 +1155,7 @@ function toggleWishlist(product, btn) {
         updateHeartIcon(btn, true);
     }
 
-    localStorage.setItem("hoodvibe_wishlist", JSON.stringify(wishlist));
+    StorageManager.saveWishlist(wishlist);
     updateWishlistBadge();
     checkWishlistUI(); // Update other buttons for same product if any
 }
@@ -900,7 +1186,7 @@ function updateHeartIcon(btn, isFilled) {
 }
 
 function checkWishlistUI() {
-    let wishlist = JSON.parse(localStorage.getItem("hoodvibe_wishlist")) || [];
+    let wishlist = StorageManager.getWishlist();
     const wishlistIds = wishlist.map(item => item.id);
     const wishlistBtns = document.querySelectorAll(".wishlist-btn");
 
@@ -915,31 +1201,16 @@ function checkWishlistUI() {
 }
 
 function updateWishlistBadge() {
-    const wishlist = JSON.parse(localStorage.getItem("hoodvibe_wishlist")) || [];
+    const wishlist = StorageManager.getWishlist();
     const count = wishlist.length;
 
-    // Header Heart Icon Badge
-    // We need to find the badge element inside the header heart link
-    // The header link href="wishlist.html"
-    const wishlistLinks = document.querySelectorAll('a[href="wishlist.html"]');
-
-    wishlistLinks.forEach(link => {
-        const badge = link.querySelector("span.absolute"); // Assuming structure
+    // Update all wishlist badge elements using DOMUtils
+    DOMUtils.getAll('a[href="wishlist.html"] span.absolute').forEach(badge => {
         if (badge) {
-            badge.textContent = count;
-            if (count > 0) {
-                badge.classList.remove("hidden"); // Ensure it's visible (some might be hidden by default)
-                // Or just ensure text is set, if css handles visibility for 0
-                // The original code had style="... hidden" for 0?
-                // Let's assume we just set text.
-                // Wait, existing badge code for cart sets hidden if 0.
-                badge.style.display = count > 0 ? "flex" : "none";
-            } else {
-                badge.style.display = "none";
-            }
+            DOMUtils.setText(badge, count);
+            badge.style.display = count > 0 ? 'flex' : 'none';
         }
     });
-
 }
 
 // Inject Profile Popup
@@ -999,7 +1270,7 @@ function closeProfilePopupOutside(e) {
 }
 
 function handleLogout() {
-    localStorage.removeItem("hoodvibe_user");
+    StorageManager.clearUser();
     checkLoginState(); // Reset Icon & Drawer
 
     // Explicitly Close Profile Popup
