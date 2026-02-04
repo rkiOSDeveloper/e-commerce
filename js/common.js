@@ -315,7 +315,116 @@ class PerformanceUtils {
 }
 
 // ============================================
-// MAIN CODE STARTS HERE
+// 4. Validator Utilities
+// ============================================
+/**
+ * Validator: Form validation and error handling
+ */
+class Validator {
+    /**
+     * Email validation using standard regex
+     */
+    static isValidEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email.trim());
+    }
+
+    /**
+     * Phone validation (Indian format: 10 digits starting with 6-9)
+     */
+    static isValidPhone(phone) {
+        const cleaned = phone.replace(/\s+/g, '');
+        const regex = /^[6-9]\d{9}$/;
+        return regex.test(cleaned);
+    }
+
+    /**
+     * OTP validation (6 digits)
+     */
+    static isValidOTP(otp) {
+        const regex = /^\d{6}$/;
+        return regex.test(otp.trim());
+    }
+
+    /**
+     * Name validation (minimum 2 characters)
+     */
+    static isValidName(name) {
+        return name.trim().length >= 2;
+    }
+
+    /**
+     * Show error message on input field
+     */
+    static showError(input, message) {
+        if (!input) return;
+
+        // Add error styling
+        input.classList.add('border-red-500', 'focus:ring-red-500');
+        input.classList.remove('border-gray-300', 'focus:ring-black');
+
+        // Create or update error message
+        let errorEl = input.parentElement.querySelector('.validation-error');
+        if (!errorEl) {
+            errorEl = document.createElement('p');
+            errorEl.className = 'validation-error text-red-500 text-xs mt-1';
+            input.parentElement.appendChild(errorEl);
+        }
+        errorEl.textContent = message;
+    }
+
+    /**
+     * Clear error message from input field
+     */
+    static clearError(input) {
+        if (!input) return;
+
+        // Remove error styling
+        input.classList.remove('border-red-500', 'focus:ring-red-500');
+        input.classList.add('border-gray-300', 'focus:ring-black');
+
+        // Remove error message
+        const errorEl = input.parentElement.querySelector('.validation-error');
+        if (errorEl) errorEl.remove();
+    }
+
+    /**
+     * Set loading state on button
+     */
+    static setLoading(button, isLoading) {
+        if (!button) return;
+
+        if (isLoading) {
+            button.disabled = true;
+            button.dataset.originalText = button.textContent;
+            button.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loading...';
+            button.classList.add('opacity-75', 'cursor-not-allowed');
+        } else {
+            button.disabled = false;
+            button.textContent = button.dataset.originalText || button.textContent;
+            button.classList.remove('opacity-75', 'cursor-not-allowed');
+        }
+    }
+
+    /**
+     * Auto-format phone number (digits only, max 10)
+     */
+    static formatPhone(input) {
+        if (!input) return;
+        input.value = input.value.replace(/\D/g, '').slice(0, 10);
+    }
+
+    /**
+     * Auto-format OTP (digits only, max 6)
+     */
+    static formatOTP(input) {
+        if (!input) return;
+        input.value = input.value.replace(/\D/g, '').slice(0, 6);
+    }
+}
+
+// ============================================
+// 5. Constants Configuration
 // ============================================
 
 
@@ -383,6 +492,89 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.key === "Enter") {
                 window.location.href =
                     "product_list.html?search=" + encodeURIComponent(e.target.value);
+            }
+        });
+    }
+
+    // ===========================================
+    // FORM VALIDATION - Real-time feedback
+    // ===========================================
+
+    // Email validation for login form
+    const loginEmailInput = document.getElementById("login-email");
+    if (loginEmailInput) {
+        // Clear error as user types
+        loginEmailInput.addEventListener('input', function () {
+            if (this.value.trim().length > 0) {
+                Validator.clearError(this);
+            }
+        });
+
+        // Validate on blur
+        loginEmailInput.addEventListener('blur', function () {
+            const email = this.value.trim();
+            if (email && !Validator.isValidEmail(email)) {
+                Validator.showError(this, 'Please enter a valid email address');
+            }
+        });
+    }
+
+    // OTP validation
+    const loginOTPInput = document.getElementById("login-otp");
+    if (loginOTPInput) {
+        // Auto-format and clear errors
+        loginOTPInput.addEventListener('input', function () {
+            Validator.formatOTP(this);
+            Validator.clearError(this);
+        });
+
+        // Validate on blur  
+        loginOTPInput.addEventListener('blur', function () {
+            if (this.value && !Validator.isValidOTP(this.value)) {
+                Validator.showError(this, 'OTP must be 6 digits');
+            }
+        });
+    }
+
+    // Create account form validation
+    const createFirstName = document.getElementById("create-account-firstname");
+    const createLastName = document.getElementById("create-account-lastname");
+    const createEmail = document.getElementById("create-account-email");
+
+    if (createFirstName) {
+        createFirstName.addEventListener('input', function () {
+            Validator.clearError(this);
+        });
+        createFirstName.addEventListener('blur', function () {
+            if (!this.value.trim()) {
+                Validator.showError(this, 'First name is required');
+            } else if (!Validator.isValidName(this.value)) {
+                Validator.showError(this, 'Name must be at least 2 characters');
+            }
+        });
+    }
+
+    if (createLastName) {
+        createLastName.addEventListener('input', function () {
+            Validator.clearError(this);
+        });
+        createLastName.addEventListener('blur', function () {
+            if (!this.value.trim()) {
+                Validator.showError(this, 'Last name is required');
+            } else if (!Validator.isValidName(this.value)) {
+                Validator.showError(this, 'Name must be at least 2 characters');
+            }
+        });
+    }
+
+    if (createEmail) {
+        createEmail.addEventListener('input', function () {
+            Validator.clearError(this);
+        });
+        createEmail.addEventListener('blur', function () {
+            const email = this.value.trim();
+            if (email && !Validator.isValidEmail(email)) {
+                Validator.showError(this, 'Please enter a valid email address');
             }
         });
     }
