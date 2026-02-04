@@ -503,6 +503,18 @@ function handleOtpSubmit(event) {
         console.log("User logged in:", mockUser);
         checkLoginState(); // Update Header Icon
 
+        // Check for pending wishlist item
+        const pendingWishlist = sessionStorage.getItem("hoodvibe_pending_wishlist");
+        if (pendingWishlist) {
+            try {
+                const product = JSON.parse(pendingWishlist);
+                toggleWishlist(product, null); // Add to wishlist (btn is null, but checkWishlistUI handles icons)
+                sessionStorage.removeItem("hoodvibe_pending_wishlist");
+            } catch (e) {
+                console.error("Error processing pending wishlist item", e);
+            }
+        }
+
         toggleLoginModal(); // Close popup
         // Reset after transition
         setTimeout(() => {
@@ -835,6 +847,15 @@ function checkLoginState() {
 // --- Wishlist Logic ---
 
 function toggleWishlist(product, btn) {
+    // Check if user is logged in
+    const user = localStorage.getItem("hoodvibe_user");
+    if (!user) {
+        // Not logged in: Store intent and show login popup
+        sessionStorage.setItem("hoodvibe_pending_wishlist", JSON.stringify(product));
+        toggleLoginModal();
+        return;
+    }
+
     let wishlist = JSON.parse(localStorage.getItem("hoodvibe_wishlist")) || [];
     const index = wishlist.findIndex((item) => item.id === product.id);
 
