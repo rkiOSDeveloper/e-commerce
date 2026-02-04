@@ -18,21 +18,57 @@ const CONFIG = {
 
     // Element IDs
     IDS: {
+        // Drawers & Popups
         CART_DRAWER: 'cart-drawer',
         CART_DRAWER_ITEMS: 'cart-drawer-items',
         CART_DRAWER_BOTTOM: 'cart-drawer-bottom',
         CART_DRAWER_SUBTOTAL: 'cart-drawer-subtotal',
+        LOGIN_POPUP: 'login-popup',
+        MOBILE_MENU: 'mobile-menu',
+        PROFILE_POPUP: 'profile-popup',
+
+        // Badges
         CART_COUNT_BADGE: 'cart-count-badge',
         WISHLIST_COUNT_BADGE: 'wishlist-count-badge',
         MOBILE_WISHLIST_BADGE: 'mobile-wishlist-badge',
-        COPYRIGHT_YEAR: 'copyright-year',
-        SCROLL_TO_TOP: 'scroll-to-top',
-        PROFILE_POPUP: 'profile-popup',
-        MOBILE_MENU: 'mobile-menu',
-        LOGIN_POPUP: 'login-popup',
+
+        // Login Form - Steps
         LOGIN_STEP_EMAIL: 'login-step-email',
         LOGIN_STEP_OTP: 'login-step-otp',
-        LOGIN_STEP_CREATE_ACCOUNT: 'login-step-create-account'
+        LOGIN_STEP_CREATE_ACCOUNT: 'login-step-create-account',
+
+        // Login Form - Inputs
+        LOGIN_EMAIL: 'login-email',
+        LOGIN_OTP: 'login-otp',
+
+        // Login Form - Error Messages
+        LOGIN_EMAIL_ERROR: 'login-email-error',
+        LOGIN_OTP_ERROR: 'login-otp-error',
+
+        // Create Account Form - Inputs
+        CREATE_ACCOUNT_FIRSTNAME: 'create-account-firstname',
+        CREATE_ACCOUNT_LASTNAME: 'create-account-lastname',
+        CREATE_ACCOUNT_EMAIL: 'create-account-email',
+
+        // Create Account Form - Errors
+        CREATE_ACCOUNT_FIRSTNAME_ERROR: 'create-account-firstname-error',
+        CREATE_ACCOUNT_LASTNAME_ERROR: 'create-account-lastname-error',
+        CREATE_ACCOUNT_EMAIL_ERROR: 'create-account-email-error',
+
+        // OTP Display  
+        OTP_EMAIL_DISPLAY: 'otp-email-display',
+        OTP_BACK_BTN: 'otp-back-btn',
+
+        // Search
+        SEARCH_INPUT_FIELD: 'search-input-field',
+        SEARCH_BTN_ICON: 'search-btn-icon',
+        MOBILE_SEARCH_INPUT: 'mobile-search-input',
+
+        // Other
+        SCROLL_TO_TOP: 'scroll-to-top',
+        COPYRIGHT_YEAR: 'copyright-year',
+        MOBILE_DRAWER_GUEST: 'mobile-drawer-guest',
+        MOBILE_DRAWER_USER: 'mobile-drawer-user'
     },
 
     // CSS Selectors
@@ -433,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
     DOMUtils.setText('#copyright-year', new Date().getFullYear());
 
     // Scroll to Top Logic
-    const scrollToTopBtn = document.getElementById("scroll-to-top");
+    const scrollToTopBtn = DOMUtils.get(`#${CONFIG.IDS.SCROLL_TO_TOP}`);
     if (scrollToTopBtn) {
         window.addEventListener("scroll", PerformanceUtils.throttle(() => {
             if (window.scrollY > 300) {
@@ -459,7 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Mobile Search Input Listener - OPTIMIZED
-    const mobileSearchInput = document.getElementById("mobile-search-input");
+    const mobileSearchInput = DOMUtils.get(`#${CONFIG.IDS.MOBILE_SEARCH_INPUT}`);
     if (mobileSearchInput) {
         // Debounce input for better performance
         mobileSearchInput.addEventListener("input", PerformanceUtils.debounce(function (e) {
@@ -477,8 +513,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Desktop Search Logic - OPTIMIZED
-    const desktopSearchInput = document.getElementById("search-input-field");
-    const desktopSearchBtn = document.getElementById("search-btn-icon");
+    const desktopSearchInput = DOMUtils.get(`#${CONFIG.IDS.SEARCH_INPUT_FIELD}`);
+    const desktopSearchBtn = DOMUtils.get(`#${CONFIG.IDS.SEARCH_BTN_ICON}`);
 
     if (desktopSearchInput) {
         // Debounce input for better performance
@@ -501,7 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ===========================================
 
     // Email validation for login form
-    const loginEmailInput = document.getElementById("login-email");
+    const loginEmailInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL}`);
     if (loginEmailInput) {
         // Clear error as user types
         loginEmailInput.addEventListener('input', function () {
@@ -520,7 +556,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // OTP validation
-    const loginOTPInput = document.getElementById("login-otp");
+    const loginOTPInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`);
     if (loginOTPInput) {
         // Auto-format and clear errors
         loginOTPInput.addEventListener('input', function () {
@@ -537,9 +573,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Create account form validation
-    const createFirstName = document.getElementById("create-account-firstname");
-    const createLastName = document.getElementById("create-account-lastname");
-    const createEmail = document.getElementById("create-account-email");
+    const createFirstName = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_FIRSTNAME}`);
+    const createLastName = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_LASTNAME}`);
+    const createEmail = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_EMAIL}`);
 
     if (createFirstName) {
         createFirstName.addEventListener('input', function () {
@@ -606,8 +642,8 @@ document.addEventListener("DOMContentLoaded", () => {
     updateWishlistBadge();
 
     // Search Bar Highlight Logic
-    const searchInput = document.getElementById("search-input-field");
-    const searchBtn = document.getElementById("search-btn-icon");
+    const searchInput = DOMUtils.get(`#${CONFIG.IDS.SEARCH_INPUT_FIELD}`);
+    const searchBtn = DOMUtils.get(`#${CONFIG.IDS.SEARCH_BTN_ICON}`);
 
     if (searchInput && searchBtn) {
         searchInput.addEventListener("input", () => {
@@ -754,7 +790,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Login Popup Logic
 function injectLoginPopup() {
-    if (!document.getElementById("login-popup")) {
+    if (!DOMUtils.get(`#${CONFIG.IDS.LOGIN_POPUP}`)) {
         const popupHTML = `
             <div id="login-popup" class="fixed inset-0 z-[60] invisible opacity-0 transition-opacity duration-300">
                 <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleLoginModal()"></div>
@@ -865,17 +901,13 @@ function injectLoginPopup() {
 
 function handleCreateAccountSubmit(event) {
     event.preventDefault();
-    const firstNameInput = document.getElementById("create-account-firstname");
-    const lastNameInput = document.getElementById("create-account-lastname");
-    const emailInput = document.getElementById("create-account-email");
+    const firstNameInput = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_FIRSTNAME}`);
+    const lastNameInput = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_LASTNAME}`);
+    const emailInput = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_EMAIL}`);
 
-    const firstNameError = document.getElementById(
-        "create-account-firstname-error",
-    );
-    const lastNameError = document.getElementById(
-        "create-account-lastname-error",
-    );
-    const emailError = document.getElementById("create-account-email-error");
+    const firstNameError = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_FIRSTNAME_ERROR}`);
+    const lastNameError = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_LASTNAME_ERROR}`);
+    const emailError = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_EMAIL_ERROR}`);
 
     const firstName = firstNameInput.value.trim();
     const lastName = lastNameInput.value.trim();
@@ -949,8 +981,8 @@ function handleCreateAccountSubmit(event) {
 
 function handleLoginSubmit(event) {
     event.preventDefault();
-    const emailInput = document.getElementById("login-email");
-    const errorMsg = document.getElementById("login-email-error");
+    const emailInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL}`);
+    const errorMsg = DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL_ERROR}`);
     const email = emailInput.value.trim();
 
     // Simple email regex
@@ -958,33 +990,28 @@ function handleLoginSubmit(event) {
 
     if (!email || !emailRegex.test(email)) {
         // Show Error
-        emailInput.classList.add("border-red-600");
-        emailInput.classList.remove("focus:ring-black");
-        emailInput.classList.add("focus:ring-red-600");
-        errorMsg.classList.remove("hidden");
+        DOMUtils.addClass(emailInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.removeClass(emailInput, "focus:ring-black");
+        DOMUtils.removeClass(errorMsg, CONFIG.CLASSES.HIDDEN);
     } else {
         // Hide Error
-        emailInput.classList.remove("border-red-600");
-        emailInput.classList.remove("focus:ring-red-600");
-        emailInput.classList.add("focus:ring-black");
-        errorMsg.classList.add("hidden");
+        DOMUtils.removeClass(emailInput, "border-red-600", "focus:ring-red-600");
+        DOMUtils.addClass(emailInput, "focus:ring-black");
+        DOMUtils.addClass(errorMsg, CONFIG.CLASSES.HIDDEN);
 
         // Switch to OTP Step
-        document.getElementById("login-step-email").classList.add("hidden");
-        document.getElementById("login-step-otp").classList.remove("hidden");
-        document.getElementById("otp-email-display").textContent = email;
+        DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_EMAIL}`), CONFIG.CLASSES.HIDDEN);
+        DOMUtils.removeClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_OTP}`), CONFIG.CLASSES.HIDDEN);
+        DOMUtils.setText(`#${CONFIG.IDS.OTP_EMAIL_DISPLAY}`, email);
+
         //OTP UI Reset
-        document.getElementById("login-otp-error").classList.add("hidden");
-        document
-            .getElementById("login-otp")
-            .classList.remove("border-red-600", "focus:ring-red-600");
-        document
-            .getElementById("login-otp")
-            .classList.add("focus:ring-black", "border-gray-300");
-        document.getElementById("login-otp").value = "";
+        DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP_ERROR}`), CONFIG.CLASSES.HIDDEN);
+        DOMUtils.removeClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`), "border-red-600", "focus:ring-red-600");
+        DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`), "focus:ring-black", "border-gray-300");
+        DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`).value = "";
 
         // Reset Back Button to Default (Login)
-        const backBtn = document.getElementById("otp-back-btn");
+        const backBtn = DOMUtils.get(`#${CONFIG.IDS.OTP_BACK_BTN}`);
         if (backBtn) {
             backBtn.textContent = "Sign in with a different email";
             backBtn.onclick = switchBackToEmail;
@@ -994,8 +1021,8 @@ function handleLoginSubmit(event) {
 
 function handleOtpSubmit(event) {
     event.preventDefault();
-    const otpInput = document.getElementById("login-otp");
-    const errorMsg = document.getElementById("login-otp-error");
+    const otpInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`);
+    const errorMsg = DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP_ERROR}`);
     const otp = otpInput.value.trim();
 
     // Check if OTP is exactly 6 digits
@@ -1043,9 +1070,9 @@ function handleOtpSubmit(event) {
 }
 
 function switchBackToEmail() {
-    document.getElementById("login-step-otp").classList.add("hidden");
-    document.getElementById("login-step-create-account").classList.add("hidden");
-    document.getElementById("login-step-email").classList.remove("hidden");
+    DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_OTP}`), CONFIG.CLASSES.HIDDEN);
+    DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_CREATE_ACCOUNT}`), CONFIG.CLASSES.HIDDEN);
+    DOMUtils.removeClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_EMAIL}`), CONFIG.CLASSES.HIDDEN);
 }
 
 function resetCreateAccountForm() {
@@ -1063,11 +1090,9 @@ function resetCreateAccountForm() {
 }
 
 function switchToCreateAccount(keepData = false) {
-    document.getElementById("login-step-email").classList.add("hidden");
-    document.getElementById("login-step-otp").classList.add("hidden");
-    document
-        .getElementById("login-step-create-account")
-        .classList.remove("hidden");
+    DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_EMAIL}`), CONFIG.CLASSES.HIDDEN);
+    DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_OTP}`), CONFIG.CLASSES.HIDDEN);
+    DOMUtils.removeClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_STEP_CREATE_ACCOUNT}`), CONFIG.CLASSES.HIDDEN);
     if (!keepData) {
         resetCreateAccountForm();
     }
@@ -1079,10 +1104,10 @@ function switchToLogin() {
 }
 
 function resetLoginPopupUI() {
-    document.getElementById("login-otp").value = "";
-    document.getElementById("login-email").value = "";
-    document.getElementById("login-email-error").classList.add("hidden");
-    document.getElementById("login-otp-error").classList.add("hidden");
+    DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`).value = "";
+    DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL}`).value = "";
+    DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_EMAIL_ERROR}`), CONFIG.CLASSES.HIDDEN);
+    DOMUtils.addClass(DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP_ERROR}`), CONFIG.CLASSES.HIDDEN);
     document
         .getElementById("login-otp")
         .classList.remove("border-red-600", "focus:ring-red-600");
@@ -1193,7 +1218,7 @@ function addToCart(product) {
     renderCartDrawer();
 
     // Open drawer if it's currently closed
-    const drawer = document.getElementById("cart-drawer");
+    const drawer = DOMUtils.get(`#${CONFIG.IDS.CART_DRAWER}`);
     if (drawer && drawer.classList.contains("invisible")) {
         toggleCartDrawer();
     }
@@ -1357,8 +1382,8 @@ function checkLoginState() {
         if (loginIcon) loginIcon.textContent = "person_outline";
 
         // Mobile Drawer: Show Guest View
-        const mobileGuest = document.getElementById("mobile-drawer-guest");
-        const mobileUser = document.getElementById("mobile-drawer-user");
+        const mobileGuest = DOMUtils.get(`#${CONFIG.IDS.MOBILE_DRAWER_GUEST}`);
+        const mobileUser = DOMUtils.get(`#${CONFIG.IDS.MOBILE_DRAWER_USER}`);
 
         if (mobileGuest) mobileGuest.classList.remove("hidden");
         if (mobileUser) mobileUser.classList.add("hidden");
