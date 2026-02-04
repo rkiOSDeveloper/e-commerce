@@ -9,9 +9,13 @@ import { DOMUtils } from './utils/dom.js';
 import { PerformanceUtils } from './utils/performance.js';
 import { Validator } from './utils/validator.js';
 
-// Import application modules
-import { AuthManager } from './modules/auth.js';
-import { UIManager } from './modules/ui.js';
+// Import auth module functions
+import * as Auth from './modules/auth.js';
+
+// Import UI module functions  
+import * as UI from './modules/ui.js';
+
+// Import application modules (classes)
 import { CartManager } from './modules/cart.js';
 import { WishlistManager } from './modules/wishlist.js';
 import { LoginManager } from './modules/login.js';
@@ -26,8 +30,6 @@ window.PerformanceUtils = PerformanceUtils;
 window.Validator = Validator;
 
 // Make managers globally available
-window.AuthManager = AuthManager;
-window.UIManager = UIManager;
 window.CartManager = CartManager;
 window.WishlistManager = WishlistManager;
 window.LoginManager = LoginManager;
@@ -43,9 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
     WishlistManager.init();
     LoginManager.init();
 
-    // Initialize existing modules
-    AuthManager.init();
-    UIManager.init();
+    // Initialize UI features
+    UI.updateCartBadge();
+    UI.updateWishlistBadge();
+    UI.setCopyrightYear();
+    UI.initScrollToTop();
+    UI.initSearch();
+
+    // Initialize authentication
+    Auth.initAuth();
+    Auth.checkLoginState();
 
     console.log('✅ Application initialized successfully');
 });
