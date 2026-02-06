@@ -802,8 +802,27 @@ function handleLogout() {
         document.removeEventListener("click", closeProfilePopupOutside);
     }
 
-    // Ideally redirect to home or show toast
-    console.log("Logged out");
+    // Show toast if available
+    if (window.Toast) {
+        window.Toast.show('Logged out successfully', 'success');
+    } else {
+        console.log("Logged out");
+    }
+
+    // Page-specific Redirect Logic
+    const currentPath = window.location.pathname;
+
+    if (currentPath.includes('checkout.html')) {
+        // Scenario A: Checkout -> Cart
+        setTimeout(() => {
+            window.location.href = 'cart.html';
+        }, 1000); // Small delay for toast visibility
+    } else {
+        // Scenario B/C: All other pages -> Home
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000);
+    }
 }
 
 /**
