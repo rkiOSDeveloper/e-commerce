@@ -112,7 +112,7 @@ function loadAddresses() {
                 <h3 class="font-bold text-gray-900 dark:text-white">${addr.firstname} ${addr.lastname}</h3>
                 ${addr.isDefault ? '<span class="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-xs font-medium rounded text-gray-600 dark:text-gray-300">Default</span>' : ''}
               </div>
-              <button onclick="openEditAddressPopup(${addr.id})" class="text-gray-400 hover:text-blue-600 transition-colors p-1"><span class="material-icons text-lg">edit</span></button>
+              <button onclick="openEditAddressPopup(${addr.id})" class="text-gray-400 hover:text-black transition-colors p-1"><span class="material-icons text-lg">edit</span></button>
             </div>
             <div class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
               ${addr.line1}<br>

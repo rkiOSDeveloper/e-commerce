@@ -75,6 +75,8 @@ function renderOrdersList(orders, filterStatus) {
     if (filterStatus !== 'all') {
         if (filterStatus === 'ongoing') {
             filteredOrders = orders.filter(o => ['pending', 'processing', 'shipped'].includes(o.status));
+        } else if (filterStatus === 'returns') {
+            filteredOrders = orders.filter(o => ['return_requested', 'returned'].includes(o.status));
         } else {
             filteredOrders = orders.filter(o => o.status === filterStatus);
         }
@@ -255,6 +257,16 @@ function getStatusConfig(status) {
             label: 'Cancelled',
             bgClass: 'bg-red-100 dark:bg-red-900/30',
             textClass: 'text-red-700 dark:text-red-400'
+        },
+        return_requested: {
+            label: 'Return Initiated',
+            bgClass: 'bg-orange-100 dark:bg-orange-900/30',
+            textClass: 'text-orange-700 dark:text-orange-400'
+        },
+        returned: {
+            label: 'Returned',
+            bgClass: 'bg-gray-100 dark:bg-gray-800',
+            textClass: 'text-gray-700 dark:text-gray-400'
         }
     };
 
@@ -401,6 +413,40 @@ async function returnOrder(orderId) {
 }
 
 /**
+ * Setup Image Preview Listener
+ * Should be called once on init
+ */
+function setupReturnImagePreview() {
+    const imageInput = document.getElementById('return_images');
+    const previewContainer = document.getElementById('image-previews');
+
+    if (imageInput && previewContainer) {
+        imageInput.addEventListener('change', function (e) {
+            previewContainer.innerHTML = ''; // Clear existing
+            const files = Array.from(e.target.files);
+
+            files.forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const div = document.createElement('div');
+                    div.className = 'relative aspect-square rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" class="w-full h-full object-cover" alt="Preview">
+                    `;
+                    previewContainer.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+    }
+}
+
+// Call on load
+document.addEventListener('DOMContentLoaded', setupReturnImagePreview);
+
+/**
  * Open return popup
  */
 function openReturnPopup() {
@@ -411,9 +457,16 @@ function openReturnPopup() {
         popup.classList.remove('hidden');
 
         // Reset form
-        document.getElementById('return_reason_select').value = '';
+        // Reset form
+        document.querySelectorAll('input[name="return_reason"]').forEach(input => input.checked = false);
         const comment = document.getElementById('return_comment');
         if (comment) comment.value = '';
+
+        const imageInput = document.getElementById('return_images');
+        if (imageInput) imageInput.value = ''; // Clear file input
+
+        const previewContainer = document.getElementById('image-previews');
+        if (previewContainer) previewContainer.innerHTML = ''; // Clear previews
 
         // Animation
         setTimeout(() => {
@@ -447,16 +500,44 @@ async function confirmReturn() {
         return;
     }
 
-    const reasonSelect = document.getElementById('return_reason_select');
-    if (!reasonSelect || !reasonSelect.value) {
+    // Get form elements
+    const reasonRadio = document.querySelector('input[name="return_reason"]:checked');
+    const commentInput = document.getElementById('return_comment');
+    const imageInput = document.getElementById('return_images');
+
+    // Get values
+    const reason = reasonRadio ? reasonRadio.value : '';
+    const comments = commentInput ? commentInput.value.trim() : '';
+    const files = imageInput ? imageInput.files : [];
+
+    // Validation
+    if (!reason) {
         window.Toast.show('Please select a reason for return', 'error');
         return;
     }
 
-    const reason = reasonSelect.value;
+    if (!comments) {
+        window.Toast.show('Please provide additional comments', 'error');
+        return;
+    }
+
+    if (files.length === 0) {
+        window.Toast.show('Please attach at least one image as proof', 'error');
+        return;
+    }
+
+    // Prepare data
+    // For mock purposes, we store file names. In real app, we'd upload these.
+    const imageNames = Array.from(files).map(f => f.name);
+
+    const returnData = {
+        reason,
+        comments,
+        images: imageNames
+    };
 
     // Call service
-    const result = await orderService.requestReturn(currentReturnOrderId, reason);
+    const result = await orderService.requestReturn(currentReturnOrderId, returnData);
 
     if (result.success) {
         closeReturnPopup();

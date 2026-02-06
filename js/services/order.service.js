@@ -175,6 +175,47 @@ class OrderService {
     }
 
     /**
+     * Request a return for an order
+     * @param {string} orderId 
+     * @param {Object} returnData - { reason, comments, images }
+     */
+    async requestReturn(orderId, returnData) {
+        try {
+            const orders = this.getLocalOrders();
+            const orderIndex = orders.findIndex(o => o.id === orderId);
+
+            if (orderIndex === -1) {
+                return { success: false, message: 'Order not found' };
+            }
+
+            const order = orders[orderIndex];
+
+            // Validate status
+            if (order.status !== 'delivered') {
+                return { success: false, message: 'Only delivered orders can be returned' };
+            }
+
+            // Update status and save return details
+            order.status = 'return_requested';
+            order.returnDetails = {
+                reason: returnData.reason,
+                comments: returnData.comments,
+                images: returnData.images || [], // Store dummy URLs or file names
+                requestedAt: new Date().toISOString()
+            };
+            order.updatedAt = new Date().toISOString();
+
+            // Save
+            localStorage.setItem(this.storageKey, JSON.stringify(orders));
+
+            return { success: true, order };
+        } catch (error) {
+            console.error('Error requesting return:', error);
+            return { success: false, message: 'Failed to request return. Please try again.' };
+        }
+    }
+
+    /**
      * Cancel order
      * @param {string} orderId - Order ID
      * @returns {Promise<Object>} Response object

@@ -146,7 +146,7 @@ function renderPaymentInfo(order) {
     document.getElementById('payment-method').textContent = methodMap[order.paymentMethod] || order.paymentMethod || 'Unknown';
 
     const paymentStatusEl = document.getElementById('payment-status');
-    const isPaid = order.paymentStatus === 'paid' || (order.status === 'delivered' && order.paymentMethod === 'cod');
+    const isPaid = order.paymentStatus === 'paid' || (order.status === 'delivered' && order.paymentMethod === 'cod') || (order.paymentMethod === 'online');
 
     if (isPaid) {
         paymentStatusEl.innerHTML = `
@@ -208,6 +208,16 @@ function getStatusConfig(status) {
             label: 'Cancelled',
             bgClass: 'bg-red-100 dark:bg-red-900/30',
             textClass: 'text-red-700 dark:text-red-400'
+        },
+        return_requested: {
+            label: 'Return Initiated',
+            bgClass: 'bg-orange-100 dark:bg-orange-900/30',
+            textClass: 'text-orange-700 dark:text-orange-400'
+        },
+        returned: {
+            label: 'Returned',
+            bgClass: 'bg-gray-100 dark:bg-gray-800',
+            textClass: 'text-gray-700 dark:text-gray-400'
         }
     };
     return configs[status] || configs.pending;

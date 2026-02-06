@@ -148,7 +148,18 @@ class MobileMenuManager {
                 this.userNameElement.textContent = user.name || user.email || 'User';
             }
 
-            console.log('[MobileMenuManager] User view displayed');
+            // Auto-expand user submenu
+            const userSubmenu = document.getElementById('mobile-user-submenu');
+            const userChevron = document.getElementById('mobile-user-chevron');
+
+            if (userSubmenu) {
+                userSubmenu.classList.remove('hidden');
+            }
+            if (userChevron) {
+                userChevron.style.transform = 'rotate(180deg)';
+            }
+
+            console.log('[MobileMenuManager] User view displayed and expanded');
         } else {
             // Show guest section, hide user section
             if (this.guestSection) this.guestSection.classList.remove('hidden');
