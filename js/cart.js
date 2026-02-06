@@ -5,6 +5,19 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   renderFullCart();
+
+  // Attach checkout button listener
+  const checkoutBtn = document.getElementById('cart-page-checkout-btn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (typeof handleCheckoutAction === 'function') {
+        handleCheckoutAction();
+      } else {
+        console.error('[Cart Page] handleCheckoutAction not found');
+      }
+    });
+    console.log('[Cart Page] ✓ Checkout button listener attached');
+  }
 });
 
 function renderFullCart() {
@@ -15,8 +28,8 @@ function renderFullCart() {
 
   if (!list) return; // Not on cart page
 
-  // Get cart from localStorage (managed by common.js usually, but we read here)
-  const cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
+  // Get cart from service
+  const cart = typeof cartService !== 'undefined' ? cartService.getCart() : (JSON.parse(localStorage.getItem("clothyfly_cart")) || []);
 
   if (cart.length === 0) {
     if (container) container.classList.add("hidden");
@@ -97,32 +110,33 @@ function renderFullCart() {
   }
 }
 
-// These functions will communicate with common.js mostly, but since we are on the cart page
-// we might need to duplicate some logic or expose common functions.
-// For better design, common.js should handle state, and we just call shared methods.
-// But to keep it simple, we'll manipulate localStorage here and re-render.
+// Listen for global cart updates
+window.addEventListener('cartUpdated', () => {
+  renderFullCart();
+});
 
 // Updates quantity for a specific item instance
 function updateCartQuantity(instanceId, change) {
-  let cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
-  const itemIndex = cart.findIndex((item) => item.instanceId === instanceId);
+  if (typeof cartService === 'undefined') return;
 
-  if (itemIndex > -1) {
-    cart[itemIndex].quantity += change;
-    if (cart[itemIndex].quantity < 1) cart[itemIndex].quantity = 1;
+  const cart = cartService.getCart();
+  const item = cart.find(i => i.instanceId === instanceId);
+  if (!item) return;
 
-    localStorage.setItem("hoodvibe_cart", JSON.stringify(cart));
-    renderFullCart();
-    // Also update header badge if common.js is present (it is)
-    if (typeof updateCartBadge === "function") updateCartBadge();
+  if (change < 0 && item.quantity === 1) {
+    return;
+  }
+
+  const newQty = item.quantity + change;
+  if (newQty >= 1) {
+    cartService.updateQuantity(instanceId, newQty);
+    // renderFullCart() is now handled by the event listener
   }
 }
 
 function removeFromCart(instanceId) {
-  let cart = JSON.parse(localStorage.getItem("hoodvibe_cart")) || [];
-  cart = cart.filter((item) => item.instanceId !== instanceId);
-
-  localStorage.setItem("hoodvibe_cart", JSON.stringify(cart));
-  renderFullCart();
-  if (typeof updateCartBadge === "function") updateCartBadge();
+  if (typeof cartService !== 'undefined') {
+    cartService.removeFromCart(instanceId);
+    // renderFullCart() is now handled by the event listener
+  }
 }

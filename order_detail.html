@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" href="images/clothyfly_favicon.jpg" />
+
+    <title>Order Details - Clothyfly</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#111111",
+                        "background-light": "#ffffff",
+                        "background-dark": "#121212",
+                        "card-light": "#f8f8f8",
+                        "card-dark": "#1e1e1e",
+                        accent: "#ef4444",
+                    },
+                    fontFamily: {
+                        display: ["Oswald", "sans-serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200 pb-10 lg:pb-0 flex flex-col min-h-screen">
+    <!-- Header Component (loaded dynamically) -->
+    <div id="header-placeholder"></div>
+
+    <main class="flex-grow pb-24 bg-gray-50 dark:bg-background-dark pt-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Back Link -->
+            <a href="orders.html"
+                class="inline-flex items-center text-sm text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white mb-6 transition-colors">
+                <span class="material-icons text-sm mr-1">arrow_back</span>
+                Back to Orders
+            </a>
+
+            <!-- Loading State -->
+            <div id="order-loading" class="text-center py-20">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto">
+                </div>
+                <p class="mt-4 text-gray-500 dark:text-gray-400">Loading order details...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="order-error" class="hidden text-center py-20">
+                <span class="material-icons text-6xl text-red-500 mb-4">error_outline</span>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Order Not Found</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-6">We couldn't find the order details you're looking for.
+                </p>
+                <a href="orders.html"
+                    class="inline-block px-6 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg">Return
+                    to Orders</a>
+            </div>
+
+            <!-- Order Content -->
+            <div id="order-content" class="hidden space-y-6">
+
+                <!-- Header Card -->
+                <div
+                    class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-3 mb-1">
+                                <h1 class="text-2xl font-display font-bold text-gray-900 dark:text-white" id="order-id">
+                                    ORD-LOADING</h1>
+                                <span id="order-status-badge"
+                                    class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">Loading</span>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400" id="order-date">Placed on ...</p>
+                        </div>
+                        <div class="flex gap-3" id="order-actions">
+                            <!-- Dynamic buttons rendered by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Left Column (Items & Shipping) -->
+                    <div class="lg:col-span-2 space-y-6">
+
+                        <!-- Items -->
+                        <div
+                            class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                            <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                                <h2 class="text-lg font-bold text-gray-900 dark:text-white">Order Items</h2>
+                            </div>
+                            <div class="p-6">
+                                <div class="space-y-6" id="order-items-container">
+                                    <!-- Items rendered here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Info -->
+                        <div
+                            class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                            <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                                <h2 class="text-lg font-bold text-gray-900 dark:text-white">Delivery Information</h2>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-full">
+                                        <span
+                                            class="material-icons text-gray-600 dark:text-gray-400">local_shipping</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium text-gray-900 dark:text-white mb-2">Shipping Address</h3>
+                                        <div id="shipping-address"
+                                            class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                                            <!-- Address rendered here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column (Summary & Payment) -->
+                    <div class="space-y-6">
+
+                        <!-- Order Summary -->
+                        <div
+                            class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                            <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                                <h2 class="text-lg font-bold text-gray-900 dark:text-white">Order Summary</h2>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500 dark:text-gray-400">Subtotal</span>
+                                    <span class="font-medium text-gray-900 dark:text-white" id="summary-subtotal">Rs.
+                                        0.00</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500 dark:text-gray-400">Shipping</span>
+                                    <span class="font-medium text-gray-900 dark:text-white" id="summary-shipping">Rs.
+                                        0.00</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500 dark:text-gray-400">Tax</span>
+                                    <span class="font-medium text-gray-900 dark:text-white" id="summary-tax">Rs.
+                                        0.00</span>
+                                </div>
+                                <div
+                                    class="pt-4 border-t border-gray-100 dark:border-gray-800 flex justify-between items-center">
+                                    <span class="text-base font-bold text-gray-900 dark:text-white">Total</span>
+                                    <span class="text-xl font-bold text-gray-900 dark:text-white" id="summary-total">Rs.
+                                        0.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Info -->
+                        <div
+                            class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                            <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                                <h2 class="text-lg font-bold text-gray-900 dark:text-white">Payment Information</h2>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="material-icons text-gray-500">credit_card</span>
+                                    <span class="font-medium text-gray-900 dark:text-white"
+                                        id="payment-method">Method</span>
+                                </div>
+                                <div id="payment-status"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Component (loaded dynamically) -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Mobile Menu Drawer (White Background) -->
+    <div id="mobile-menu-placeholder"></div>
+
+    <!-- Cart Drawer Component (loaded dynamically) -->
+    <div id="cart-drawer-placeholder"></div>
+
+    <!-- Auth Popup Component (loaded dynamically) -->
+    <div id="auth-popup-placeholder"></div>
+
+    <!-- Cancel Order Popup (Reused structure) -->
+    <div id="cancel-popup" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCancelPopup()"></div>
+        <div id="cancel-popup-content"
+            class="absolute bottom-0 left-0 right-0 md:top-1/2 md:left-1/2 md:bottom-auto md:right-auto md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-lg bg-white dark:bg-card-dark rounded-t-3xl md:rounded-2xl shadow-2xl transition-transform duration-300 translate-y-full flex flex-col max-h-[90vh]">
+            <div
+                class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center shrink-0">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Cancel Order</h3>
+                <button onclick="closeCancelPopup()"
+                    class="p-2 -mr-2 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 font-medium">Please select a reason for
+                    cancellation:</p>
+                <div class="space-y-3 mb-6">
+                    <label class="cursor-pointer group block">
+                        <input type="radio" name="cancel_reason" class="peer sr-only" value="changed_mind">
+                        <div
+                            class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+                            <span
+                                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Changed
+                                my mind</span>
+                            <div
+                                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                                <span
+                                    class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer group block">
+                        <input type="radio" name="cancel_reason" class="peer sr-only" value="found_cheaper">
+                        <div
+                            class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+                            <span
+                                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Found
+                                a better price</span>
+                            <div
+                                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                                <span
+                                    class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer group block">
+                        <input type="radio" name="cancel_reason" class="peer sr-only" value="duplicate">
+                        <div
+                            class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+                            <span
+                                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Ordered
+                                by mistake / Duplicate</span>
+                            <div
+                                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                                <span
+                                    class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer group block">
+                        <input type="radio" name="cancel_reason" class="peer sr-only" value="other">
+                        <div
+                            class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-gray-50 dark:peer-checked:bg-gray-800/50 transition-all flex items-center justify-between">
+                            <span
+                                class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Other
+                                reason</span>
+                            <div
+                                class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 peer-checked:border-black dark:peer-checked:border-white peer-checked:bg-black dark:peer-checked:bg-white flex items-center justify-center">
+                                <span
+                                    class="material-icons text-[10px] text-white dark:text-black opacity-0 peer-checked:opacity-100 font-bold">check</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Additional Comments
+                        (Optional)</label>
+                    <textarea id="cancel_comment" rows="3"
+                        class="w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-gray-900 dark:text-white focus:ring-black dark:focus:ring-white focus:border-black dark:focus:border-white"
+                        placeholder="Tell us more about why you're cancelling..."></textarea>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="closeCancelPopup()"
+                        class="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Keep
+                        Order</button>
+                    <button onclick="confirmCancel()"
+                        class="flex-1 px-4 py-3 bg-red-600 text-white font-medium rounded-xl hover:bg-red-700 shadow-lg shadow-red-500/20 transition-all transform active:scale-95">Confirm
+                        Cancellation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services & Scripts -->
+    <script src="js/services/api.service.js"></script>
+    <script src="js/services/auth.service.js"></script>
+    <script src="js/services/product.service.js"></script>
+    <script src="js/services/wishlist.service.js"></script>
+    <script src="js/services/cart.service.js"></script>
+    <script src="js/services/order.service.js"></script>
+
+    <script src="js/common.js"></script>
+    <script src="js/utils/toast-manager.js"></script>
+
+    <!-- Component Loader & Managers -->
+    <script src="js/utils/component-loader.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/components/footer.js"></script>
+    <script src="js/components/mobile-menu.js?v=2"></script>
+    <script src="js/components/cart-drawer.js"></script>
+    <script src="js/components/auth-popup.js"></script>
+
+    <script>
+        // Initialize Components
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loader = new ComponentLoader();
+            await loader.loadMultiple([
+                { name: 'header', target: '#header-placeholder', method: 'replace' },
+                { name: 'footer', target: '#footer-placeholder', method: 'replace' },
+                { name: 'mobile-menu', target: '#mobile-menu-placeholder', method: 'replace' },
+                { name: 'cart-drawer', target: '#cart-drawer-placeholder', method: 'replace' },
+                { name: 'auth-popup', target: '#auth-popup-placeholder', method: 'replace' }
+            ]);
+
+            const headerManager = new HeaderManager();
+            await headerManager.init();
+            new FooterManager().init();
+
+            window.authPopupManager = new AuthPopupManager();
+            window.authPopupManager.init();
+            if (typeof window.checkLoginState === 'function') window.checkLoginState();
+
+            // Initialize mobile menu functionality (Async, can fail)
+            const mobileMenuManager = new MobileMenuManager();
+            try {
+                await mobileMenuManager.init();
+            } catch (error) {
+                console.error("Mobile menu init failed:", error);
+            }
+
+            window.cartDrawerManager = new CartDrawerManager();
+            if (window.cartDrawerManager.init && window.cartDrawerManager.init.constructor.name === "AsyncFunction") {
+                window.cartDrawerManager.init().catch(e => console.error("Cart Drawer init failed", e));
+            } else {
+                window.cartDrawerManager.init();
+            }
+        });
+    </script>
+
+    <!-- Order Detail Script -->
+    <script src="js/order_detail.js"></script>
+</body>
+
+</html>

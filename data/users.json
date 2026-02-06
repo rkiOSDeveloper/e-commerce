@@ -1,0 +1,60 @@
+{
+    "users": [
+        {
+            "id": "user-1",
+            "email": "demo@clothyfly.com",
+            "name": "Demo User",
+            "phone": "+91 9876543210",
+            "addresses": [
+                {
+                    "id": "addr-1",
+                    "type": "home",
+                    "name": "Demo User",
+                    "phone": "+91 9876543210",
+                    "addressLine1": "123, Sample Street",
+                    "addressLine2": "Near City Mall",
+                    "city": "Mumbai",
+                    "state": "Maharashtra",
+                    "pincode": "400001",
+                    "isDefault": true
+                }
+            ],
+            "createdAt": "2025-01-15T10:30:00Z",
+            "lastLogin": "2026-02-04T16:00:00Z"
+        },
+        {
+            "id": "user-2",
+            "email": "john.doe@example.com",
+            "name": "John Doe",
+            "phone": "+91 9123456789",
+            "addresses": [
+                {
+                    "id": "addr-2",
+                    "type": "home",
+                    "name": "John Doe",
+                    "phone": "+91 9123456789",
+                    "addressLine1": "456, MG Road",
+                    "addressLine2": "Opposite Park",
+                    "city": "Bangalore",
+                    "state": "Karnataka",
+                    "pincode": "560001",
+                    "isDefault": true
+                },
+                {
+                    "id": "addr-3",
+                    "type": "work",
+                    "name": "John Doe",
+                    "phone": "+91 9123456789",
+                    "addressLine1": "789, Tech Park",
+                    "addressLine2": "Building A, 5th Floor",
+                    "city": "Bangalore",
+                    "state": "Karnataka",
+                    "pincode": "560066",
+                    "isDefault": false
+                }
+            ],
+            "createdAt": "2025-12-01T08:15:00Z",
+            "lastLogin": "2026-02-03T14:30:00Z"
+        }
+    ]
+}

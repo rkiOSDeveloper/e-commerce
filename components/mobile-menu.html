@@ -1,0 +1,83 @@
+<!-- Mobile Menu Drawer (White Background) -->
+<div id="mobile-menu-drawer"
+    class="fixed inset-0 z-40 bg-white transform -translate-x-full transition-transform duration-300 xl:hidden overflow-y-auto">
+    <div class="pt-24 px-6 pb-12 flex flex-col h-full">
+        <!-- Nav Links -->
+        <nav class="space-y-6 flex-1">
+            <a href="#" class="block text-lg font-medium text-black">Home</a>
+            <!-- Products (Expandable) -->
+            <div>
+                <button onclick="
+              toggleMobileSubmenu('products-submenu', 'products-chevron')
+            " class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                    <span class="block text-lg font-medium text-black">Products</span>
+                    <span id="products-chevron"
+                        class="material-icons text-black transition-transform duration-300">expand_more</span>
+                </button>
+
+                <!-- Products Submenu (Dynamically Loaded) -->
+                <div id="products-submenu" class="hidden mt-4 pl-4 space-y-4 border-l border-gray-200">
+                    <!-- Categories will be rendered here dynamically from categories.json -->
+                </div>
+            </div>
+            <a href="#" class="block text-lg font-medium text-black">About Us</a>
+            <a href="#" class="block text-lg font-medium text-black">Contact</a>
+            <a href="wishlist.html" class="block text-lg font-medium text-black">Wishlist</a>
+        </nav>
+
+        <!-- My Account Section -->
+        <div class="mt-auto pt-10">
+            <h3 class="text-lg font-bold text-black mb-6 dark:text-white">
+                My Account
+            </h3>
+
+            <!-- Guest View -->
+            <div id="mobile-drawer-guest" class="space-y-4">
+                <button onclick="
+              toggleLoginPopup();
+              toggleMobileMenu();
+            " class="block w-full text-center py-3 border border-black text-black font-medium hover:bg-black hover:text-white transition-colors dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black">
+                    Log in
+                </button>
+                <button onclick="
+              toggleLoginPopup();
+              switchToCreateAccount();
+              toggleMobileMenu();
+            " class="block w-full text-center py-3 bg-black text-white font-medium hover:bg-gray-800 transition-colors dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                    Register
+                </button>
+            </div>
+
+            <!-- User View (Hidden by default) -->
+            <div id="mobile-drawer-user" class="hidden space-y-4">
+                <button onclick="
+              toggleMobileSubmenu(
+                'mobile-user-submenu',
+                'mobile-user-chevron',
+              )
+            " class="w-full flex items-center justify-between group cursor-pointer focus:outline-none">
+                    <div class="flex items-center gap-3">
+                        <span class="material-icons text-2xl text-black dark:text-white">person_outline</span>
+                        <span id="mobile-user-name" class="text-lg font-medium text-black dark:text-white">User</span>
+                    </div>
+                    <span id="mobile-user-chevron"
+                        class="material-icons text-black transition-transform duration-300">expand_more</span>
+                </button>
+
+                <div id="mobile-user-submenu" class="hidden pl-10 space-y-3">
+                    <a href="profile.html"
+                        class="block text-sm text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white">Profile</a>
+                    <a href="orders.html"
+                        class="block text-sm text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white">Orders</a>
+                </div>
+
+                <button onclick="
+              handleLogout();
+              toggleMobileMenu();
+            " class="block w-full text-center py-3 border border-black text-black font-medium hover:bg-black hover:text-white transition-colors dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black">
+                    Sign out
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

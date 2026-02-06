@@ -94,12 +94,6 @@
   <!-- Mobile Menu Component (loaded dynamically) -->
   <div id="mobile-menu-placeholder"></div>
 
-  <!-- Cart Drawer Component (loaded dynamically) -->
-  <div id="cart-drawer-placeholder"></div>
-
-  <!-- Auth Popup Component (loaded dynamically) -->
-  <div id="auth-popup-placeholder"></div>
-
   <!-- Search Modal -->
   <div id="search-modal"
     class="fixed inset-0 z-[60] bg-white dark:bg-background-dark transform translate-y-full transition-transform duration-300 flex flex-col">
@@ -147,44 +141,24 @@
   </div>
 
   <!-- Component Loader -->
-  <!-- Services -->
-  <script src="js/services/api.service.js"></script>
-  <script src="js/services/product.service.js"></script>
-  <script src="js/services/auth.service.js"></script>
-  <script src="js/services/wishlist.service.js"></script>
-  <script src="js/services/cart.service.js"></script>
-
   <script src="js/utils/component-loader.js"></script>
   <!-- Header Manager -->
   <script src="js/components/header.js"></script>
   <!-- Footer Manager -->
   <script src="js/components/footer.js"></script>
   <!-- Mobile Menu Manager -->
-  <script src="js/components/mobile-menu.js?v=2"></script>
-  <!-- Cart Drawer Manager -->
-  <script src="js/components/cart-drawer.js"></script>
+  <script src="js/components/mobile-menu.js"></script>
   <script>
     // Load header and footer components on page load
     document.addEventListener('DOMContentLoaded', async () => {
       const loader = new ComponentLoader();
-
+      
       // Load header and footer components
       await loader.loadMultiple([
         { name: 'header', target: '#header-placeholder', method: 'replace' },
         { name: 'footer', target: '#footer-placeholder', method: 'replace' },
-        { name: 'mobile-menu', target: '#mobile-menu-placeholder', method: 'replace' },
-        { name: 'cart-drawer', target: '#cart-drawer-placeholder', method: 'replace' },
-        { name: 'auth-popup', target: '#auth-popup-placeholder', method: 'replace' }
+        { name: 'mobile-menu', target: '#mobile-menu-placeholder', method: 'replace' }
       ]);
-
-      // Initialize auth popup functionality
-      window.authPopupManager = new AuthPopupManager();
-      window.authPopupManager.init();
-
-      // Refresh login state UI now that components are loaded
-      if (typeof window.checkLoginState === 'function') {
-        window.checkLoginState();
-      }
 
       // Initialize header functionality after component is loaded
       const headerManager = new HeaderManager();
@@ -197,18 +171,22 @@
       // Initialize mobile menu functionality after component is loaded
       const mobileMenuManager = new MobileMenuManager();
       mobileMenuManager.init();
+    });
+  </script>
+  <!-- Header Manager -->
+  <script src="js/components/header.js"></script>
+  <script>
+    // Load header component on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+      const loader = new ComponentLoader();
+      await loader.load('header', '#header-placeholder', 'replace');
 
-      // Initialize cart drawer functionality after component is loaded
-      window.cartDrawerManager = new CartDrawerManager();
-      window.cartDrawerManager.init();
+      // Initialize header functionality after component is loaded
+      const headerManager = new HeaderManager();
+      await headerManager.init();
     });
   </script>
 
-  <!-- Auth Popup Manager -->
-  <script src="js/components/auth-popup.js"></script>
-
-  <!-- Product Card Renderer -->
-  <script src="js/utils/product-card-renderer.js"></script>
   <script src="js/common.js"></script>
   <script src="js/wishlist.js"></script>
 </body>

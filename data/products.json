@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "id": "new-arrival-1",
+      "name": "Defender Generation Gap - HV007",
+      "slug": "defender-generation-gap-hv007",
+      "description": "Premium black hoodie with modern design and superior comfort. Perfect for casual streetwear.",
+      "price": 2999,
+      "originalPrice": 4999,
+      "discount": 40,
+      "category": "mens",
+      "subcategory": "hoodies",
+      "tags": ["Top Seller", "New Arrival"],
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuDxiRnmxxTQZJXirfuzhIvv2SIZVdLKumVvDJj9Xxq2wHUGvyfo3AlEGv5SzQym3CY8vivdsI5KF0kep9GZAdS-Q2JXHB0W12gvxXJFInG0TwLZm-Jqujn_qCoP3KoS9N3B5AhQT5MkA9S1uBzcC93DZEbe64Me-ko13GB7HWdXNN1qBUcSMm1Xh8tnzos5pdJ_8ReegiYJ1vKyst4xiYYTCDETJS15IUd8okq7exN0WEobWJI-QXkqM7YuGkTXRn3bP4qRIFnDiZSS"
+      ],
+      "sizes": ["S", "M", "L", "XL", "XXL"],
+      "colors": ["Black"],
+      "stock": 50,
+      "featured": true,
+      "rating": 4.5,
+      "reviews": 128
+    },
+    {
+      "id": "new-arrival-2",
+      "name": "Ginger Root Brown Mood Tee",
+      "slug": "ginger-root-brown-mood-tee",
+      "description": "Comfortable beige oversized t-shirt with premium fabric and relaxed fit.",
+      "price": 369,
+      "originalPrice": 1399,
+      "discount": 73,
+      "category": "mens",
+      "subcategory": "t-shirts",
+      "tags": ["New", "Sale"],
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuASt0aF5WxFLdU2RuJNkTIA3--nuXmw5wL9nxUeSIdUxKt9Vnw5DjgDOXkof_JwtWb_CIs3UwyyZb89PL1UJvwtaxNbFazbqDDe5R8auGzn-WALoNCDZbawYz3pHgF5EOlSviLuFzrkXE_UfVg4-l66i5GOdH_4vV1OaIL_QOrKu4iKVOO9aUJLkKb9VDDt0yPNN6BE5nkPK0plC0ngzQrK6p9ErmZ1mXnCqS1l4qxcNjzGKuM2bBRKmuCoiUvayZEPnyr6EzbgnCub"
+      ],
+      "sizes": ["S", "M", "L", "XL"],
+      "colors": ["Beige", "Brown"],
+      "stock": 75,
+      "featured": true,
+      "rating": 4.3,
+      "reviews": 89
+    },
+    {
+      "id": "new-arrival-3",
+      "name": "11:11 Mask Design - HOODVIBE",
+      "slug": "1111-mask-design-hoodvibe",
+      "description": "Maroon graphic tee with unique mask design. Stand out with this bold statement piece.",
+      "price": 1499,
+      "originalPrice": null,
+      "discount": 0,
+      "category": "mens",
+      "subcategory": "t-shirts",
+      "tags": ["Sale"],
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuDGWrAuc-vNuO2OTjCBsh5z_yK-OTcsU2i0Xlob7roXg8FIKrELP8Sz87W2DhzOSqXfeh9XKD0UURO2JkMJe5XEUXiu2z0BeJXpDuoqfh_HRKlhMyPiSZJ59B3p2cWww6WI52t0XVC5SIhn2c_ID_IHBqWG9ffOzDIyH9yJvVtfFIc4CikCl_W4q42XtCsoCDnfi9hDVHqsaSi3oSLphWTrpUTRtpGQC8GVcEDvpo9ERRCeFTWuGaf3iL9HyKQzrkghdCrFdRdoESVq"
+      ],
+      "sizes": ["S", "M", "L", "XL"],
+      "colors": ["Maroon"],
+      "stock": 30,
+      "featured": true,
+      "rating": 4.6,
+      "reviews": 56
+    },
+    {
+      "id": "new-arrival-4",
+      "name": "THE ARMED MAFIA HOODIE",
+      "slug": "the-armed-mafia-hoodie",
+      "description": "Brown hoodie with unique back design. Premium quality and street-style aesthetics.",
+      "price": 2499,
+      "originalPrice": 3499,
+      "discount": 29,
+      "category": "mens",
+      "subcategory": "hoodies",
+      "tags": ["Limited"],
+      "images": [
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuCjXolRishS-369zSIZtLx2e3rI8PoZ1na1MW4oh3HbItsZh362_--P70BDE5aVKzS19pfew86zekrf9_-A9a8m1ZpUGoGsXXBimxZb435jRnc1XzPKPxVye6AXzpY64kTuevkzKTkhc4vbkw5EodpBAx62iTQVa86M-ae_wBRM0ncSj3QUjp5Sx1nAiDpCVZNFW_gT9uLUeuD2hHxw_L0YbJBcAx2S0LaI2ZhnZdqSCO4lNYBV91HOT59ZPA2fMP_LuygKefJnzC-M"
+      ],
+      "sizes": ["M", "L", "XL"],
+      "colors": ["Brown"],
+      "stock": 20,
+      "featured": true,
+      "rating": 4.7,
+      "reviews": 42
+    }
+  ]
+}

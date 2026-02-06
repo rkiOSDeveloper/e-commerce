@@ -296,8 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
           console.error("Error sharing:", err);
         }
       } else {
-        alert(
+        window.Toast.show(
           "Sharing is not supported on this browser. Copying URL to clipboard is a good fallback.",
+          'info'
         );
       }
     });
@@ -385,8 +386,8 @@ document.addEventListener("DOMContentLoaded", () => {
         name: titleEl ? titleEl.textContent.trim() : "Unknown Product",
         price: priceEl
           ? parseFloat(
-              priceEl.textContent.replace("Rs. ", "").replace(/[^0-9.]/g, ""),
-            )
+            priceEl.textContent.replace("Rs. ", "").replace(/[^0-9.]/g, ""),
+          )
           : 0,
         image: mainImageEl ? mainImageEl.src : "",
         size: selectedSize,
@@ -394,21 +395,76 @@ document.addEventListener("DOMContentLoaded", () => {
         fabric: "Cotton", // Hardcoded as per mock or read from description if possible
       };
 
-      // Call global function from common.js
-      if (typeof addToCart === "function") {
-        addToCart(product);
+      // Use CartService if available
+      if (typeof cartService !== 'undefined') {
+        // Quantity is 1 by default for now (could read from quantity input if needed)
+        const quantity = parseInt(document.getElementById("quantity-value")?.textContent || 1);
 
-        // Optional: Feedback Button Interaction
-        const originalText = addToCartBtn.textContent;
-        addToCartBtn.textContent = "Added to Cart!";
-        setTimeout(() => {
-          addToCartBtn.textContent = originalText;
-        }, 2000);
+        // Pass base product and selected options separately as per service signature
+        // Service expects: addToCart(product, quantity, size, color)
+        cartService.addToCart(product, quantity, selectedSize, selectedColor).then(result => {
+          if (result.success) {
+            // Feedback
+            const originalText = addToCartBtn.textContent;
+            addToCartBtn.textContent = "Added to Cart!";
+            setTimeout(() => {
+              addToCartBtn.textContent = originalText;
+            }, 2000);
+
+            // Open Drawer (optional, but good UX)
+            if (window.cartDrawerManager) {
+              window.cartDrawerManager.open();
+            }
+          } else {
+            if (result.success) {
+              window.Toast.show('Product added to cart', 'success');
+              // Update UI
+              updateCartCount(result.cart.length); // Assuming implementation
+              window.dispatchEvent(new CustomEvent('cartUpdated'));
+
+              // Open drawer
+              if (window.cartDrawerManager) {
+                window.cartDrawerManager.open();
+              }
+            } else {
+              window.Toast.show(result.message || "Failed to add to cart", 'error');
+            }
+          }
+        });
       } else {
-        console.error(
-          "addToCart function not found. Ensure common.js is loaded.",
-        );
+        console.error("CartService not found!");
       }
     });
   }
+
+  // Render "You Might Also Like" Section
+  async function renderYouMightAlsoLike() {
+    try {
+      // Fetch products from products.json
+      const response = await fetch('data/products.json');
+      if (!response.ok) {
+        throw new Error('Failed to load products');
+      }
+      const data = await response.json();
+
+      // Get random 4 products for recommendations
+      const allProducts = data.products || [];
+      const shuffled = allProducts.sort(() => 0.5 - Math.random());
+      const recommendedProducts = shuffled.slice(0, 4);
+
+      // Use ProductCardRenderer if available
+      const container = document.getElementById('you-might-also-like-grid');
+      if (container && typeof ProductCardRenderer !== 'undefined') {
+        const renderer = new ProductCardRenderer();
+        const html = renderer.renderWithWishlistState(recommendedProducts);
+        container.innerHTML = html;
+        console.log('[Product Detail] You Might Also Like section rendered');
+      }
+    } catch (error) {
+      console.error('[Product Detail] Error rendering recommendations:', error);
+    }
+  }
+
+  // Call the render function
+  renderYouMightAlsoLike();
 });

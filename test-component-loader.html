@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Loader Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-8 bg-gray-100">
+    <h1 class="text-3xl font-bold mb-4">Component Loader Test Page</h1>
+
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Test 1: Replace Method</h2>
+        <div id="test-1" class="bg-gray-300 p-4 rounded">
+            <p>This should be replaced by the component</p>
+        </div>
+    </div>
+
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Test 2: Append Method</h2>
+        <div id="test-2" class="bg-gray-300 p-4 rounded">
+            <p>Original content - component will be appended below</p>
+        </div>
+    </div>
+
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Test 3: Load Multiple</h2>
+        <div id="test-3a" class="bg-gray-300 p-4 rounded mb-2">
+            <p>Test 3A placeholder</p>
+        </div>
+        <div id="test-3b" class="bg-gray-300 p-4 rounded">
+            <p>Test 3B placeholder</p>
+        </div>
+    </div>
+
+    <div class="mb-8">
+        <button onclick="runTests()" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+            Run Tests
+        </button>
+        <button onclick="componentLoader.clearCache()"
+            class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 ml-2">
+            Clear Cache
+        </button>
+    </div>
+
+    <div id="results" class="bg-white p-4 rounded shadow">
+        <h3 class="font-bold mb-2">Test Results:</h3>
+        <div id="results-content" class="text-sm font-mono"></div>
+    </div>
+
+    <!-- Load Component Loader -->
+    <script src="js/utils/component-loader.js"></script>
+
+    <script>
+        function logResult(message, success = true) {
+            const resultsDiv = document.getElementById('results-content');
+            const color = success ? 'text-green-600' : 'text-red-600';
+            resultsDiv.innerHTML += `<div class="${color}"> ${success ? '✓' : '✗'} ${message}</div>`;
+        }
+
+        async function runTests() {
+            // Clear previous results
+            document.getElementById('results-content').innerHTML = '<div class="text-blue-600">Running tests...</div>';
+
+            try {
+                // Test 1: Replace method
+                logResult('Test 1: Testing replace method...');
+                const result1 = await componentLoader.load('test-component', '#test-1', 'replace');
+                logResult(`Replace method: ${result1 ? 'SUCCESS' : 'FAILED'}`, result1);
+
+                // Wait a bit
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Test 2: Append method
+                logResult('Test 2: Testing append method...');
+                const result2 = await componentLoader.load('test-component', '#test-2', 'append');
+                logResult(`Append method: ${result2 ? 'SUCCESS' : 'FAILED'}`, result2);
+
+                // Wait a bit
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Test 3: Load multiple
+                logResult('Test 3: Testing loadMultiple...');
+                const results3 = await componentLoader.loadMultiple([
+                    { name: 'test-component', target: '#test-3a', method: 'replace' },
+                    { name: 'test-component', target: '#test-3b', method: 'replace' }
+                ]);
+                const allSuccess = results3.every(r => r);
+                logResult(`LoadMultiple: ${allSuccess ? 'SUCCESS' : 'FAILED'}`, allSuccess);
+
+                logResult('All tests completed!', true);
+
+            } catch (error) {
+                logResult(`ERROR: ${error.message}`, false);
+            }
+        }
+
+        // Auto-run tests on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('Component Loader Test Page Ready');
+            logResult('Page loaded, ready to test');
+        });
+    </script>
+</body>
+
+</html>

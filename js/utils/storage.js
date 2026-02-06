@@ -1,11 +1,16 @@
 /**
- * StorageManager: Centralized localStorage management
- * Provides error handling and JSON serialization/deserialization
+ * Storage Manager
+ * Centralized localStorage management with error handling and type safety
  */
+
+import { STORAGE_KEYS } from '../config/constants.js';
 
 export class StorageManager {
     /**
-     * Get item from localStorage
+     * Get item from localStorage with error handling
+     * @param {string} key - Storage key
+     * @param {*} defaultValue - Default value if key doesn't exist
+     * @returns {*} Parsed value or default
      */
     static get(key, defaultValue = null) {
         try {
@@ -18,7 +23,10 @@ export class StorageManager {
     }
 
     /**
-     * Set item in localStorage
+     * Set item in localStorage with error handling
+     * @param {string} key - Storage key
+     * @param {*} value - Value to store (will be JSON stringified)
+     * @returns {boolean} Success status
      */
     static set(key, value) {
         try {
@@ -32,6 +40,7 @@ export class StorageManager {
 
     /**
      * Remove item from localStorage
+     * @param {string} key - Storage key
      */
     static remove(key) {
         try {
@@ -56,37 +65,89 @@ export class StorageManager {
         }
     }
 
-    /**
-     * Check if key exists
-     */
-    static has(key) {
-        return localStorage.getItem(key) !== null;
-    }
-
-    // Cart-specific methods
+    // Cart specific methods
     static getCart() {
-        return this.get('hoodvibe_cart', []);
+        return this.get(STORAGE_KEYS.CART, []);
     }
 
     static saveCart(cart) {
-        return this.set('hoodvibe_cart', cart);
+        if (!Array.isArray(cart)) {
+            console.error('Cart must be an array');
+            return false;
+        }
+        return this.set(STORAGE_KEYS.CART, cart);
     }
 
-    // User-specific methods
-    static getUser() {
-        return this.get('hoodvibe_user', null);
+    static clearCart() {
+        return this.set(STORAGE_KEYS.CART, []);
     }
 
-    static saveUser(user) {
-        return this.set('hoodvibe_user', user);
-    }
-
-    // Wishlist-specific methods
+    // Wishlist specific methods
     static getWishlist() {
-        return this.get('hoodvibe_wishlist', []);
+        return this.get(STORAGE_KEYS.WISHLIST, []);
     }
 
     static saveWishlist(wishlist) {
-        return this.set('hoodvibe_wishlist', wishlist);
+        if (!Array.isArray(wishlist)) {
+            console.error('Wishlist must be an array');
+            return false;
+        }
+        return this.set(STORAGE_KEYS.WISHLIST, wishlist);
+    }
+
+    static clearWishlist() {
+        return this.set(STORAGE_KEYS.WISHLIST, []);
+    }
+
+    // User specific methods
+    static getUser() {
+        return this.get(STORAGE_KEYS.USER, null);
+    }
+
+    static saveUser(user) {
+        if (!user || typeof user !== 'object') {
+            console.error('User must be an object');
+            return false;
+        }
+        return this.set(STORAGE_KEYS.USER, user);
+    }
+
+    static clearUser() {
+        return this.remove(STORAGE_KEYS.USER);
+    }
+
+    static isLoggedIn() {
+        return this.getUser() !== null;
+    }
+
+    // Pending wishlist (sessionStorage for temporary data)
+    static getPendingWishlist() {
+        try {
+            const item = sessionStorage.getItem(STORAGE_KEYS.PENDING_WISHLIST);
+            return item ? JSON.parse(item) : null;
+        } catch (error) {
+            console.error('Error reading pending wishlist:', error);
+            return null;
+        }
+    }
+
+    static savePendingWishlist(product) {
+        try {
+            sessionStorage.setItem(STORAGE_KEYS.PENDING_WISHLIST, JSON.stringify(product));
+            return true;
+        } catch (error) {
+            console.error('Error saving pending wishlist:', error);
+            return false;
+        }
+    }
+
+    static clearPendingWishlist() {
+        try {
+            sessionStorage.removeItem(STORAGE_KEYS.PENDING_WISHLIST);
+            return true;
+        } catch (error) {
+            console.error('Error clearing pending wishlist:', error);
+            return false;
+        }
     }
 }

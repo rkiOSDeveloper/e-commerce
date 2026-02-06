@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Layer Test - Clothyfly</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .output {
+            background: #f8f8f8;
+            padding: 15px;
+            border-left: 4px solid #000;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Service Layer Test Page</h1>
+    <p>This page tests all the new services we created. Open the browser console to see detailed logs.</p>
+
+    <!-- Product Service Tests -->
+    <div class="test-section">
+        <h2>📦 Product Service</h2>
+        <button onclick="testGetAllProducts()">Get All Products</button>
+        <button onclick="testGetProductById()">Get Product By ID</button>
+        <button onclick="testGetCategories()">Get Categories</button>
+        <button onclick="testSearchProducts()">Search Products</button>
+        <div id="product-output" class="output"></div>
+    </div>
+
+    <!-- Auth Service Tests -->
+    <div class="test-section">
+        <h2>🔐 Auth Service</h2>
+        <button onclick="testSendOTP()">Send OTP</button>
+        <button onclick="testVerifyOTP()">Verify OTP</button>
+        <button onclick="testGetCurrentUser()">Get Current User</button>
+        <button onclick="testLogout()">Logout</button>
+        <div id="auth-output" class="output"></div>
+    </div>
+
+    <!-- Cart Service Tests -->
+    <div class="test-section">
+        <h2>🛒 Cart Service</h2>
+        <button onclick="testAddToCart()">Add to Cart</button>
+        <button onclick="testGetCart()">Get Cart</button>
+        <button onclick="testGetCartTotal()">Get Cart Total</button>
+        <button onclick="testClearCart()">Clear Cart</button>
+        <div id="cart-output" class="output"></div>
+    </div>
+
+    <!-- Wishlist Service Tests -->
+    <div class="test-section">
+        <h2>❤️ Wishlist Service</h2>
+        <button onclick="testAddToWishlist()">Add to Wishlist</button>
+        <button onclick="testGetWishlist()">Get Wishlist</button>
+        <button onclick="testMoveToCart()">Move to Cart</button>
+        <div id="wishlist-output" class="output"></div>
+    </div>
+
+    <!-- Order Service Tests -->
+    <div class="test-section">
+        <h2>📋 Order Service</h2>
+        <button onclick="testGetOrders()">Get Orders</button>
+        <button onclick="testCreateOrder()">Create Order</button>
+        <button onclick="testGetOrderStats()">Get Order Stats</button>
+        <div id="order-output" class="output"></div>
+    </div>
+
+    <!-- Load Services -->
+    <script src="js/services/api.service.js"></script>
+    <script src="js/services/product.service.js"></script>
+    <script src="js/services/auth.service.js"></script>
+    <script src="js/services/cart.service.js"></script>
+    <script src="js/services/wishlist.service.js"></script>
+    <script src="js/services/order.service.js"></script>
+
+    <!-- Test Functions -->
+    <script>
+        let testProduct = null;
+
+        // Product Service Tests
+        async function testGetAllProducts() {
+            const output = document.getElementById('product-output');
+            output.innerHTML = '⏳ Loading products...';
+
+            try {
+                const products = await productService.getAll();
+                testProduct = products[0]; // Save for other tests
+                output.innerHTML = `✅ Success! Found ${products.length} products\n\n${JSON.stringify(products, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        async function testGetProductById() {
+            const output = document.getElementById('product-output');
+            output.innerHTML = '⏳ Loading product...';
+
+            try {
+                const product = await productService.getById('new-arrival-1');
+                output.innerHTML = `✅ Success! Found product\n\n${JSON.stringify(product, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        async function testGetCategories() {
+            const output = document.getElementById('product-output');
+            output.innerHTML = '⏳ Loading categories...';
+
+            try {
+                const categories = await productService.getCategories();
+                output.innerHTML = `✅ Success! Found ${categories.length} categories\n\n${JSON.stringify(categories, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        async function testSearchProducts() {
+            const output = document.getElementById('product-output');
+            output.innerHTML = '⏳ Searching for "hoodie"...';
+
+            try {
+                const products = await productService.search('hoodie');
+                output.innerHTML = `✅ Success! Found ${products.length} matching products\n\n${JSON.stringify(products, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        // Auth Service Tests
+        async function testSendOTP() {
+            const output = document.getElementById('auth-output');
+            output.innerHTML = '⏳ Sending OTP...';
+
+            try {
+                const result = await authService.sendOTP('test@clothyfly.com');
+                output.innerHTML = `✅ Success!\n\n${JSON.stringify(result, null, 2)}\n\nUse this OTP for verification: ${result.otp}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        async function testVerifyOTP() {
+            const output = document.getElementById('auth-output');
+
+            const otp = sessionStorage.getItem('pending_otp');
+            if (!otp) {
+                output.innerHTML = '❌ Please send OTP first!';
+                output.className = 'output error';
+                return;
+            }
+
+            output.innerHTML = '⏳ Verifying OTP...';
+
+            try {
+                const result = await authService.verifyOTP('test@clothyfly.com', otp);
+                output.innerHTML = `✅ Success! User logged in\n\n${JSON.stringify(result, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        function testGetCurrentUser() {
+            const output = document.getElementById('auth-output');
+            const user = authService.getCurrentUser();
+            const isLoggedIn = authService.isLoggedIn();
+
+            output.innerHTML = `User: ${user ? JSON.stringify(user, null, 2) : 'None'}\nLogged In: ${isLoggedIn}`;
+            output.className = 'output';
+        }
+
+        function testLogout() {
+            const output = document.getElementById('auth-output');
+            const result = authService.logout();
+            output.innerHTML = `✅ ${result.message}\n\n${JSON.stringify(result, null, 2)}`;
+            output.className = 'output success';
+        }
+
+        // Cart Service Tests
+        async function testAddToCart() {
+            const output = document.getElementById('cart-output');
+
+            if (!testProduct) {
+                await testGetAllProducts();
+            }
+
+            output.innerHTML = '⏳ Adding to cart...';
+
+            try {
+                const result = await cartService.addToCart(testProduct, 1, 'M', 'Black');
+                output.innerHTML = `✅ Success!\n\n${JSON.stringify(result, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        function testGetCart() {
+            const output = document.getElementById('cart-output');
+            const cart = cartService.getCart();
+            output.innerHTML = `Cart Items: ${cart.length}\n\n${JSON.stringify(cart, null, 2)}`;
+            output.className = 'output';
+        }
+
+        function testGetCartTotal() {
+            const output = document.getElementById('cart-output');
+            const total = cartService.getCartTotal();
+            output.innerHTML = `Cart Total:\n\n${JSON.stringify(total, null, 2)}`;
+            output.className = 'output';
+        }
+
+        function testClearCart() {
+            const output = document.getElementById('cart-output');
+            const result = cartService.clearCart();
+            output.innerHTML = `✅ ${result.message}\n\n${JSON.stringify(result, null, 2)}`;
+            output.className = 'output success';
+        }
+
+        // Wishlist Service Tests
+        async function testAddToWishlist() {
+            const output = document.getElementById('wishlist-output');
+
+            if (!testProduct) {
+                await testGetAllProducts();
+            }
+
+            const result = wishlistService.addToWishlist(testProduct);
+            output.innerHTML = `${result.success ? '✅' : '⚠️'} ${result.message}\n\n${JSON.stringify(result, null, 2)}`;
+            output.className = `output ${result.success ? 'success' : ''}`;
+        }
+
+        function testGetWishlist() {
+            const output = document.getElementById('wishlist-output');
+            const wishlist = wishlistService.getWishlist();
+            output.innerHTML = `Wishlist Items: ${wishlist.length}\n\n${JSON.stringify(wishlist, null, 2)}`;
+            output.className = 'output';
+        }
+
+        async function testMoveToCart() {
+            const output = document.getElementById('wishlist-output');
+            const wishlist = wishlistService.getWishlist();
+
+            if (wishlist.length === 0) {
+                output.innerHTML = '❌ Wishlist is empty. Add items first!';
+                output.className = 'output error';
+                return;
+            }
+
+            output.innerHTML = '⏳ Moving to cart...';
+
+            const result = await wishlistService.moveToCart(wishlist[0].id);
+            output.innerHTML = `${result.success ? '✅' : '❌'} ${result.message}\n\n${JSON.stringify(result, null, 2)}`;
+            output.className = `output ${result.success ? 'success' : 'error'}`;
+        }
+
+        // Order Service Tests
+        async function testGetOrders() {
+            const output = document.getElementById('order-output');
+            output.innerHTML = '⏳ Loading orders...';
+
+            try {
+                const orders = await orderService.getOrders();
+                output.innerHTML = `✅ Found ${orders.length} orders\n\n${JSON.stringify(orders, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        async function testCreateOrder() {
+            const output = document.getElementById('order-output');
+
+            // Check if logged in
+            if (!authService.isLoggedIn()) {
+                output.innerHTML = '❌ Please login first!';
+                output.className = 'output error';
+                return;
+            }
+
+            // Check if cart has items
+            const cart = cartService.getCart();
+            if (cart.length === 0) {
+                output.innerHTML = '❌ Cart is empty! Add items first.';
+                output.className = 'output error';
+                return;
+            }
+
+            output.innerHTML = '⏳ Creating order...';
+
+            const orderData = {
+                shippingAddress: {
+                    name: 'Test User',
+                    phone: '+91 9876543210',
+                    addressLine1: '123 Test Street',
+                    addressLine2: 'Test Area',
+                    city: 'Mumbai',
+                    state: 'Maharashtra',
+                    pincode: '400001'
+                },
+                paymentMethod: 'cod'
+            };
+
+            try {
+                const result = await orderService.createOrder(orderData);
+                output.innerHTML = `${result.success ? '✅' : '❌'} ${result.message}\n\n${JSON.stringify(result, null, 2)}`;
+                output.className = `output ${result.success ? 'success' : 'error'}`;
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        async function testGetOrderStats() {
+            const output = document.getElementById('order-output');
+            output.innerHTML = '⏳ Calculating stats...';
+
+            try {
+                const stats = await orderService.getOrderStats();
+                output.innerHTML = `✅ Order Statistics\n\n${JSON.stringify(stats, null, 2)}`;
+                output.className = 'output success';
+            } catch (error) {
+                output.innerHTML = `❌ Error: ${error.message}`;
+                output.className = 'output error';
+            }
+        }
+
+        // Auto-load products on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Service Layer Test Page Loaded');
+            console.log('Services available:', {
+                apiService,
+                productService,
+                authService,
+                cartService,
+                wishlistService,
+                orderService
+            });
+        });
+    </script>
+</body>
+
+</html>

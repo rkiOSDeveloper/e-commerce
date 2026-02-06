@@ -311,7 +311,215 @@
         </div>
       </div>
       <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16">
-        <!-- Products will be rendered dynamically from products.json -->
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Black graphic hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxmTnUKbWgghAdRg-J4ZbH64q33DU-PWdIHCpc0brPP2pzb1muszUobPyfeSVRKFa6JsRXrusj8BaIFodiQRdaqEjOzc-R1XcKBzcTiAfTEmsuP2eCyZGp-fZdyaiJ9X1mlKr35QJBLn0sg_-7Bxb_6oe5ka3TVOb1Yq8M6Xt2eNDUeu0qe8txz1-4VPZlmIT5PjyQckCvuv_hBXIqCRLWsS-lgG6eUwe5kpshgTsMyABXdcJAxutCqkkw0K2uyqZs93-SKgS1Ge1a" />
+            </a>
+            <button data-id="plist-ref-1" data-name="DEFENDER GAP" data-price="1499" data-original-price="4399"
+              data-offer="65% OFF" data-tag="Sale"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuDxmTnUKbWgghAdRg-J4ZbH64q33DU-PWdIHCpc0brPP2pzb1muszUobPyfeSVRKFa6JsRXrusj8BaIFodiQRdaqEjOzc-R1XcKBzcTiAfTEmsuP2eCyZGp-fZdyaiJ9X1mlKr35QJBLn0sg_-7Bxb_6oe5ka3TVOb1Yq8M6Xt2eNDUeu0qe8txz1-4VPZlmIT5PjyQckCvuv_hBXIqCRLWsS-lgG6eUwe5kpshgTsMyABXdcJAxutCqkkw0K2uyqZs93-SKgS1Ge1a"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              DEFENDER GAP
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 4,399</span>
+              <span class="text-green-600 text-xs font-bold">65% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <a href="product_detail.html" class="block">
+              <img alt="Back print graphic hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLGazvs_rfyV7gSTN74B2QjZYOKQMCh-rxLzwtr5kOFKItsv1HmM3EAVR9IVlEWuTyhUQfShUrZZayYBsMFhWoaEJtFEMXXldH1dE0o9yId5vHpLfYm04VYHy4ey81p9WibZaXYF_fYD5UbeU_ifgC9FumKqd-qgNIUZE9jCws0_g-vuAXor0tc3D7VLioXJVAU_CwETh51mTcH4weIiUp26e89RgosY-2C_z0yqFutCM4dd4hR7JlEe6d78DMd4qv0u_eSAissJf" />
+            </a>
+            <button data-id="plist-ref-2" data-name="BULLET & DOLLAR" data-price="2999"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLGazvs_rfyV7gSTN74B2QjZYOKQMCh-rxLzwtr5kOFKItsv1HmM3EAVR9IVlEWuTyhUQfShUrZZayYBsMFhWoaEJtFEMXXldH1dE0o9yId5vHpLfYm04VYHy4ey81p9WibZaXYF_fYD5UbeU_ifgC9FumKqd-qgNIUZE9jCws0_g-vuAXor0tc3D7VLioXJVAU_CwETh51mTcH4weIiUp26e89RgosY-2C_z0yqFutCM4dd4hR7JlEe6d78DMd4qv0u_eSAissJf"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              BULLET & DOLLAR
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Brown hoodie graphic"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXcyYSY0z7m1lJX8R7O7n_R4nH3nFCilbB-_fN9R33P9Bse5Ot6eUKSEm8LsRsdVMo3nu0GMJ7QYWN_FR0SnY6eqV9jSuxa6Si_ojv8W2XGgTW5e_9b9H3QIal8ccW3HA6-8COc1q4nhBtHBA2ZtKjgDXKo3BO9CIXH65Wxv_hpCntbkNUoppWCfRykfYDkCT3mUXd4WojKpNUqNlgIKIPbz0WKbtrGRCay5Ed97iBsAwmKkiJGUciDLVdbESgPvXuK8hXbyoP9Rj6" />
+            </a>
+            <button data-id="plist-ref-3" data-name="ARMED MAFIA" data-price="1499" data-original-price="2999"
+              data-offer="50% OFF" data-tag="Sale"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBXcyYSY0z7m1lJX8R7O7n_R4nH3nFCilbB-_fN9R33P9Bse5Ot6eUKSEm8LsRsdVMo3nu0GMJ7QYWN_FR0SnY6eqV9jSuxa6Si_ojv8W2XGgTW5e_9b9H3QIal8ccW3HA6-8COc1q4nhBtHBA2ZtKjgDXKo3BO9CIXH65Wxv_hpCntbkNUoppWCfRykfYDkCT3mUXd4WojKpNUqNlgIKIPbz0WKbtrGRCay5Ed97iBsAwmKkiJGUciDLVdbESgPvXuK8hXbyoP9Rj6"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              ARMED MAFIA
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 2,999</span>
+              <span class="text-green-600 text-xs font-bold">50% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <a href="product_detail.html" class="block">
+              <img alt="White porsche hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrg4GEiaFPfRGZJD833QBhi_-nZZwk07TS-zP8iE7hEY5xLs73AMLWuzvaf15RQLVZ2vLlCU6DEQP6lUQ-_jY0bwptf_JEjbaOCxip2OsPiG5LjrfbqA70KCBU4I4ddHPFhFfPyZQrwEDEtJFVYOsYb5jtD1L-yUD6jgcZ0myc6etwCAG_JUKU8cycuja5NdyCh-yi_EOT3JkaTnQ8GqQg4dBao6lw9i3kEH1jMIVyq62kgiDAje-qslnOd4gPMYkK40-_LQrV855T" />
+            </a>
+            <button data-id="plist-ref-4" data-name="PUFFED GT3RS" data-price="2999"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBrg4GEiaFPfRGZJD833QBhi_-nZZwk07TS-zP8iE7hEY5xLs73AMLWuzvaf15RQLVZ2vLlCU6DEQP6lUQ-_jY0bwptf_JEjbaOCxip2OsPiG5LjrfbqA70KCBU4I4ddHPFhFfPyZQrwEDEtJFVYOsYb5jtD1L-yUD6jgcZ0myc6etwCAG_JUKU8cycuja5NdyCh-yi_EOT3JkaTnQ8GqQg4dBao6lw9i3kEH1jMIVyq62kgiDAje-qslnOd4gPMYkK40-_LQrV855T"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              PUFFED GT3RS
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Street culture mask hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoWeq-wEuj2uIvmQ6ls5l0P9gj_TaibnwKjRizTkvuIDmtbdytg0raAm4aVLj4cH8KtySl6YnFVLJv8_Mi1rBMQ8XwKYyaDQoepN7RSG6JnPJF7e8LhSqdaDjP4a9A4FZmN0Gk7WKZm6j4yCJjZZQWPeBIoroZMk175oYq84doPa335hZK1bowVCWq8ad6tDLIkc5OosVmBahsNht21VLQ87eK4htRmq-JLLtjcI_F2a-KXi0G5JCxlBOAMv9or7Yu7U4yPjAS6R7U" />
+            </a>
+            <button data-id="plist-1" data-name="STREET CULTURE" data-price="2099" data-original-price="2999"
+              data-offer="30% OFF" data-tag="Sale"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuCoWeq-wEuj2uIvmQ6ls5l0P9gj_TaibnwKjRizTkvuIDmtbdytg0raAm4aVLj4cH8KtySl6YnFVLJv8_Mi1rBMQ8XwKYyaDQoepN7RSG6JnPJF7e8LhSqdaDjP4a9A4FZmN0Gk7WKZm6j4yCJjZZQWPeBIoroZMk175oYq84doPa335hZK1bowVCWq8ad6tDLIkc5OosVmBahsNht21VLQ87eK4htRmq-JLLtjcI_F2a-KXi0G5JCxlBOAMv9or7Yu7U4yPjAS6R7U"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              STREET CULTURE
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,099</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 2,999</span>
+              <span class="text-green-600 text-xs font-bold">30% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Gangster orange hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk2skXxFJ-nJeqCA0-GP4QDtWCMYJC-W75lUrrnVNt7xEOnNOtlKk_wDSmGOsE2oGQY_RP61Q1JWr6ZqtXrEOSoi-ravYuTE2kkqvqtiYdAWKJL-TrgPlpMRZaq9IQWQ6XktYI-Q4TNbVB3OYLTjNt6L3x8JubCJDDBqiLTBzN5kk-kZZQFvrL_O3JEPODH0RMBaUlfcyc7IOubT1qtj6Hhx_HYZwGlS_OjaaNgdiQtmmPKJNn8wSzymKKgyGlimi-WaxC0nvlrcgU" />
+            </a>
+            <button data-id="plist-2" data-name="GANGSTER EAGLE" data-price="1799" data-original-price="2999"
+              data-offer="40% OFF" data-tag="Sale"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBk2skXxFJ-nJeqCA0-GP4QDtWCMYJC-W75lUrrnVNt7xEOnNOtlKk_wDSmGOsE2oGQY_RP61Q1JWr6ZqtXrEOSoi-ravYuTE2kkqvqtiYdAWKJL-TrgPlpMRZaq9IQWQ6XktYI-Q4TNbVB3OYLTjNt6L3x8JubCJDDBqiLTBzN5kk-kZZQFvrL_O3JEPODH0RMBaUlfcyc7IOubT1qtj6Hhx_HYZwGlS_OjaaNgdiQtmmPKJNn8wSzymKKgyGlimi-WaxC0nvlrcgU"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              GANGSTER EAGLE
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 1,799</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 2,999</span>
+              <span class="text-green-600 text-xs font-bold">40% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <span
+              class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+            <a href="product_detail.html" class="block">
+              <img alt="Night crawler hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQyx-EY10oW6HoCulDzXRv5sAnoBqjHWMSBPd75iwHeo8D2R__JhSqrWP2cCG26MkA2STMOuuOGMGLXpD-yLwxTtOTwgIZA548agOouhyZHcbCE6v9pg-LfUGDjrTZLi8A-W2NY699IKWhIEAl1m9HOBLncbhs2ARwcnm1DikQE98LImG7aq05yX_e9E-E2G4aaDm61Qf_5WGOiZGoosrdvxNA9tyogPJU9yG0AwE8wRCNjhYE3wYFmf9OCKq_55awCUSGFgNXX_mV" />
+            </a>
+            <button data-id="plist-3" data-name="NIGHT CRAWLER" data-price="2499" data-original-price="3999"
+              data-offer="37% OFF" data-tag="Sale"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuCQyx-EY10oW6HoCulDzXRv5sAnoBqjHWMSBPd75iwHeo8D2R__JhSqrWP2cCG26MkA2STMOuuOGMGLXpD-yLwxTtOTwgIZA548agOouhyZHcbCE6v9pg-LfUGDjrTZLi8A-W2NY699IKWhIEAl1m9HOBLncbhs2ARwcnm1DikQE98LImG7aq05yX_e9E-E2G4aaDm61Qf_5WGOiZGoosrdvxNA9tyogPJU9yG0AwE8wRCNjhYE3wYFmf9OCKq_55awCUSGFgNXX_mV"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              NIGHT CRAWLER
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,499</span>
+              <span class="text-gray-400 line-through text-xs">Rs. 3,999</span>
+              <span class="text-green-600 text-xs font-bold">37% OFF</span>
+            </div>
+          </a>
+        </div>
+        <div class="group">
+          <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+            <a href="product_detail.html" class="block">
+              <img alt="Neon demon hoodie"
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5A16U-AYWn6pAfgnvo1fiBJ3jmh_PFRh04sIhZ3q_9sae-BAs6RE1Qs-vwDpGod0cUasSrQngu6i5PEihFpBBOovgZlOl6Tlma0tNX9t3bBmqvMJoKFv8zNo4XP29idWo_zoyenNDDX7uNBsG-3DdLSlopMqeOtvRcED7oI405pg8QXt_6yxhbute-UzkHyh94Jwj2Ha7f47TPAiFz5ApJTaHV92CTRj4RbUqn2bBdm7XR1-Uyvh-1BrGwg3gRRa1lOi_XRHJfiLW" />
+            </a>
+            <button data-id="plist-4" data-name="NEON DEMON" data-price="2999"
+              data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuA5A16U-AYWn6pAfgnvo1fiBJ3jmh_PFRh04sIhZ3q_9sae-BAs6RE1Qs-vwDpGod0cUasSrQngu6i5PEihFpBBOovgZlOl6Tlma0tNX9t3bBmqvMJoKFv8zNo4XP29idWo_zoyenNDDX7uNBsG-3DdLSlopMqeOtvRcED7oI405pg8QXt_6yxhbute-UzkHyh94Jwj2Ha7f47TPAiFz5ApJTaHV92CTRj4RbUqn2bBdm7XR1-Uyvh-1BrGwg3gRRa1lOi_XRHJfiLW"
+              class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+              <span class="material-icons text-lg">favorite_border</span>
+            </button>
+          </div>
+          <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+            <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+              NEON DEMON
+            </h3>
+            <div
+              class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+              <span class="font-bold text-gray-900 dark:text-white">Rs. 2,999.00</span>
+            </div>
+          </a>
+        </div>
       </div>
       <div class="mt-20 flex justify-center">
         <button id="load-more-btn"
@@ -459,13 +667,6 @@
   </div>
   <!-- Mobile Menu Component (loaded dynamically) -->
   <div id="mobile-menu-placeholder"></div>
-
-  <!-- Cart Drawer Component (loaded dynamically) -->
-  <div id="cart-drawer-placeholder"></div>
-
-  <!-- Auth Popup Component (loaded dynamically) -->
-  <div id="auth-popup-placeholder"></div>
-
   <!-- Search Modal -->
   <div id="search-modal"
     class="fixed inset-0 z-[60] bg-white dark:bg-background-dark transform translate-y-full transition-transform duration-300 flex flex-col">
@@ -502,13 +703,6 @@
     </div>
   </div>
 
-  <!-- Services -->
-  <script src="js/services/api.service.js"></script>
-  <script src="js/services/auth.service.js"></script>
-  <script src="js/services/product.service.js"></script>
-  <script src="js/services/wishlist.service.js"></script>
-  <script src="js/services/cart.service.js"></script>
-
   <!-- Component Loader -->
   <script src="js/utils/component-loader.js"></script>
   <!-- Header Manager -->
@@ -516,9 +710,7 @@
   <!-- Footer Manager -->
   <script src="js/components/footer.js"></script>
   <!-- Mobile Menu Manager -->
-  <script src="js/components/mobile-menu.js?v=2"></script>
-  <!-- Cart Drawer Manager -->
-  <script src="js/components/cart-drawer.js"></script>
+  <script src="js/components/mobile-menu.js"></script>
   <script>
     // Load header and footer components on page load
     document.addEventListener('DOMContentLoaded', async () => {
@@ -528,19 +720,8 @@
       await loader.loadMultiple([
         { name: 'header', target: '#header-placeholder', method: 'replace' },
         { name: 'footer', target: '#footer-placeholder', method: 'replace' },
-        { name: 'mobile-menu', target: '#mobile-menu-placeholder', method: 'replace' },
-        { name: 'cart-drawer', target: '#cart-drawer-placeholder', method: 'replace' },
-        { name: 'auth-popup', target: '#auth-popup-placeholder', method: 'replace' }
+        { name: 'mobile-menu', target: '#mobile-menu-placeholder', method: 'replace' }
       ]);
-
-      // Initialize auth popup functionality
-      window.authPopupManager = new AuthPopupManager();
-      window.authPopupManager.init();
-
-      // Refresh login state UI now that components are loaded
-      if (typeof window.checkLoginState === 'function') {
-        window.checkLoginState();
-      }
 
       // Initialize header functionality after component is loaded
       const headerManager = new HeaderManager();
@@ -553,17 +734,9 @@
       // Initialize mobile menu functionality after component is loaded
       const mobileMenuManager = new MobileMenuManager();
       mobileMenuManager.init();
-
-      // Initialize cart drawer functionality after component is loaded
-      window.cartDrawerManager = new CartDrawerManager();
-      window.cartDrawerManager.init();
     });
   </script>
 
-  <!-- Auth Popup Manager -->
-  <script src="js/components/auth-popup.js"></script>
-  <!-- Product Card Renderer -->
-  <script src="js/utils/product-card-renderer.js"></script>
   <script src="js/common.js"></script>
   <script src="js/product_list.js"></script>
 </body>

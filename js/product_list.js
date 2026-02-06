@@ -196,7 +196,39 @@ function toggleMobileFilter() {
 
 // --- DOMContentLoaded Logic ---
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Render products dynamically
+  async function renderProducts() {
+    try {
+      const response = await fetch('data/products.json');
+      if (!response.ok) {
+        console.error('[Product List] Failed to load products');
+        return;
+      }
+      const data = await response.json();
+      const products = data.products || [];
+
+      const productGrid = document.getElementById('product-grid');
+      if (productGrid && typeof ProductCardRenderer !== 'undefined') {
+        const renderer = new ProductCardRenderer();
+        const html = renderer.renderWithWishlistState(products);
+        productGrid.innerHTML = html;
+        console.log(`[Product List] Rendered ${products.length} products dynamically`);
+
+        // Update product count
+        const productCount = document.getElementById('product-count');
+        if (productCount) {
+          productCount.textContent = `Showing ${products.length} products`;
+        }
+      }
+    } catch (error) {
+      console.error('[Product List] Error rendering products:', error);
+    }
+  }
+
+  // Call render function first
+  await renderProducts();
+
   const loadMoreBtn = document.getElementById("load-more-btn");
   const productGrid = document.getElementById("product-grid");
   const productCount = document.getElementById("product-count");

@@ -1,0 +1,198 @@
+{
+    "categories": [
+        {
+            "id": "men",
+            "name": "Men",
+            "slug": "men",
+            "subcategories": [
+                {
+                    "id": "topwear",
+                    "name": "Topwear",
+                    "items": [
+                        "T-Shirts",
+                        "Casual Shirts",
+                        "Formal Shirts",
+                        "Sweatshirts",
+                        "Sweaters",
+                        "Jackets",
+                        "Blazers & Coats",
+                        "Suits",
+                        "Rain Jackets"
+                    ]
+                },
+                {
+                    "id": "indian-festive",
+                    "name": "Indian & Festive Wear",
+                    "items": [
+                        "Kurtas & Kurta Sets",
+                        "Sherwanis",
+                        "Nehru Jackets",
+                        "Dhotis"
+                    ]
+                },
+                {
+                    "id": "bottomwear",
+                    "name": "Bottomwear",
+                    "items": [
+                        "Jeans",
+                        "Casual Trousers",
+                        "Formal Trousers",
+                        "Shorts",
+                        "Track Pants & Joggers"
+                    ]
+                },
+                {
+                    "id": "innerwear-sleepwear",
+                    "name": "Innerwear & Sleepwear",
+                    "items": [
+                        "Briefs & Trunks",
+                        "Boxers",
+                        "Vests",
+                        "Sleepwear & Loungewear",
+                        "Thermals"
+                    ]
+                },
+                {
+                    "id": "footwear",
+                    "name": "Footwear",
+                    "items": [
+                        "Casual Shoes",
+                        "Sports Shoes",
+                        "Formal Shoes",
+                        "Sneakers",
+                        "Sandals & Floaters",
+                        "Flip Flops",
+                        "Socks"
+                    ]
+                },
+                {
+                    "id": "sports-activewear",
+                    "name": "Sports & Active Wear",
+                    "items": [
+                        "Sports Shoes",
+                        "Sports Sandals",
+                        "Active T-Shirts",
+                        "Track Pants & Shorts",
+                        "Tracksuits",
+                        "Jackets & Sweatshirts",
+                        "Sports Accessories",
+                        "Swimwear"
+                    ]
+                },
+                {
+                    "id": "fashion-accessories",
+                    "name": "Fashion Accessories",
+                    "items": [
+                        "Wallets",
+                        "Belts",
+                        "Perfumes & Body Mists",
+                        "Trimmers",
+                        "Deodorants",
+                        "Ties, Cufflinks & Pocket Squares",
+                        "Accessory Gift Sets",
+                        "Caps & Hats",
+                        "Mufflers, Scarves & Gloves",
+                        "Phone Cases",
+                        "Rings & Wristwear",
+                        "Helmets"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "women",
+            "name": "Women",
+            "slug": "women",
+            "subcategories": [
+                {
+                    "id": "indian-fusion",
+                    "name": "Indian & Fusion Wear",
+                    "items": [
+                        "Kurtas & Suits",
+                        "Kurtis, Tunics & Tops",
+                        "Sarees",
+                        "Ethnic Wear",
+                        "Leggings, Salwars & Churidars",
+                        "Skirts & Palazzos",
+                        "Dress Materials",
+                        "Lehenga Cholis",
+                        "Dupattas & Shawls",
+                        "Jackets"
+                    ]
+                },
+                {
+                    "id": "western-wear",
+                    "name": "Western Wear",
+                    "items": [
+                        "Dresses",
+                        "Tops",
+                        "Tshirts",
+                        "Jeans",
+                        "Trousers & Capris",
+                        "Shorts & Skirts",
+                        "Co-ords",
+                        "Playsuits",
+                        "Jumpsuits",
+                        "Shrugs",
+                        "Sweaters & Sweatshirts",
+                        "Jackets & Coats",
+                        "Blazers & Waistcoats"
+                    ]
+                },
+                {
+                    "id": "footwear",
+                    "name": "Footwear",
+                    "items": [
+                        "Flats",
+                        "Casual Shoes",
+                        "Heels",
+                        "Boots",
+                        "Sports Shoes & Floaters"
+                    ]
+                },
+                {
+                    "id": "sports-activewear",
+                    "name": "Sports & Active Wear",
+                    "items": [
+                        "Clothing",
+                        "Footwear",
+                        "Sports Accessories",
+                        "Sports Equipment"
+                    ]
+                },
+                {
+                    "id": "lingerie-sleepwear",
+                    "name": "Lingerie & Sleepwear",
+                    "items": [
+                        "Bra",
+                        "Briefs",
+                        "Shapewear",
+                        "Sleepwear & Loungewear",
+                        "Swimwear",
+                        "Camisoles & Thermals"
+                    ]
+                },
+                {
+                    "id": "beauty-personal-care",
+                    "name": "Beauty & Personal Care",
+                    "items": [
+                        "Makeup",
+                        "Skincare",
+                        "Premium Beauty",
+                        "Lipsticks",
+                        "Fragrances"
+                    ]
+                },
+                {
+                    "id": "jewellery",
+                    "name": "Jewellery",
+                    "items": [
+                        "Fashion Jewellery",
+                        "Fine Jewellery",
+                        "Earrings"
+                    ]
+                }
+            ]
+        }
+    ]
+}

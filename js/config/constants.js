@@ -5,10 +5,10 @@
 
 // LocalStorage Keys
 export const STORAGE_KEYS = {
-    CART: 'hoodvibe_cart',
-    USER: 'hoodvibe_user',
-    WISHLIST: 'hoodvibe_wishlist',
-    PENDING_WISHLIST: 'hoodvibe_pending_wishlist'
+    CART: 'clothyfly_cart',
+    USER: 'clothyfly_user',
+    WISHLIST: 'clothyfly_wishlist',
+    PENDING_WISHLIST: 'clothyfly_pending_wishlist'
 };
 
 // DOM Selectors

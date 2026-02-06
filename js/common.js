@@ -1,9 +1,4 @@
 /**
- * Common JavaScript Functionality - Phase 6 Cleaned
- * Shared utilities + thin wrappers that delegate to modules
- */
-
-/**
  * Common JavaScript Functionality
  * Shared across index.html, product_list.html, and product_detail.html
  */
@@ -15,65 +10,29 @@
 const CONFIG = {
     // Storage Keys
     STORAGE_KEYS: {
-        CART: 'hoodvibe_cart',
-        USER: 'hoodvibe_user',
-        WISHLIST: 'hoodvibe_wishlist',
-        PENDING_WISHLIST: 'hoodvibe_pending_wishlist'
+        CART: 'clothyfly_cart',
+        USER: 'clothyfly_user',
+        WISHLIST: 'clothyfly_wishlist',
+        PENDING_WISHLIST: 'clothyfly_pending_wishlist'
     },
 
     // Element IDs
     IDS: {
-        // Drawers & Popups
         CART_DRAWER: 'cart-drawer',
         CART_DRAWER_ITEMS: 'cart-drawer-items',
         CART_DRAWER_BOTTOM: 'cart-drawer-bottom',
         CART_DRAWER_SUBTOTAL: 'cart-drawer-subtotal',
-        LOGIN_POPUP: 'login-popup',
-        MOBILE_MENU: 'mobile-menu',
-        PROFILE_POPUP: 'profile-popup',
-
-        // Badges
         CART_COUNT_BADGE: 'cart-count-badge',
         WISHLIST_COUNT_BADGE: 'wishlist-count-badge',
         MOBILE_WISHLIST_BADGE: 'mobile-wishlist-badge',
-
-        // Login Form - Steps
+        COPYRIGHT_YEAR: 'copyright-year',
+        SCROLL_TO_TOP: 'scroll-to-top',
+        PROFILE_POPUP: 'profile-popup',
+        MOBILE_MENU: 'mobile-menu',
+        LOGIN_POPUP: 'login-popup',
         LOGIN_STEP_EMAIL: 'login-step-email',
         LOGIN_STEP_OTP: 'login-step-otp',
-        LOGIN_STEP_CREATE_ACCOUNT: 'login-step-create-account',
-
-        // Login Form - Inputs
-        LOGIN_EMAIL: 'login-email',
-        LOGIN_OTP: 'login-otp',
-
-        // Login Form - Error Messages
-        LOGIN_EMAIL_ERROR: 'login-email-error',
-        LOGIN_OTP_ERROR: 'login-otp-error',
-
-        // Create Account Form - Inputs
-        CREATE_ACCOUNT_FIRSTNAME: 'create-account-firstname',
-        CREATE_ACCOUNT_LASTNAME: 'create-account-lastname',
-        CREATE_ACCOUNT_EMAIL: 'create-account-email',
-
-        // Create Account Form - Errors
-        CREATE_ACCOUNT_FIRSTNAME_ERROR: 'create-account-firstname-error',
-        CREATE_ACCOUNT_LASTNAME_ERROR: 'create-account-lastname-error',
-        CREATE_ACCOUNT_EMAIL_ERROR: 'create-account-email-error',
-
-        // OTP Display  
-        OTP_EMAIL_DISPLAY: 'otp-email-display',
-        OTP_BACK_BTN: 'otp-back-btn',
-
-        // Search
-        SEARCH_INPUT_FIELD: 'search-input-field',
-        SEARCH_BTN_ICON: 'search-btn-icon',
-        MOBILE_SEARCH_INPUT: 'mobile-search-input',
-
-        // Other
-        SCROLL_TO_TOP: 'scroll-to-top',
-        COPYRIGHT_YEAR: 'copyright-year',
-        MOBILE_DRAWER_GUEST: 'mobile-drawer-guest',
-        MOBILE_DRAWER_USER: 'mobile-drawer-user'
+        LOGIN_STEP_CREATE_ACCOUNT: 'login-step-create-account'
     },
 
     // CSS Selectors
@@ -327,151 +286,18 @@ class DOMUtils {
 }
 
 // ============================================
-// 3. Performance Utilities
+// MAIN CODE STARTS HERE
 // ============================================
-/**
- * PerformanceUtils: Optimize event handlers
- */
-class PerformanceUtils {
-    static debounce(func, wait = 300) {
-        let timeout;
-        return function executedFunction(...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), wait);
-        };
-    }
 
-    static throttle(func, limit = 100) {
-        let inThrottle;
-        return function (...args) {
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
-}
-
-// ============================================
-// 4. Validator Utilities
-// ============================================
-/**
- * Validator: Form validation and error handling
- */
-class Validator {
-    /**
-     * Email validation using standard regex
-     */
-    static isValidEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email.trim());
-    }
-
-    /**
-     * Phone validation (Indian format: 10 digits starting with 6-9)
-     */
-    static isValidPhone(phone) {
-        const cleaned = phone.replace(/\s+/g, '');
-        const regex = /^[6-9]\d{9}$/;
-        return regex.test(cleaned);
-    }
-
-    /**
-     * OTP validation (6 digits)
-     */
-    static isValidOTP(otp) {
-        const regex = /^\d{6}$/;
-        return regex.test(otp.trim());
-    }
-
-    /**
-     * Name validation (minimum 2 characters)
-     */
-    static isValidName(name) {
-        return name.trim().length >= 2;
-    }
-
-    /**
-     * Show error message on input field
-     */
-    static showError(input, message) {
-        if (!input) return;
-
-        // Add error styling
-        input.classList.add('border-red-500', 'focus:ring-red-500');
-        input.classList.remove('border-gray-300', 'focus:ring-black');
-
-        // Create or update error message
-        let errorEl = input.parentElement.querySelector('.validation-error');
-        if (!errorEl) {
-            errorEl = document.createElement('p');
-            errorEl.className = 'validation-error text-red-500 text-xs mt-1';
-            input.parentElement.appendChild(errorEl);
-        }
-        errorEl.textContent = message;
-    }
-
-    /**
-     * Clear error message from input field
-     */
-    static clearError(input) {
-        if (!input) return;
-
-        // Remove error styling
-        input.classList.remove('border-red-500', 'focus:ring-red-500');
-        input.classList.add('border-gray-300', 'focus:ring-black');
-
-        // Remove error message
-        const errorEl = input.parentElement.querySelector('.validation-error');
-        if (errorEl) errorEl.remove();
-    }
-
-    /**
-     * Set loading state on button
-     */
-    static setLoading(button, isLoading) {
-        if (!button) return;
-
-        if (isLoading) {
-            button.disabled = true;
-            button.dataset.originalText = button.textContent;
-            button.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loading...';
-            button.classList.add('opacity-75', 'cursor-not-allowed');
-        } else {
-            button.disabled = false;
-            button.textContent = button.dataset.originalText || button.textContent;
-            button.classList.remove('opacity-75', 'cursor-not-allowed');
-        }
-    }
-
-    /**
-     * Auto-format phone number (digits only, max 10)
-     */
-    static formatPhone(input) {
-        if (!input) return;
-        input.value = input.value.replace(/\D/g, '').slice(0, 10);
-    }
-
-    /**
-     * Auto-format OTP (digits only, max 6)
-     */
-    static formatOTP(input) {
-        if (!input) return;
-        input.value = input.value.replace(/\D/g, '').slice(0, 6);
-    }
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     // Dynamic Copyright Year - Using DOMUtils
     DOMUtils.setText('#copyright-year', new Date().getFullYear());
 
     // Scroll to Top Logic
-    const scrollToTopBtn = DOMUtils.get(`#${CONFIG.IDS.SCROLL_TO_TOP}`);
+    const scrollToTopBtn = document.getElementById("scroll-to-top");
     if (scrollToTopBtn) {
-        window.addEventListener("scroll", PerformanceUtils.throttle(() => {
+        window.addEventListener("scroll", () => {
             if (window.scrollY > 300) {
                 scrollToTopBtn.classList.remove(
                     "opacity-0",
@@ -487,168 +313,44 @@ document.addEventListener("DOMContentLoaded", () => {
                     "translate-y-0",
                 );
             }
-        }, 100), { passive: true });
+        });
 
         scrollToTopBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
 
-    // Mobile Search Input - Enter Key Only
-    const mobileSearchInput = DOMUtils.get(`#${CONFIG.IDS.MOBILE_SEARCH_INPUT}`);
+    // Mobile Search Input Listener
+    const mobileSearchInput = document.getElementById("mobile-search-input");
     if (mobileSearchInput) {
         mobileSearchInput.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
-                const query = e.target.value.trim();
-                if (query) {
-                    window.location.href = "/product_list?search=" + encodeURIComponent(query);
-                }
+                window.location.href =
+                    "product_list.html?search=" + encodeURIComponent(e.target.value);
             }
         });
     }
 
-    // Mobile Search Button Click Handler
-    // Note: Using adjacent sibling selector to get the search button next to input, not the close button
-    const mobileSearchBtn = document.querySelector('#mobile-search-input + button');
-    if (mobileSearchBtn && mobileSearchInput) {
-        mobileSearchBtn.addEventListener('click', function () {
-            const query = mobileSearchInput.value.trim();
-            if (query) {
-                window.location.href = "/product_list?search=" + encodeURIComponent(query);
-            }
-        });
-    }
-
-    // Desktop Search Logic - Enter Key
-    const desktopSearchInput = DOMUtils.get(`#${CONFIG.IDS.SEARCH_INPUT_FIELD}`);
-    const desktopSearchBtn = DOMUtils.get(`#${CONFIG.IDS.SEARCH_BTN_ICON}`);
+    // Desktop Search Logic
+    const desktopSearchInput = document.getElementById("search-input-field");
+    const desktopSearchBtn = document.getElementById("search-btn-icon");
 
     if (desktopSearchInput) {
         desktopSearchInput.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
-                const query = e.target.value.trim();
-                if (query) {
-                    window.location.href = "/product_list?search=" + encodeURIComponent(query);
-                }
+                window.location.href =
+                    "product_list.html?search=" + encodeURIComponent(e.target.value);
             }
         });
     }
-
-    // Search Button Click Handler
-    if (desktopSearchBtn && desktopSearchInput) {
-        desktopSearchBtn.addEventListener("click", function () {
-            const query = desktopSearchInput.value.trim();
-            if (query) {
-                window.location.href = "/product_list?search=" + encodeURIComponent(query);
-            }
-        });
-    }
-    if (loginEmailInput) {
-        // Clear error as user types
-        loginEmailInput.addEventListener('input', function () {
-            if (this.value.trim().length > 0) {
-                Validator.clearError(this);
-            }
-        });
-
-        // Validate on blur
-        loginEmailInput.addEventListener('blur', function () {
-            const email = this.value.trim();
-            if (email && !Validator.isValidEmail(email)) {
-                Validator.showError(this, 'Please enter a valid email address');
-            }
-        });
-    }
-
-    // OTP validation
-    const loginOTPInput = DOMUtils.get(`#${CONFIG.IDS.LOGIN_OTP}`);
-    if (loginOTPInput) {
-        // Auto-format and clear errors
-        loginOTPInput.addEventListener('input', function () {
-            Validator.formatOTP(this);
-            Validator.clearError(this);
-        });
-
-        // Validate on blur  
-        loginOTPInput.addEventListener('blur', function () {
-            if (this.value && !Validator.isValidOTP(this.value)) {
-                Validator.showError(this, 'OTP must be 6 digits');
-            }
-        });
-    }
-
-    // Create account form validation
-    const createFirstName = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_FIRSTNAME}`);
-    const createLastName = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_LASTNAME}`);
-    const createEmail = DOMUtils.get(`#${CONFIG.IDS.CREATE_ACCOUNT_EMAIL}`);
-
-    if (createFirstName) {
-        createFirstName.addEventListener('input', function () {
-            Validator.clearError(this);
-        });
-        createFirstName.addEventListener('blur', function () {
-            if (!this.value.trim()) {
-                Validator.showError(this, 'First name is required');
-            } else if (!Validator.isValidName(this.value)) {
-                Validator.showError(this, 'Name must be at least 2 characters');
-            }
-        });
-    }
-
-    if (createLastName) {
-        createLastName.addEventListener('input', function () {
-            Validator.clearError(this);
-        });
-        createLastName.addEventListener('blur', function () {
-            if (!this.value.trim()) {
-                Validator.showError(this, 'Last name is required');
-            } else if (!Validator.isValidName(this.value)) {
-                Validator.showError(this, 'Name must be at least 2 characters');
-            }
-        });
-    }
-
-    if (createEmail) {
-        createEmail.addEventListener('input', function () {
-            Validator.clearError(this);
-        });
-        createEmail.addEventListener('blur', function () {
-            const email = this.value.trim();
-            if (email && !Validator.isValidEmail(email)) {
-                Validator.showError(this, 'Please enter a valid email address');
-            }
-        });
-    }
-
-    // Wishlist/Favorite Button Logic
-    const wishlistBtns = document.querySelectorAll(".wishlist-btn");
-    wishlistBtns.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation(); // Prevent navigation if wrapped in link
-
-            // Extract data from attributes
-            const id = btn.dataset.id;
-            const name = btn.dataset.name;
-            const price = btn.dataset.price;
-            const image = btn.dataset.image;
-            const originalPrice = btn.dataset.originalPrice;
-            const offer = btn.dataset.offer;
-            const tag = btn.dataset.tag;
-
-            if (id) {
-                toggleWishlist({ id, name, price, image, originalPrice, offer, tag }, btn);
-            }
-        });
-    });
 
     // Check Wishlist UI on load
     checkWishlistUI();
     updateWishlistBadge();
 
     // Search Bar Highlight Logic
-    const searchInput = DOMUtils.get(`#${CONFIG.IDS.SEARCH_INPUT_FIELD}`);
-    const searchBtn = DOMUtils.get(`#${CONFIG.IDS.SEARCH_BTN_ICON}`);
+    const searchInput = document.getElementById("search-input-field");
+    const searchBtn = document.getElementById("search-btn-icon");
 
     if (searchInput && searchBtn) {
         searchInput.addEventListener("input", () => {
@@ -673,188 +375,480 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ============================================
-// THIN WRAPPERS FOR ONCLICK HANDLERS
-// These delegate to module functionality
-// ============================================
+// Event Delegation for Wishlist Buttons (handles both static and dynamic elements)
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.wishlist-btn');
+    if (btn) {
+        e.preventDefault();
+        e.stopPropagation(); // Prevent navigation if wrapped in link
 
-// Menu Wrappers
+        // Extract data from attributes
+        const id = btn.dataset.id;
+        const name = btn.dataset.name;
+        const price = btn.dataset.price;
+        const image = btn.dataset.image;
+        const originalPrice = btn.dataset.originalPrice;
+        const offer = btn.dataset.offer;
+        const tag = btn.dataset.tag;
+
+        if (id) {
+            toggleWishlist({ id, name, price, image, originalPrice, offer, tag }, btn);
+        }
+    }
+});
+
+// Listen to wishlistUpdated event from wishlistService
+window.addEventListener('wishlistUpdated', (event) => {
+    // Update badge count
+    updateWishlistBadge();
+
+    // Update all heart icons on the current page
+    checkWishlistUI();
+
+    // If we're on the wishlist page, re-render the list
+    if (typeof renderWishlist === 'function') {
+        renderWishlist();
+    }
+});
+
+// Mobile Menu Logic
 function toggleMobileMenu() {
-    if (window.MenuManager) {
-        window.MenuManager.toggleMobileMenu();
+    const menu = DOMUtils.get("#mobile-menu-drawer");
+    const btn = DOMUtils.get("#mobile-menu-btn");
+    const icon = DOMUtils.get("#mobile-menu-icon");
+    const stickyCartBar = DOMUtils.get("#sticky-cart-bar");
+
+    const isOpen = menu && !DOMUtils.hasClass(menu, "-translate-x-full");
+
+    if (isOpen) {
+        // Close Menu
+        if (menu) DOMUtils.addClass(menu, "-translate-x-full");
+        DOMUtils.removeClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
+
+        // Show Sticky Cart (Product Detail Page specific, simplified check)
+        if (stickyCartBar) DOMUtils.removeClass(stickyCartBar, CONFIG.CLASSES.HIDDEN);
+
+        // Animate Icon to Menu
+        if (btn) DOMUtils.removeClass(btn, "rotate-90");
+        if (icon) icon.textContent = "menu";
+    } else {
+        // Open Menu
+        if (menu) DOMUtils.removeClass(menu, "-translate-x-full");
+        DOMUtils.addClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
+
+        // Hide Sticky Cart
+        if (stickyCartBar) DOMUtils.addClass(stickyCartBar, CONFIG.CLASSES.HIDDEN);
+
+        // Animate Icon to Close
+        if (btn) DOMUtils.addClass(btn, "rotate-90");
+        if (icon) icon.textContent = "close";
     }
 }
 
 function toggleMobileSubmenu(submenuId, chevronId) {
-    if (window.MenuManager) {
-        window.MenuManager.toggleSubmenu(submenuId, chevronId);
+    const submenu = DOMUtils.get(`#${submenuId}`);
+    const chevron = DOMUtils.get(`#${chevronId}`);
+
+    if (submenu && submenu.classList.contains("hidden")) {
+        DOMUtils.removeClass(submenu, CONFIG.CLASSES.HIDDEN);
+        if (
+            (chevronId.includes("products") || chevronId.includes("user")) &&
+            chevron
+        ) {
+            chevron.style.transform = "rotate(180deg)";
+        } else if (chevron) {
+            chevron.innerText = "remove";
+        }
+    } else if (submenu) {
+        DOMUtils.addClass(submenu, CONFIG.CLASSES.HIDDEN);
+        if (
+            (chevronId.includes("products") || chevronId.includes("user")) &&
+            chevron
+        ) {
+            chevron.style.transform = "rotate(0deg)";
+        } else if (chevron) {
+            chevron.innerText = "add";
+        }
     }
 }
 
 function toggleSearchModal() {
-    if (window.MenuManager) {
-        window.MenuManager.toggleSearchModal();
+    const modal = DOMUtils.get("#search-modal");
+    const input = DOMUtils.get("#mobile-search-input");
+
+    if (!modal) return;
+
+    const isOpen = !modal.classList.contains("translate-y-full");
+
+    if (isOpen) {
+        DOMUtils.addClass(modal, "translate-y-full");
+        DOMUtils.removeClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
+    } else {
+        DOMUtils.removeClass(modal, "translate-y-full");
+        DOMUtils.addClass(document.body, CONFIG.CLASSES.OVERFLOW_HIDDEN);
+        if (input) setTimeout(() => input.focus(), 300);
     }
 }
 
-// Cart Wrappers
-function toggleCartDrawer() {
-    if (window.CartManager) {
-        window.CartManager.toggle();
+// --- Cart Logic (Shared) ---
+
+// Initialize Cart Badge on Load
+document.addEventListener("DOMContentLoaded", () => {
+    updateCartBadge();
+});
+
+// Login Popup Logic
+// Login Popup Logic - DEPRECATED
+// Logic moved to AuthPopupManager (js/components/auth-popup.js)
+// function injectLoginPopup() { ... }
+// Smart Dispatcher: Called by Header Icon
+function toggleLoginPopup() {
+    // Check if user is already logged in
+    if (typeof StorageManager !== 'undefined' && StorageManager.isLoggedIn()) {
+        toggleProfilePopup();
+        return;
     }
+
+    // If AuthPopupManager is initialized, use it
+    if (window.authPopupManager) {
+        window.authPopupManager.open();
+        return;
+    }
+    console.warn('AuthPopupManager not initialized');
 }
 
-function addToCart(product) {
-    if (window.CartManager) {
-        window.CartManager.addToCart(product);
-    }
-}
 
-function removeFromCart(instanceId) {
-    if (window.CartManager) {
-        window.CartManager.removeFromCart(instanceId);
-    }
-}
 
-function renderCartDrawer() {
-    if (window.CartManager) {
-        window.CartManager.renderDrawer();
-    }
-}
+// Cart functions now delegated to CartService and CartDrawerManager
 
 function updateCartBadge() {
-    if (window.CartManager) {
-        window.CartManager.updateCartBadge();
+    // Determine count: prefer service, fallback to storage
+    let count = 0;
+    if (typeof cartService !== 'undefined') {
+        count = cartService.getCartCount();
     } else {
-        // Fallback for pages without modules
         const cart = StorageManager.getCart();
-        const count = cart.reduce((total, item) => total + item.quantity, 0);
-        document.querySelectorAll('.cart-count-badge, #cart-count-badge').forEach(badge => {
-            badge.textContent = count;
-            badge.style.display = count > 0 ? 'flex' : 'none';
-        });
+        count = cart.reduce((acc, item) => acc + item.quantity, 0);
+    }
+
+    // Update all cart count badges using DOMUtils
+    DOMUtils.getAll('.cart-count-badge, #cart-count-badge').forEach((badge) => {
+        if (badge) {
+            DOMUtils.setText(badge, count);
+            if (count > 0) {
+                DOMUtils.show(badge);
+            } else {
+                DOMUtils.hide(badge);
+            }
+        }
+    });
+}
+
+// Listen for cart updates from service
+window.addEventListener('cartUpdated', (e) => {
+    updateCartBadge();
+    // Also re-render drawer if open (handled in drawer manager normally, but good redundancy)
+});
+
+// Cart drawer functions are now handled by CartDrawerManager
+// These remain as fallbacks if CartDrawerManager is not loaded
+function renderCartDrawer() {
+    if (window.cartDrawerManager) {
+        window.cartDrawerManager.render();
     }
 }
 
-// Wishlist Wrappers
+function updateDrawerQuantity(instanceId, change) {
+    if (window.cartDrawerManager) {
+        window.cartDrawerManager.updateQuantity(instanceId, change);
+    }
+}
+
+function removeFromCart(instanceId, quantity) {
+    if (window.cartDrawerManager) {
+        window.cartDrawerManager.removeItem(instanceId, quantity);
+    }
+}
+
+// Check Login State on Load
+function checkLoginState() {
+    const user = StorageManager.getUser();
+    // Select the button by its onclick attribute
+    const loginBtn = document.querySelector(
+        'button[onclick="toggleLoginPopup()"]',
+    );
+    const loginIcon = loginBtn ? loginBtn.querySelector(".material-icons") : null;
+
+    if (user && loginIcon) {
+        // User is logged in
+        loginIcon.textContent = "person";
+
+        // Populate Profile Popup if it exists
+        const initials = DOMUtils.get("#profile-initials");
+        const name = DOMUtils.get("#profile-name");
+        const email = DOMUtils.get("#profile-email");
+
+        if (initials && name && email) {
+            const firstName = user.firstname || user.name?.split(' ')[0] || '?';
+            const lastName = user.lastname || user.name?.split(' ')[1] || '';
+
+            initials.textContent = (
+                (firstName[0] || '') + (lastName[0] || '')
+            ).toUpperCase();
+
+            name.textContent = `${firstName} ${lastName}`;
+            email.textContent = user.email;
+        }
+
+        // Mobile Drawer: Show User View
+        const mobileGuest = DOMUtils.get("#mobile-drawer-guest");
+        const mobileUser = DOMUtils.get("#mobile-drawer-user");
+        const mobileName = DOMUtils.get("#mobile-user-name");
+
+        if (mobileGuest) DOMUtils.addClass(mobileGuest, CONFIG.CLASSES.HIDDEN);
+        if (mobileUser) DOMUtils.removeClass(mobileUser, CONFIG.CLASSES.HIDDEN);
+
+        if (mobileName) {
+            const firstName = user.firstname || user.name?.split(' ')[0] || 'User';
+            const lastName = user.lastname || user.name?.split(' ')[1] || '';
+            mobileName.textContent = `${firstName} ${lastName}`;
+        }
+    } else {
+        // User is not logged in
+        if (loginIcon) loginIcon.textContent = "person_outline";
+
+        // Mobile Drawer: Show Guest View
+        const mobileGuest = document.getElementById("mobile-drawer-guest");
+        const mobileUser = document.getElementById("mobile-drawer-user");
+
+        if (mobileGuest) mobileGuest.classList.remove("hidden");
+        if (mobileUser) mobileUser.classList.add("hidden");
+    }
+}
+
+// --- Wishlist Logic ---
+
 function toggleWishlist(product, btn) {
-    if (window.WishlistManager) {
-        window.WishlistManager.toggle(product, btn);
+    // Check if wishlistService is available
+    if (typeof wishlistService === 'undefined') {
+        console.error('wishlistService is not loaded');
+        return;
+    }
+
+    // Check if product is currently in wishlist
+    const isInWishlist = wishlistService.isInWishlist(product.id);
+
+    if (isInWishlist) {
+        // Remove from wishlist
+        const result = wishlistService.removeFromWishlist(product.id);
+
+        if (result.success) {
+            updateHeartIcon(btn, false);
+        } else {
+            console.error('Failed to remove from wishlist:', result.message);
+        }
+    } else {
+        // Prepare product object for wishlist service
+        const wishlistProduct = {
+            id: product.id,
+            name: product.name,
+            price: parseFloat(product.price) || 0,
+            originalPrice: product.originalPrice ? parseFloat(product.originalPrice) : undefined,
+            images: product.image ? [product.image] : []
+        };
+
+        // Add to wishlist
+        const result = wishlistService.addToWishlist(wishlistProduct);
+
+        if (result.success) {
+            updateHeartIcon(btn, true);
+        } else if (result.requiresLogin) {
+            // User is not logged in - login popup will be shown by service
+            toggleLoginPopup();
+        } else {
+            console.error('Failed to add to wishlist:', result.message);
+        }
+    }
+
+    // Note: Badge update will be handled by wishlistUpdated event listener
+}
+
+function updateHeartIcon(btn, isFilled) {
+    if (!btn) return;
+    const icon = btn.querySelector(".material-icons");
+    if (!icon) return;
+
+    if (isFilled) {
+        icon.textContent = "favorite";
+        btn.classList.add("text-red-500");
+        if (!btn.classList.contains("text-white")) {
+            // Only remove black if it's not a white-text button (helper)
+            // Actually, usually we toggle class but let's be safe
+            btn.classList.remove("text-black");
+            btn.classList.remove("text-gray-400"); // Mobile nav
+        }
+    } else {
+        icon.textContent = "favorite_border";
+        btn.classList.remove("text-red-500");
+        // Restore default color - usually black or gray depending on context
+        // This is tricky without knowing original class.
+        // For simplicity, we assume generic card hearts are black on hover/active.
+        // Let's check class list to decide.
+        btn.classList.add("text-black");
     }
 }
 
 function checkWishlistUI() {
-    if (window.WishlistManager) {
-        window.WishlistManager.checkUI();
+    if (typeof wishlistService === 'undefined') {
+        console.error('wishlistService is not loaded');
+        return;
     }
+
+    const wishlist = wishlistService.getWishlist();
+    const wishlistIds = wishlist.map(item => item.id);
+    const wishlistBtns = document.querySelectorAll(".wishlist-btn");
+
+    wishlistBtns.forEach(btn => {
+        const id = btn.dataset.id;
+        if (wishlistIds.includes(id)) {
+            updateHeartIcon(btn, true);
+        } else {
+            updateHeartIcon(btn, false);
+        }
+    });
 }
 
 function updateWishlistBadge() {
-    if (window.WishlistManager) {
-        window.WishlistManager.updateBadge();
-    } else {
-        // Fallback for pages without modules
-        const wishlist = StorageManager.getWishlist();
-        const count = wishlist.length;
-        document.querySelectorAll('a[href="wishlist.html"] span.absolute').forEach(badge => {
-            badge.textContent = count;
+    if (typeof wishlistService === 'undefined') {
+        console.error('wishlistService is not loaded');
+        return;
+    }
+
+    const count = wishlistService.getWishlistCount();
+
+    // Update all wishlist badge elements using DOMUtils
+    DOMUtils.getAll('a[href="wishlist.html"] span.absolute').forEach(badge => {
+        if (badge) {
+            DOMUtils.setText(badge, count);
             badge.style.display = count > 0 ? 'flex' : 'none';
-        });
+        }
+    });
+}
+
+// Inject Profile Popup
+function injectProfilePopup() {
+    if (!document.getElementById("profile-popup")) {
+        const popupHTML = `
+            <div id="profile-popup" class="hidden absolute top-16 right-4 sm:right-16 z-50 w-72 bg-white dark:bg-card-dark rounded shadow-xl border border-gray-100 dark:border-gray-800 transition-all origin-top-right">
+                <div class="p-6 border-b border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                    <div id="profile-initials" class="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-lg font-bold text-black dark:text-white">
+                        <!-- Initials -->
+                    </div>
+                    <div class="overflow-hidden">
+                        <h3 id="profile-name" class="font-bold text-gray-900 dark:text-white truncate"><!-- Name --></h3>
+                        <p id="profile-email" class="text-xs text-gray-500 truncate"><!-- Email --></p>
+                    </div>
+                </div>
+                <div class="py-2">
+                    <a href="profile.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Profile</a>
+                    <a href="orders.html" class="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Orders</a>
+                </div>
+                <div class="py-2 border-t border-gray-100 dark:border-gray-800">
+                     <button onclick="handleLogout()" class="w-full text-left px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Sign out</button>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML("beforeend", popupHTML);
     }
 }
 
-// Login Wrappers
-function toggleLoginPopup() {
-    if (window.LoginManager) {
-        window.LoginManager.toggleLoginPopup();
-    }
-}
-
-// Alias for compatibility
-const toggleLoginModal = toggleLoginPopup;
-
-function handleLoginSubmit(event) {
-    if (window.LoginManager) {
-        window.LoginManager.handleLoginSubmit(event);
-    }
-}
-
-function handleOtpSubmit(event) {
-    if (window.LoginManager) {
-        window.LoginManager.handleOtpSubmit(event);
-    }
-}
-
-function handleCreateAccountSubmit(event) {
-    if (window.LoginManager) {
-        window.LoginManager.handleCreateAccountSubmit(event);
-    }
-}
-
-function switchToCreateAccount() {
-    if (window.LoginManager) {
-        window.LoginManager.switchToCreateAccount();
-    }
-}
-
-function switchBackToEmail() {
-    if (window.LoginManager) {
-        window.LoginManager.switchBackToEmail();
-    }
-}
-
-function switchToLogin() {
-    if (window.LoginManager) {
-        window.LoginManager.switchToLogin();
-    }
-}
-
-// Legacy injectLoginPopup for DOMContentLoaded compatibility
-function injectLoginPopup() {
-    // Login popup is now injected by LoginManager module
-    console.log('Login popup injection handled by LoginManager module');
-}
-
-// Profile Wrapper
 function toggleProfilePopup() {
-    if (window.ProfileManager) {
-        window.ProfileManager.togglePopup();
+    const popup = document.getElementById("profile-popup");
+    if (!popup) return;
+
+    if (popup.classList.contains("hidden")) {
+        popup.classList.remove("hidden");
+        // Close on click outside
+        setTimeout(() => {
+            document.addEventListener("click", closeProfilePopupOutside);
+        }, 0);
+    } else {
+        popup.classList.add("hidden");
+        document.removeEventListener("click", closeProfilePopupOutside);
     }
 }
 
-// Auth helpers
-function checkLoginState() {
-    const user = StorageManager.getUser();
-    const loginBtns = document.querySelectorAll('button[onclick="toggleLoginPopup()"]');
-    const profileBtns = document.querySelectorAll('button[onclick="toggleProfilePopup()"]');
+function closeProfilePopupOutside(e) {
+    const popup = document.getElementById("profile-popup");
+    const loginBtn = document.querySelector(
+        'button[onclick="toggleLoginPopup()"]',
+    ); // The trigger button
 
-    if (user) {
-        // Show profile button, hide login button
-        loginBtns.forEach(btn => btn.classList.add('hidden'));
-        profileBtns.forEach(btn => {
-            btn.classList.remove('hidden');
-            const nameSpan = btn.querySelector('.hidden.sm\\:inline');
-            if (nameSpan) nameSpan.textContent = user.firstName || 'User';
-        });
-    } else {
-        // Show login button, hide profile button
-        loginBtns.forEach(btn => btn.classList.remove('hidden'));
-        profileBtns.forEach(btn => btn.classList.add('hidden'));
+    // If click is NOT in popup AND NOT on the trigger button
+    if (popup && !popup.contains(e.target) && !loginBtn.contains(e.target)) {
+        popup.classList.add("hidden");
+        document.removeEventListener("click", closeProfilePopupOutside);
     }
 }
 
 function handleLogout() {
     StorageManager.clearUser();
-    checkLoginState();
-    const popup = document.getElementById('profile-popup');
-    if (popup) popup.classList.add('hidden');
-    console.log('Logged out');
+    checkLoginState(); // Reset Icon & Drawer
+
+    // Explicitly Close Profile Popup
+    const popup = document.getElementById("profile-popup");
+    if (popup) {
+        popup.classList.add("hidden");
+        document.removeEventListener("click", closeProfilePopupOutside);
+    }
+
+    // Ideally redirect to home or show toast
+    console.log("Logged out");
 }
 
-// Initialize on load
+/**
+ * CHECKOUT ACTION HANDLER
+ * Centralized function to handle checkout button clicks from any location
+ * (Cart Drawer, Cart Page, etc.)
+ * 
+ * Flow:
+ * 1. Check if user is logged in
+ * 2. If logged in -> redirect to checkout.html
+ * 3. If guest -> save redirect intent and open login popup
+ */
+function handleCheckoutAction() {
+    console.log('[Checkout Action] Initiated');
+
+    // Check if authService is available
+    if (typeof authService === 'undefined') {
+        console.error('[Checkout Action] authService not found');
+        if (window.Toast) window.Toast.show('Unable to proceed to checkout. Please refresh the page.', 'error');
+        return;
+    }
+
+    // Auth Check
+    if (authService.isLoggedIn()) {
+        // User is logged in - proceed directly to checkout
+        console.log('[Checkout Action] User logged in, redirecting to checkout');
+        window.location.href = 'checkout.html';
+    } else {
+        // Guest user - save redirect intent and open login popup
+        console.log('[Checkout Action] Guest user, saving redirect intent and opening login popup');
+
+        // Save post-login redirect intent
+        sessionStorage.setItem('redirect_after_login', 'checkout.html');
+
+        // Open login popup
+        if (typeof window.authPopupManager !== 'undefined') {
+            window.authPopupManager.open();
+        } else {
+            console.error('[Checkout Action] Auth popup manager not found');
+            if (window.Toast) window.Toast.show('Please log in to continue to checkout', 'info');
+        }
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    updateCartBadge();
-    updateWishlistBadge();
+    injectProfilePopup();
     checkLoginState();
 });
-

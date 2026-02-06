@@ -21,7 +21,7 @@ function populateStates() {
 }
 
 function loadProfile() {
-    const userStr = localStorage.getItem("hoodvibe_user");
+    const userStr = localStorage.getItem("clothyfly_user");
     if (userStr) {
         const user = JSON.parse(userStr);
         const nameEl = document.getElementById("profile-display-name");
@@ -34,7 +34,7 @@ function loadProfile() {
 
 function openEditProfilePopup() {
     const popup = document.getElementById("edit-profile-popup");
-    const userStr = localStorage.getItem("hoodvibe_user");
+    const userStr = localStorage.getItem("clothyfly_user");
 
     if (userStr) {
         const user = JSON.parse(userStr);
@@ -63,18 +63,18 @@ function saveProfile() {
     const email = document.getElementById("edit-email").value;
 
     if (!firstname || !lastname || !email) {
-        alert("Please fill in all fields");
+        window.Toast.show("Please fill in all fields", 'error');
         return;
     }
 
-    const userStr = localStorage.getItem("hoodvibe_user");
+    const userStr = localStorage.getItem("clothyfly_user");
     let user = userStr ? JSON.parse(userStr) : {};
 
     user.firstname = firstname;
     user.lastname = lastname;
     user.email = email;
 
-    localStorage.setItem("hoodvibe_user", JSON.stringify(user));
+    localStorage.setItem("clothyfly_user", JSON.stringify(user));
 
     loadProfile();
     closeEditProfilePopup();
@@ -90,7 +90,7 @@ function loadAddresses() {
     const container = document.getElementById("address-list-container");
     if (!container) return;
 
-    const addressesStr = localStorage.getItem("hoodvibe_addresses");
+    const addressesStr = localStorage.getItem("clothyfly_addresses");
     let addresses = addressesStr ? JSON.parse(addressesStr) : [];
 
     // Start empty if no addresses
@@ -155,7 +155,7 @@ function openAddAddressPopup() {
 
 function openEditAddressPopup(id) {
     const popup = document.getElementById("add-address-popup");
-    const addressesStr = localStorage.getItem("hoodvibe_addresses");
+    const addressesStr = localStorage.getItem("clothyfly_addresses");
     const addresses = addressesStr ? JSON.parse(addressesStr) : [];
     const address = addresses.find(a => a.id === id);
 
@@ -211,7 +211,7 @@ function saveNewAddress() {
         return;
     }
 
-    const addressesStr = localStorage.getItem("hoodvibe_addresses");
+    const addressesStr = localStorage.getItem("clothyfly_addresses");
     let addresses = addressesStr ? JSON.parse(addressesStr) : [];
 
     // If set as default, remove default from others
@@ -255,7 +255,7 @@ function saveNewAddress() {
         addresses.push(newAddress);
     }
 
-    localStorage.setItem("hoodvibe_addresses", JSON.stringify(addresses));
+    localStorage.setItem("clothyfly_addresses", JSON.stringify(addresses));
 
     loadAddresses();
     closeAddAddressPopup();
@@ -266,7 +266,7 @@ function deleteAddress() {
     if (!id) return;
 
     // Check if it's the only address
-    const addressesStr = localStorage.getItem("hoodvibe_addresses");
+    const addressesStr = localStorage.getItem("clothyfly_addresses");
     if (addressesStr) {
         const addresses = JSON.parse(addressesStr);
         if (addresses.length === 1) {
@@ -293,7 +293,7 @@ function confirmDeleteAddress() {
     const id = document.getElementById("add-address-id").value;
     if (!id) return;
 
-    const addressesStr = localStorage.getItem("hoodvibe_addresses");
+    const addressesStr = localStorage.getItem("clothyfly_addresses");
     if (addressesStr) {
         let addresses = JSON.parse(addressesStr);
 
@@ -308,7 +308,7 @@ function confirmDeleteAddress() {
             addresses[0].isDefault = true;
         }
 
-        localStorage.setItem("hoodvibe_addresses", JSON.stringify(addresses));
+        localStorage.setItem("clothyfly_addresses", JSON.stringify(addresses));
 
         loadAddresses();
         closeDeleteConfirmationPopup();

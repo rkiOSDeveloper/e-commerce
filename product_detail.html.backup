@@ -334,9 +334,120 @@
             <h2 class="font-display text-3xl lg:text-4xl uppercase text-center mb-10">
                 You Might Also Like
             </h2>
-            <!-- Dynamic Product Grid -->
-            <div id="you-might-also-like-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-                <!-- Products will be rendered dynamically -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                <div class="group">
+                    <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                        <span
+                            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Hot</span>
+                        <a href="product_detail.html" class="block">
+                            <img alt="Navy Blue T-shirt"
+                                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5QHG0v8WTfRi_KbvaTQDYubV9uCIeFm6uSa-M2QiHE7KXkqQbeJGyjtM6zqklNGG0Umc73ovzgNWGWZwbx2gvg4dYrlWWKjW2S16BWyDYZWhBzTUR6-z8hL_8J96aPiBj-mjRkKRPfTwa98IN6p4-mClVL7gf5HFLL2z-GMRbyJ4_wmVJ0FSJhWXoZ-v4xGeANONWvripOOIOChWMI_UlNKCO4MEjQUfV7-02KEwGRUNjG5mkq83Qz6JYf262a0tZegX0Q3MpQHGu" />
+                        </a>
+                        <button data-id="featured-1" data-name="Navy Blue Hang Loose Relax Tee" data-price="499"
+                            data-original-price="1099" data-offer="55% OFF" data-tag="Hot"
+                            data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuB5QHG0v8WTfRi_KbvaTQDYubV9uCIeFm6uSa-M2QiHE7KXkqQbeJGyjtM6zqklNGG0Umc73ovzgNWGWZwbx2gvg4dYrlWWKjW2S16BWyDYZWhBzTUR6-z8hL_8J96aPiBj-mjRkKRPfTwa98IN6p4-mClVL7gf5HFLL2z-GMRbyJ4_wmVJ0FSJhWXoZ-v4xGeANONWvripOOIOChWMI_UlNKCO4MEjQUfV7-02KEwGRUNjG5mkq83Qz6JYf262a0tZegX0Q3MpQHGu"
+                            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                            <span class="material-icons text-lg">favorite_border</span>
+                        </button>
+                    </div>
+                    <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+                            Navy Blue Hang Loose Relax Tee
+                        </h3>
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
+                            <span class="text-gray-400 line-through text-xs">Rs. 1,099</span>
+                            <span class="text-green-600 text-xs font-bold">55% OFF</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="group">
+                    <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                        <span
+                            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">New</span>
+                        <a href="product_detail.html" class="block">
+                            <img alt="Cargo Pants"
+                                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs8cyzmXiRzVDzNoopaBPe7ObQne7hASsyybN7N6WgItXBepLrPBDE-DsfLLnaurFuK94B-wOfGZC3Afa7MFWVjhZN_JAEGRcmIm8nu0fxdLwfFJv4oYxMZL_k6soWSG1P1rFoO2aJCvpEvt-FC1R5kPZajRT4TqylO_NCKjXf0JNlfk0SdccXdbfSEnD9mxO9aUW97916mTCVShgbavqvp-4z2BdxgA9P8FwQqiAJM7O8vsMGZ9Q1oGtBh8o-tHG4eUa9xZReoGtd" />
+                        </a>
+                        <button data-id="featured-2" data-name="Women Black Cargo Carpenter Pants" data-price="1499"
+                            data-original-price="4399" data-offer="65% OFF" data-tag="New"
+                            data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuCs8cyzmXiRzVDzNoopaBPe7ObQne7hASsyybN7N6WgItXBepLrPBDE-DsfLLnaurFuK94B-wOfGZC3Afa7MFWVjhZN_JAEGRcmIm8nu0fxdLwfFJv4oYxMZL_k6soWSG1P1rFoO2aJCvpEvt-FC1R5kPZajRT4TqylO_NCKjXf0JNlfk0SdccXdbfSEnD9mxO9aUW97916mTCVShgbavqvp-4z2BdxgA9P8FwQqiAJM7O8vsMGZ9Q1oGtBh8o-tHG4eUa9xZReoGtd"
+                            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                            <span class="material-icons text-lg">favorite_border</span>
+                        </button>
+                    </div>
+                    <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+                            Women Black Cargo Carpenter Pants
+                        </h3>
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 1,499</span>
+                            <span class="text-gray-400 line-through text-xs">Rs. 4,399</span>
+                            <span class="text-green-600 text-xs font-bold">65% OFF</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="group">
+                    <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                        <span
+                            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Best
+                            Seller</span>
+                        <a href="product_detail.html" class="block">
+                            <img alt="Orange T-shirt"
+                                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs20icwyfpo6BWaKsVyVcZ6omM5y1i6YuBbBrcoVH7iJg5Bm4wz2AYbyLdf1fMsjIZSiVq-koBK3jm1usb2srIB5TxJrtnQOiPoSHRdnPUY4FaeAyRx2nbIs9it1u3MBIR0EcVmrebOcPMIJBigP0an7br6l0x9gUKg5qV-Z1n2CJf1yC5b_hTbuBvTPgMKgwctBELs3U-cFV5OmV2fsv-AzQq8qZBaK_pdtIpTAK8M5cYVMaAWLCVEvpCyIED0_KDDoxuuDU0qV2d" />
+                        </a>
+                        <button data-id="featured-3" data-name="Women's Orange Boyfriend T-shirt" data-price="399"
+                            data-original-price="699" data-offer="42% OFF" data-tag="Best Seller"
+                            data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBs20icwyfpo6BWaKsVyVcZ6omM5y1i6YuBbBrcoVH7iJg5Bm4wz2AYbyLdf1fMsjIZSiVq-koBK3jm1usb2srIB5TxJrtnQOiPoSHRdnPUY4FaeAyRx2nbIs9it1u3MBIR0EcVmrebOcPMIJBigP0an7br6l0x9gUKg5qV-Z1n2CJf1yC5b_hTbuBvTPgMKgwctBELs3U-cFV5OmV2fsv-AzQq8qZBaK_pdtIpTAK8M5cYVMaAWLCVEvpCyIED0_KDDoxuuDU0qV2d"
+                            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                            <span class="material-icons text-lg">favorite_border</span>
+                        </button>
+                    </div>
+                    <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+                            Women's Orange Boyfriend T-shirt
+                        </h3>
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
+                            <span class="text-gray-400 line-through text-xs">Rs. 699</span>
+                            <span class="text-green-600 text-xs font-bold">42% OFF</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="group">
+                    <div class="relative bg-card-light dark:bg-card-dark rounded-lg overflow-hidden mb-4">
+                        <span
+                            class="absolute top-2 left-2 bg-accent text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm z-10">Sale</span>
+                        <a href="product_detail.html" class="block">
+                            <img alt="Lilac Oversize T-shirt"
+                                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDExQyQZGr2L7QiMkAZBblquXlMe_vS69FnhjkIY8jvLrLquE8TOVOeC27mBGSwgF2g6UJ5GgfFQUJKTcRDMOJy99qIxWmhl0_lMBZes9pSRmmRKFhhy_65LdiDdPNCtBUW3CFspdrPFbjp5j0ZImelz9my_r97l1pYor4sEreRmgksabuCtI8UezihJD0UBGd_y0Zj_yvLt-GYzHb9KllwXF4mBdo3sZ33pDdLc9rW9NrOpKFatXnQ2679J0Q55Dl7pr2yQa9uz7f7" />
+                        </a>
+                        <button data-id="featured-4" data-name="Lilac Bloom Grooving Typography Tee" data-price="599"
+                            data-original-price="1599" data-offer="62% OFF" data-tag="Sale"
+                            data-image="https://lh3.googleusercontent.com/aida-public/AB6AXuDExQyQZGr2L7QiMkAZBblquXlMe_vS69FnhjkIY8jvLrLquE8TOVOeC27mBGSwgF2g6UJ5GgfFQUJKTcRDMOJy99qIxWmhl0_lMBZes9pSRmmRKFhhy_65LdiDdPNCtBUW3CFspdrPFbjp5j0ZImelz9my_r97l1pYor4sEreRmgksabuCtI8UezihJD0UBGd_y0Zj_yvLt-GYzHb9KllwXF4mBdo3sZ33pDdLc9rW9NrOpKFatXnQ2679J0Q55Dl7pr2yQa9uz7f7"
+                            class="wishlist-btn absolute top-2 right-2 z-10 bg-white text-black w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-300 opacity-100 xl:opacity-0 xl:group-hover:opacity-100">
+                            <span class="material-icons text-lg">favorite_border</span>
+                        </button>
+                    </div>
+                    <a href="product_detail.html" class="block group-hover:opacity-80 transition-opacity">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">
+                            Lilac Bloom Grooving Typography Tee
+                        </h3>
+                        <div
+                            class="flex flex-col items-start space-y-1 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 text-sm">
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 599</span>
+                            <span class="text-gray-400 line-through text-xs">Rs. 1,599</span>
+                            <span class="text-green-600 text-xs font-bold">62% OFF</span>
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="text-center mt-12">
                 <a href="product_list.html"
@@ -348,7 +459,7 @@
         </section>
     </main>
     <!-- Footer Component (loaded dynamically) -->
-    <div id="footer-placeholder"></div>
+  <div id="footer-placeholder"></div>
 
     <!-- Sticky Bottom Bar (Mobile) -->
     <div id="sticky-cart-bar" style="padding-bottom: calc(24px + env(safe-area-inset-bottom))"
@@ -382,15 +493,10 @@
                 alt="Zoomed Product Image" />
         </div>
     </div>
-
+    <!-- Mobile Menu Drawer (White Background) -->
+    <!-- Mobile Menu Drawer (White Background) -->
     <!-- Mobile Menu Component (loaded dynamically) -->
     <div id="mobile-menu-placeholder"></div>
-
-    <!-- Cart Drawer Component (loaded dynamically) -->
-    <div id="cart-drawer-placeholder"></div>
-
-    <!-- Auth Popup Component (loaded dynamically) -->
-    <div id="auth-popup-placeholder"></div>
 
     <!-- Search Modal -->
     <div id="search-modal"
@@ -428,71 +534,54 @@
         </div>
     </div>
 
-    <!-- Services -->
-    <script src="js/services/api.service.js"></script>
-    <script src="js/services/auth.service.js"></script>
-    <script src="js/services/product.service.js"></script>
-    <script src="js/services/wishlist.service.js"></script>
-    <script src="js/services/cart.service.js"></script>
-
     <!-- Component Loader -->
-    <script src="js/utils/component-loader.js"></script>
+  <script src="js/utils/component-loader.js"></script>
+  <!-- Header Manager -->
+  <script src="js/components/header.js"></script>
+  <!-- Footer Manager -->
+  <script src="js/components/footer.js"></script>
+  <!-- Mobile Menu Manager -->
+  <script src="js/components/mobile-menu.js"></script>
+  <script>
+    // Load header and footer components on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+      const loader = new ComponentLoader();
+      
+      // Load header and footer components
+      await loader.loadMultiple([
+        { name: 'header', target: '#header-placeholder', method: 'replace' },
+        { name: 'footer', target: '#footer-placeholder', method: 'replace' },
+        { name: 'mobile-menu', target: '#mobile-menu-placeholder', method: 'replace' }
+      ]);
+
+      // Initialize header functionality after component is loaded
+      const headerManager = new HeaderManager();
+      await headerManager.init();
+
+      // Initialize footer functionality after component is loaded
+      const footerManager = new FooterManager();
+      footerManager.init();
+
+      // Initialize mobile menu functionality after component is loaded
+      const mobileMenuManager = new MobileMenuManager();
+      mobileMenuManager.init();
+    });
+  </script>
     <!-- Header Manager -->
     <script src="js/components/header.js"></script>
-    <!-- Footer Manager -->
-    <script src="js/components/footer.js"></script>
-    <!-- Mobile Menu Manager -->
-    <script src="js/components/mobile-menu.js?v=2"></script>
-    <!-- Cart Drawer Manager -->
-    <script src="js/components/cart-drawer.js"></script>
     <script>
-        // Load header and footer components on page load
+        // Load header component on page load
         document.addEventListener('DOMContentLoaded', async () => {
             const loader = new ComponentLoader();
-
-            // Load header and footer components
-            await loader.loadMultiple([
-                { name: 'header', target: '#header-placeholder', method: 'replace' },
-                { name: 'footer', target: '#footer-placeholder', method: 'replace' },
-                { name: 'mobile-menu', target: '#mobile-menu-placeholder', method: 'replace' },
-                { name: 'cart-drawer', target: '#cart-drawer-placeholder', method: 'replace' },
-                { name: 'auth-popup', target: '#auth-popup-placeholder', method: 'replace' }
-            ]);
-
-            // Initialize auth popup functionality
-            window.authPopupManager = new AuthPopupManager();
-            window.authPopupManager.init();
-
-            // Refresh login state UI now that components are loaded
-            if (typeof window.checkLoginState === 'function') {
-                window.checkLoginState();
-            }
+            await loader.load('header', '#header-placeholder', 'replace');
 
             // Initialize header functionality after component is loaded
             const headerManager = new HeaderManager();
             await headerManager.init();
-
-            // Initialize footer functionality after component is loaded
-            const footerManager = new FooterManager();
-            footerManager.init();
-
-            // Initialize mobile menu functionality after component is loaded
-            const mobileMenuManager = new MobileMenuManager();
-            mobileMenuManager.init();
-
-            // Initialize cart drawer functionality after component is loaded
-            window.cartDrawerManager = new CartDrawerManager();
-            window.cartDrawerManager.init();
         });
     </script>
 
-    <!-- Auth Popup Manager -->
-    <script src="js/components/auth-popup.js"></script>
-
-    <!-- Product Card Renderer -->
-    <script src="js/utils/product-card-renderer.js"></script>
     <script src="js/common.js"></script>
-    <script src="js/utils/toast-manager.js"></script>
     <script src="js/product_detail.js"></script>
 </body>
 
