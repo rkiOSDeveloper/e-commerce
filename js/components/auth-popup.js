@@ -71,6 +71,11 @@ class AuthPopupManager {
         this.switchToEmailStep();
         this.clearAllErrors();
         this.clearAllInputs();
+
+        // Remove test OTP display
+        const testOtpDisplay = document.getElementById('otp-test-display');
+        if (testOtpDisplay) testOtpDisplay.remove();
+
         this.currentEmail = '';
         this.isCreatingAccount = false;
     }
@@ -169,6 +174,23 @@ class AuthPopupManager {
 
             // Log OTP for testing (in real app, this is only sent to email)
             console.log(`✅ [AuthPopup] OTP sent to ${email}: ${response.otp}`);
+
+            // INJECT HELPER TEXT FOR PERSISTENT VISIBILITY
+            const otpInput = document.getElementById('login-otp');
+            if (otpInput) {
+                // Remove existing helper if any
+                const existingHelper = document.getElementById('otp-test-display');
+                if (existingHelper) existingHelper.remove();
+
+                // Create new helper
+                const helper = document.createElement('p');
+                helper.id = 'otp-test-display';
+                helper.className = 'text-xs text-blue-600 mt-2 font-medium bg-blue-50 dark:bg-blue-900/20 p-2 rounded border border-blue-200 dark:border-blue-800';
+                helper.textContent = `📨 Test Mode: Your OTP is ${response.otp}`;
+
+                // Insert after input's parent div (to avoid breaking layout)
+                otpInput.parentNode.appendChild(helper);
+            }
         } else {
             this.showError('login-email', response.message);
         }
@@ -234,6 +256,23 @@ class AuthPopupManager {
             this.switchToOTPStep(email);
 
             console.log(`✅ [AuthPopup] OTP sent for account creation: ${response.otp}`);
+
+            // INJECT HELPER TEXT FOR PERSISTENT VISIBILITY
+            const otpInput = document.getElementById('login-otp');
+            if (otpInput) {
+                // Remove existing helper if any
+                const existingHelper = document.getElementById('otp-test-display');
+                if (existingHelper) existingHelper.remove();
+
+                // Create new helper
+                const helper = document.createElement('p');
+                helper.id = 'otp-test-display';
+                helper.className = 'text-xs text-blue-600 mt-2 font-medium bg-blue-50 dark:bg-blue-900/20 p-2 rounded border border-blue-200 dark:border-blue-800';
+                helper.textContent = `🧪 Test Mode: Your OTP is ${response.otp}`;
+
+                // Insert after input's parent div
+                otpInput.parentNode.appendChild(helper);
+            }
         } else {
             this.showError('create-account-email', response.message);
         }
